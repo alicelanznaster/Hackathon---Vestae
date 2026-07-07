@@ -14,7 +14,7 @@ const modules = [Navigation, Pagination, Autoplay]
     :modules="modules"
     :slides-per-view="1"
     :loop="true"
-    :autoplay="{ delay: 3000, disableOnInteraction: false }"
+    :autoplay="{ delay: 4000, disableOnInteraction: false }"
     :pagination="{ clickable: true }"
     navigation
   >
@@ -35,22 +35,21 @@ const modules = [Navigation, Pagination, Autoplay]
 <style scoped>
 .swiper {
   width: 100%;
+  padding-top: 70px;
+  --swiper-navigation-size: 36px;
 }
 
 .swiper-slide img {
   width: 100%;
   display: block;
-  border-radius: 12px;
 }
 
-/* Cor das setas */
 :deep(.swiper-button-next),
 :deep(.swiper-button-prev) {
-  color: #000;
+  color: #ffffff;
 }
 
-/* Cor da bolinha ativa */
 :deep(.swiper-pagination-bullet-active) {
-  background: #000;
+  background: #ffffff;
 }
 </style>

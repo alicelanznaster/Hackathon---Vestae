@@ -62,7 +62,7 @@ body {
   margin: 0;
   min-height: 100vh;
   color: var(--color-text);
-  background: var(--color-background);
+  background-color: #FEF6EC;
   transition:
     color 0.5s,
     background-color 0.5s;

@@ -2,6 +2,7 @@
 import { formataPreco } from '@/utils/currencyUtils'
 
 defineProps(['produto'])
+
 </script>
 
 <template>
@@ -57,4 +58,5 @@ h3 {
     font-weight: 600;
     color: #000;
 }
+
 </style>

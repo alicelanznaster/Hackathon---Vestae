@@ -133,12 +133,16 @@ watch(busca, (valor) => {
     font-family: "Google Sans Flex", sans-serif;
     font-size: 1.2rem;
     font-weight: 500;
-    color: #000;
+    color: #303030;
     transition: color .2s;
 }
 
 .link-vender:hover {
     color: #C00B63;
+}
+
+.link-vender.router-link-active {
+  color: #C00B63;
 }
 
 .icones {
@@ -148,10 +152,6 @@ watch(busca, (valor) => {
     padding: 6px;
     border-radius: 8px;
     transition: background .2s;
-}
-
-.icones:hover {
-    background: rgba(192, 11, 99, .08);
 }
 
 .icone-perfil,
@@ -172,7 +172,11 @@ watch(busca, (valor) => {
 
 .icones:hover .icone-perfil,
 .icones:hover .icone-coracao,
-.icones:hover .icone-sacola1 {
+.icones:hover .icone-sacola1,
+.icones.router-link-active .icone-perfil,
+.icones.router-link-active .icone-coracao,
+.icones.router-link-active .icone-sacola1{
     filter: invert(11%) sepia(96%) saturate(3500%) hue-rotate(320deg);
 }
+
 </style>

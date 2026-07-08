@@ -6,19 +6,19 @@ import { RouterLink } from 'vue-router'
   <section class="categorias">
 
     <RouterLink to="/calcados" class="categoria calcados">
-      CALÇADOS
+      <h2>CALÇADOS</h2>
     </RouterLink>
 
     <RouterLink to="/masculino" class="categoria masculino">
-      MASCULINO
+      <h2>MASCULINO</h2>
     </RouterLink>
 
     <RouterLink to="/feminino" class="categoria feminino">
-      FEMININO
+      <h2>FEMININO</h2>
     </RouterLink>
 
     <RouterLink to="/acessorios" class="categoria acessorios">
-      ACESSÓRIOS
+      <h2>ACESSÓRIOS</h2>
     </RouterLink>
 
   </section>
@@ -29,12 +29,13 @@ import { RouterLink } from 'vue-router'
   display: flex;
   justify-content: center;
   gap: 30px;
-  margin: 40px 0;
+  margin: 90px 0;
+
 }
 
 .categoria {
-  width: 140px;
-  height: 140px;
+  width: 170px;
+  height: 170px;
   border-radius: 50%;
 
   display: flex;
@@ -44,7 +45,7 @@ import { RouterLink } from 'vue-router'
   text-decoration: none;
   color: black;
 
-  font-size: 22px;
+  font-size: 17px;
   font-family: 'Cormorant Garamond', serif;
 
   transition: transform 0.3s ease;
@@ -54,8 +55,25 @@ import { RouterLink } from 'vue-router'
   transform: scale(1.05);
 }
 
-.calcados { background: #FFD58C; }
-.masculino { background: #FFB494; }
-.feminino { background: #FF8E8E; }
-.acessorios { background: #FF6B88; }
+.calcados { 
+  background: #FFD58C; 
+  margin: 0 20px;
+}
+
+.masculino { 
+  background: #FFB494;
+  margin: 0 20px;
+ 
+}
+
+.feminino { 
+  background: #FF8E8E;
+  margin: 0 20px;
+
+}
+
+.acessorios { 
+  background: #FF6B88;
+  margin: 0 20px;
+}
 </style>

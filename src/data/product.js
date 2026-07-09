@@ -52,7 +52,8 @@ const produtos = [
     tamanho: "PP",
     condicao: "Novo",
     marca: "",
-    preco: 84.90
+    preco: 84.90,
+    destaque: true
   },
   {
     id: 6,
@@ -129,7 +130,8 @@ const produtos = [
     tamanho: "38",
     condicao: "Usado",
     marca: "",
-    preco: 36.90
+    preco: 36.90,
+    destaque: true
   },
   {
     id: 13,
@@ -195,7 +197,8 @@ const produtos = [
     tamanho: "PP",
     condicao: "Usado",
     marca: "",
-    preco: 59.90
+    preco: 59.90,
+    destaque: true
   },
   {
     id: 19,
@@ -305,7 +308,8 @@ const produtos = [
     tamanho: "GG",
     condicao: "Usado",
     marca: "Nike",
-    preco: 129.90
+    preco: 129.90,
+     destaque: true
   },
   {
     id: 29,
@@ -404,7 +408,8 @@ const produtos = [
     tamanho: "36",
     condicao: "Usado",
     marca: "Adidas",
-    preco: 332.90
+    preco: 332.90,
+     destaque: true
   },
   {
     id: 38,
@@ -525,7 +530,8 @@ const produtos = [
     tamanho: "",
     condicao: "Novo",
     marca: "",
-    preco: 34.90
+    preco: 34.90,
+    destaque: true
   },
   {
     id: 49,

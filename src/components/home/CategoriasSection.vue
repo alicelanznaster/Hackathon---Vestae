@@ -37,17 +37,13 @@ import { RouterLink } from 'vue-router'
   width: 170px;
   height: 170px;
   border-radius: 50%;
-
   display: flex;
   justify-content: center;
   align-items: center;
-
   text-decoration: none;
   color: black;
-
   font-size: 17px;
   font-family: 'Cormorant Garamond', serif;
-
   transition: transform 0.3s ease;
 }
 

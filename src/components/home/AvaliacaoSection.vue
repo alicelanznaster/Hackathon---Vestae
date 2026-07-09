@@ -3,20 +3,17 @@
   {
     nome: 'Alana Morais',
     foto: '/avaliacoes/alanamorais.png',
-    comentario:
-      '“Me surpreendi com a variedade de estilos e com os preços acessíveis.”'
+    comentario: '“Me surpreendi com a variedade de estilos e com os preços acessíveis.”'
   },
   {
     nome: 'Gabriella de Souza',
     foto: '/avaliacoes/gabriellasouza.png',
-    comentario:
-      '“Encontrei peças incríveis por um preço muito melhor do que imaginava. O site é super fácil de usar!”'
+    comentario: '“Encontrei peças incríveis por um preço muito melhor do que imaginava. O site é super fácil de usar!”'
   },
   {
     nome: 'Sofia Corrêa',
     foto: '/avaliacoes/sofiacorrea.png',
-    comentario:
-      '“A proposta do site é incrível e torna tudo mais prático e sustentável.”'
+    comentario: '“A proposta do site é incrível e torna tudo mais prático e sustentável.”'
   }
 ]
 </script>
@@ -27,30 +24,23 @@
     <h2>AVALIAÇÕES</h2>
 
     <div class="cards">
-
       <div
         class="card"
         v-for="avaliacao in avaliacoes"
         :key="avaliacao.nome"
       >
+      <div class="perfil">
+        <img :src="avaliacao.foto" :alt="avaliacao.nome">
 
-        <div class="perfil">
-          <img :src="avaliacao.foto" :alt="avaliacao.nome">
-
-          <div>
-            <h3>{{ avaliacao.nome }}</h3>
-            <p class="estrelas"><img src="/avaliacoes/estrelas.svg" alt="Estrelas"></p>
-          </div>
-        </div>
-
-        <p class="comentario">
-          {{ avaliacao.comentario }}
-        </p>
-
+      <div>
+        <h3>{{ avaliacao.nome }}</h3>
+        <p class="estrelas">⭐⭐⭐⭐⭐</p>
       </div>
-
+      
+      </div>
+        <p class="comentario">{{ avaliacao.comentario }}</p>
+      </div>
     </div>
-
   </section>
 </template>
 
@@ -59,12 +49,17 @@
   margin: 80px 0;
 }
 
+.card:hover {
+  transform: scale(1.05);
+}
+
 .avaliacoes h2 {
   text-align: center;
   font-size: 55px;
   font-family: "Marcellus", serif;
   font-weight: normal;
   margin-bottom: 50px;
+  color: black;
 }
 
 .cards {
@@ -77,11 +72,10 @@
 .card {
   width: 350px;
   min-height: 170px;
-
   background: #fff;
   border-radius: 20px;
-
   padding: 20px 25px;
+  transition: transform 0.3s ease;
 }
 
 .perfil {

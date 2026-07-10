@@ -47,6 +47,7 @@ const modules = [Navigation, Pagination, Autoplay]
 :deep(.swiper-button-next),
 :deep(.swiper-button-prev) {
   color: #ffffff;
+  margin: 30px 0;
 }
 
 :deep(.swiper-pagination-bullet-active) {

@@ -60,6 +60,7 @@
   font-weight: normal;
   margin-bottom: 50px;
   color: black;
+  cursor: default;
 }
 
 .cards {
@@ -104,15 +105,12 @@
   font-size: 22px;
   font-weight: normal;
   color: #222;
+  cursor: default;
 }
 
 .estrelas {
   margin: 2px 0 0 0;
-}
-
-.estrelas img {
-  width: 85px;
-  display: block;
+  cursor: default;
 }
 
 .comentario {
@@ -121,5 +119,6 @@
   font-size: 20px;
   line-height: 1.4;
   color: #222;
+  cursor: default;
 }
 </style>

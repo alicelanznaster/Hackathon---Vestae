@@ -1,13 +1,10 @@
 <script setup>
 import { Swiper, SwiperSlide } from 'swiper/vue'
 import { Navigation } from 'swiper/modules'
-
 import 'swiper/css'
 import 'swiper/css/navigation'
-
 import produtos from '@/data/product'
 import ProductCard from '@/components/products/ProductCard.vue'
-
 const produtosDestaque = produtos.filter(produto => produto.destaque)
 </script>
 
@@ -48,6 +45,7 @@ const produtosDestaque = produtos.filter(produto => produto.destaque)
   font-size: 55px;
   font-weight: normal;
   color: black;
+  cursor: default;
 }
 
 .subtitulo {
@@ -55,6 +53,7 @@ const produtosDestaque = produtos.filter(produto => produto.destaque)
   font-size: 20px;
   color: #000000;
   margin: 10px 0 40px;
+  cursor: default;
 }
 
 .swiper {
@@ -75,5 +74,6 @@ const produtosDestaque = produtos.filter(produto => produto.destaque)
 :deep(.swiper-button-next),
 :deep(.swiper-button-prev) {
   color: #000;
+  margin: 0 50px;
 }
 </style>

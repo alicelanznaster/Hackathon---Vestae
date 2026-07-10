@@ -17,29 +17,24 @@ const carrinho = ref([
     },
 ])
 
-function addCarrinho(idItem, quantidade){
-    const item = produtos.find((p) => p.id === idItem)
+function addCarrinho(idItem) {
+  const item = produtos.value.find((p) => p.id === idItem)
 
-    if (item) {
-        ultimoProdAdd.value = item.titulo
-        const itemExistente = carrinho.value.find((a) => a.id === idItem)
-        if (itemExistente) {
-            itemExistente.quantidade += quantidade
-            itemExistente.precoTotal = itemExistente.quantidade * item.preco
-        } else {
-            carrinho.value.push({
-                ...item,
-                quantidade,
-                precoTotal: quantidade * item.preco
-            })
-        }
+  if (item) {
+    ultimoProdAdd.value = item.titulo
 
-        mostrarAviso.value = true
+    const itemExistente = carrinho.value.find((produto) => produto.id === idItem)
 
-        setTimeout(() => {
-            mostrarAviso.value = false
-        }, 2000)
+    if (!itemExistente) {
+      carrinho.value.push(item)
     }
+
+    mostrarAviso.value = true
+
+    setTimeout(() => {
+      mostrarAviso.value = false
+    }, 2000)
+  }
 }
 
 function removerCarrinho(idItem) {
@@ -52,10 +47,13 @@ function removerCarrinho(idItem) {
 
 
 function totalCarrinho() {
-  return carrinho.value.reduce(
-    (total, item) => total + item.precoTotal,
-    0
-  )
+  let total = 0
+
+  for (let i = 0; i < carrinho.value.length; i++) {
+    total = total + carrinho.value[i].preco
+  }
+
+  return total
 }
 
 export { ultimoProdAdd, mostrarAviso, carrinho, addCarrinho, removerCarrinho, totalCarrinho}

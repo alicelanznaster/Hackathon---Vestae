@@ -150,9 +150,11 @@ footer{
   padding-top: 15px;
   border-top: 1px solid rgba(255, 255, 255, 0.3);
   text-align: center;
-  font-size: 0.85rem;
 }
 
+.direitos p{
+  font-size: 15px;
+}
 
 @media (max-width: 768px) {
   .conteudo {

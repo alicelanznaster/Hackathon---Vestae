@@ -13,11 +13,9 @@ watch(busca, (valor) => {
   })
 })
 
-
 function alternarMenu() {
   menuAberto.value = !menuAberto.value
 }
-
 </script>
 
 <template>
@@ -46,25 +44,19 @@ function alternarMenu() {
 
       <div class="pesquisa">
         <input v-model="busca" type="text" placeholder="Pesquisar produtos...">
-
         <button type="button">
           <img src="/icons/pesquisar.svg" alt="Pesquisar" class="icone-pesquisa">
         </button>
       </div>
 
       <nav class="acoes">
-        <RouterLink to="/anunciar" class="link-vender">
-          Quero vender
-        </RouterLink>
-
+        <RouterLink to="/anunciar" class="link-vender">Quero vender</RouterLink>
         <RouterLink to="/perfil" class="icones">
           <img src="/icons/perfil.svg" alt="Perfil" class="icone-perfil">
         </RouterLink>
-
         <RouterLink to="/favoritos" class="icones">
           <img src="/icons/coracao.svg" alt="Favoritos" class="icone-coracao">
         </RouterLink>
-
         <RouterLink to="/sacola" class="icones">
           <img src="/icons/sacola1.svg" alt="Sacola" class="icone-sacola1">
         </RouterLink>
@@ -73,46 +65,26 @@ function alternarMenu() {
 
     <!-- navbar -->
     <nav class="categorias">
-
-      <RouterLink to="/calcados" class="link">
-        Calçados
-      </RouterLink>
-
-      <RouterLink to="/masculino" class="link">
-        Masculino
-      </RouterLink>
-
-      <RouterLink to="/feminino" class="link">
-        Feminino
-      </RouterLink>
-
-      <RouterLink to="/acessorios" class="link">
-        Acessórios
-      </RouterLink>
-
+      <RouterLink to="/calcados" class="link">Calçados</RouterLink>
+      <RouterLink to="/masculino" class="link">Masculino</RouterLink>
+      <RouterLink to="/feminino" class="link">Feminino</RouterLink>
+      <RouterLink to="/acessorios" class="link">Acessórios</RouterLink>
     </nav>
+
+    <!-- fundo escurecido, fecha o menu ao clicar fora -->
+    <div v-show="menuAberto" class="overlay" @click="alternarMenu"></div>
 
     <div v-show="menuAberto" class="menu-celular">
 
-      <button class="fechar-menu" @click="alternarMenu">
-        ✕
+      <button class="fechar-menu" type="button" @click="alternarMenu">
+        <img src="/icons/fechar.png" alt="fechar" class="icone-fechar">
       </button>
 
-      <RouterLink to="/calcados" class="link-mobile" @click="menuAberto = false">
-        Calçados
-      </RouterLink>
+      <RouterLink to="/calcados" class="link-mobile" @click="menuAberto = false">Calçados</RouterLink>
+      <RouterLink to="/masculino" class="link-mobile" @click="menuAberto = false">Masculino</RouterLink>
+      <RouterLink to="/feminino" class="link-mobile" @click="menuAberto = false">Feminino</RouterLink>
+      <RouterLink to="/acessorios" class="link-mobile" @click="menuAberto = false">Acessórios</RouterLink>
 
-      <RouterLink to="/masculino" class="link-mobile" @click="menuAberto = false">
-        Masculino
-      </RouterLink>
-
-      <RouterLink to="/feminino" class="link-mobile" @click="menuAberto = false">
-        Feminino
-      </RouterLink>
-
-      <RouterLink to="/acessorios" class="link-mobile" @click="menuAberto = false">
-        Acessórios
-      </RouterLink>
     </div>
 
   </header>
@@ -321,6 +293,11 @@ header {
   font-weight: 500;
 }
 
+/* --- overlay --- */
+.overlay {
+  display: none;
+}
+
 @media (max-width: 1024px) {
 
   /* --- top bar --- */
@@ -469,26 +446,30 @@ header {
     position: absolute;
     top: 48px;
     left: 12px;
-    width: 230px;
+    width: 210px;
     background: #c76494;
-    border-radius: 22px;
-    padding: 20px;
+    border-radius: 10px;
+    padding: 15px 20px 15px 20px;
     display: flex;
     flex-direction: column;
-    gap: 18px;
-    box-shadow: 0 15px 30px rgba(0, 0, 0, .22);
+    gap: 10px;
+    box-shadow: 0 15px 30px rgba(97, 97, 97, 0.22);
     z-index: 9999;
   }
 
   .fechar-menu {
     background: none;
     border: none;
-    font-size: 1.5rem;
     cursor: pointer;
-    align-self: flex-start;
     padding: 0;
-    margin-bottom: 8px;
-    margin-top: 0;
+    align-self: flex-start;
+    margin-bottom: 14px;
+  }
+
+  .icone-fechar {
+    width: 30px;
+    height: 30px;
+    margin: 0;
   }
 
   .link-mobile {
@@ -500,9 +481,41 @@ header {
     transition: .2s;
   }
 
-  .link-mobile:hover {
-    color: #C00B63;
-    transform: translateX(8px);
+  .overlay {
+    display: block;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: 9998;
+    animation: aparecerFundo .25s ease;
+  }
+
+  .menu-celular {
+    animation: abrirMenu .25s ease;
+  }
+
+}
+
+/* animações — tocam sozinhas toda vez que o elemento aparece */
+@keyframes abrirMenu {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes aparecerFundo {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
   }
 }
 </style>

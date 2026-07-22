@@ -15,14 +15,11 @@ const produtosFiltrados = computed(() => {
     }
 
     return produtos.filter(produto =>
-
         produto.titulo.toLowerCase().includes(busca) ||
         produto.categoria.toLowerCase().includes(busca) ||
         produto.condicao.toLowerCase().includes(busca) ||
         produto.tamanho.toLowerCase().includes(busca)
-
     )
-
 })
 </script>
 
@@ -35,10 +32,29 @@ const produtosFiltrados = computed(() => {
 
 <style scoped>
 .product-list {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
     gap: 30px;
     padding: 30px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* ---------- Tablet ---------- */
+@media (max-width:1024px) {
+    .product-list {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+        padding: 20px;
+    }
+}
+
+/* ---------- Celular ---------- */
+@media (max-width:768px) {
+    .product-list {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+        padding: 20px;
+    }
 }
 </style>

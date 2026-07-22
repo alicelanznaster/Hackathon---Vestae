@@ -21,7 +21,7 @@ defineProps(['produto'])
 
 <style scoped>
 .card {
-    width: 350px;
+    width: 100%;
     background: #FEF6EC;
     border-radius: 8px;
     padding: 18px;
@@ -29,6 +29,7 @@ defineProps(['produto'])
     box-shadow: 0 2px 10px rgba(0, 0, 0, .15);
     transition: .3s;
     cursor: pointer;
+    box-sizing: border-box;
 }
 
 .card:hover {
@@ -37,26 +38,62 @@ defineProps(['produto'])
 
 .imagem {
     width: 100%;
-    height: 400px;
+    aspect-ratio: 3 / 4;
     object-fit: cover;
     border-radius: 8px;
 }
 
 .informacoes {
-    margin-top: 18px;
+    margin-top: 10px;
 }
 
 h3 {
     font-size: 1.8rem;
     font-weight: 400;
     color: #444;
-    margin-bottom: 2px;
 }
 
 .preco {
     font-size: 2rem;
-    font-weight: 600;
+    font-weight: 500;
     color: #000;
 }
 
+/* ---------- Tablet ---------- */
+@media (max-width:1024px) {
+
+    .card {
+        padding: 16px;
+    }
+
+    h3 {
+        font-size: 1.45rem;
+    }
+
+    .preco {
+        font-size: 1.7rem;
+    }
+
+}
+
+/* ---------- Celular ---------- */
+@media (max-width:768px) {
+
+    .card {
+        padding: 10px;
+    }
+
+    .informacoes {
+        margin-top: 8px;
+    }
+
+    h3 {
+        font-size: 1rem;
+    }
+
+    .preco {
+        font-size: 1.2rem;
+    }
+
+}
 </style>

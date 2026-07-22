@@ -1,4 +1,6 @@
-const produtos = [
+import { ref } from 'vue'
+
+const produtos = ref([
   {
     id: 1,
     titulo: "Blusa Preta Básica",
@@ -588,6 +590,6 @@ const produtos = [
     marca: "Casio",
     preco: 105.90
   }
-]; 
+]); 
 
 export default produtos

@@ -5,7 +5,7 @@ import 'swiper/css'
 import 'swiper/css/navigation'
 import produtos from '@/data/product'
 import ProductCard from '@/components/products/ProductCard.vue'
-const produtosDestaque = produtos.filter(produto => produto.destaque)
+const produtosDestaque = produtos.value.filter(produto => produto.destaque)
 </script>
 
 <template>

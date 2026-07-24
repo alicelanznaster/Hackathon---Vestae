@@ -293,6 +293,10 @@ header {
   font-weight: 500;
 }
 
+.menu-celular{
+  display: none;
+}
+
 /* --- overlay --- */
 .overlay {
   display: none;
@@ -382,18 +386,20 @@ header {
   }
 
   .icone-menu {
-    width: 32px;
     height: 32px;
+    width: 32px;
+    margin: 0;
   }
 
   .logo {
     order: 2;
-    margin-left: 8px;
+    margin-left: 0;
     flex-shrink: 0;
   }
 
   .logo span {
-    font-size: 2rem;
+    margin-left: 0;
+    font-size: 1.8rem;
   }
 
   .acoes {

@@ -11,16 +11,17 @@ const produtosFiltrados = computed(() => {
     const busca = route.query.busca?.toLowerCase() || ''
 
     if (!busca) {
-        return produtos
+        return produtos.value
     }
 
-    return produtos.filter(produto =>
+    return produtos.value.filter(produto =>
         produto.titulo.toLowerCase().includes(busca) ||
         produto.categoria.toLowerCase().includes(busca) ||
         produto.condicao.toLowerCase().includes(busca) ||
         produto.tamanho.toLowerCase().includes(busca)
     )
 })
+
 </script>
 
 

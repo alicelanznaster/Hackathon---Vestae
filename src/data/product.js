@@ -1,4 +1,6 @@
-const produtos = [
+import { ref } from "vue";
+
+const produtos = ref([
   {
     id: 1,
     titulo: "Blusa Preta Básica",
@@ -8,7 +10,8 @@ const produtos = [
     tamanho: "M",
     condicao: "Usado",
     marca: "",
-    preco: 39.90
+    preco: 39.90,
+    favorito: false
   },
   {
     id: 2,
@@ -19,7 +22,8 @@ const produtos = [
     tamanho: "40",
     condicao: "Usado",
     marca: "",
-    preco: 49.90
+    preco: 49.90,
+    favorito: false
   },
   {
     id: 3,
@@ -30,7 +34,8 @@ const produtos = [
     tamanho: "",
     condicao: "Novo",
     marca: "",
-    preco: 39.90
+    preco: 39.90,
+    favorito: false
   },
   {
     id: 4,
@@ -41,7 +46,8 @@ const produtos = [
     tamanho: "P",
     condicao: "Novo",
     marca: "",
-    preco: 99.90
+    preco: 99.90,
+    favorito: false
   },
   {
     id: 5,
@@ -52,7 +58,8 @@ const produtos = [
     tamanho: "PP",
     condicao: "Novo",
     marca: "",
-    preco: 84.90
+    preco: 84.90,
+    favorito: false
   },
   {
     id: 6,
@@ -63,7 +70,8 @@ const produtos = [
     tamanho: "P",
     condicao: "Usado",
     marca: "Zara",
-    preco: 54.90
+    preco: 54.90,
+    favorito: false
   },
   {
     id: 7,
@@ -74,7 +82,8 @@ const produtos = [
     tamanho: "G",
     condicao: "Usado",
     marca: "",
-    preco: 24.90
+    preco: 24.90,
+    favorito: false
   },
   {
     id: 8,
@@ -85,7 +94,8 @@ const produtos = [
     tamanho: "P",
     condicao: "Novo",
     marca: "",
-    preco: 44.90
+    preco: 44.90,
+    favorito: false
   },
   {
     id: 9,
@@ -96,7 +106,8 @@ const produtos = [
     tamanho: "PP",
     condicao: "Usado",
     marca: "",
-    preco: 22.90
+    preco: 22.90,
+    favorito: false
   },
   {
     id: 10,
@@ -107,7 +118,8 @@ const produtos = [
     tamanho: "M",
     condicao: "Usado",
     marca: "",
-    preco: 26.90
+    preco: 26.90,
+    favorito: false
   },
   {
     id: 11,
@@ -118,7 +130,8 @@ const produtos = [
     tamanho: "P",
     condicao: "Usado",
     marca: "",
-    preco: 69.90
+    preco: 69.90,
+    favorito: false
   },
   {
     id: 12,
@@ -129,7 +142,8 @@ const produtos = [
     tamanho: "38",
     condicao: "Usado",
     marca: "",
-    preco: 36.90
+    preco: 36.90,
+    favorito: false
   },
   {
     id: 13,
@@ -140,7 +154,8 @@ const produtos = [
     tamanho: "34",
     condicao: "Usado",
     marca: "",
-    preco: 49.90
+    preco: 49.90,
+    favorito: false
   },
   {
     id: 14,
@@ -151,7 +166,8 @@ const produtos = [
     tamanho: "G",
     condicao: "Novo",
     marca: "Scuffers",
-    preco: 294.90
+    preco: 294.90,
+    favorito: false
   },
   {
     id: 15,
@@ -162,7 +178,8 @@ const produtos = [
     tamanho: "34",
     condicao: "Usado",
     marca: "Hollister",
-    preco: 34.90
+    preco: 34.90,
+    favorito: false
   },
   {
     id: 16,
@@ -173,7 +190,8 @@ const produtos = [
     tamanho: "34",
     condicao: "Usado",
     marca: "",
-    preco: 29.90
+    preco: 29.90,
+    favorito: false
   },
   {
     id: 17,
@@ -184,7 +202,8 @@ const produtos = [
     tamanho: "36",
     condicao: "Novo",
     marca: "",
-    preco: 39.90
+    preco: 39.90,
+    favorito: false
   },
   {
     id: 18,
@@ -195,7 +214,8 @@ const produtos = [
     tamanho: "PP",
     condicao: "Usado",
     marca: "",
-    preco: 59.90
+    preco: 59.90,
+    favorito: false
   },
   {
     id: 19,
@@ -206,7 +226,8 @@ const produtos = [
     tamanho: "P",
     condicao: "Novo",
     marca: "",
-    preco: 84.90
+    preco: 84.90,
+    favorito: false
   },
   {
     id: 20,
@@ -217,7 +238,8 @@ const produtos = [
     tamanho: "",
     condicao: "Usado",
     marca: "",
-    preco: 54.90
+    preco: 54.90,
+    favorito: false
   },
   {
     id: 21,
@@ -228,7 +250,8 @@ const produtos = [
     tamanho: "42",
     condicao: "Usado",
     marca: "",
-    preco: 49.90
+    preco: 49.90,
+    favorito: false
   },
   {
     id: 22,
@@ -239,7 +262,8 @@ const produtos = [
     tamanho: "M",
     condicao: "Novo",
     marca: "",
-    preco: 34.90
+    preco: 34.90,
+    favorito: false
   },
   {
     id: 23,
@@ -250,7 +274,8 @@ const produtos = [
     tamanho: "M",
     condicao: "Usado",
     marca: "",
-    preco: 75.90
+    preco: 75.90,
+    favorito: false
   },
   {
     id: 24,
@@ -261,7 +286,8 @@ const produtos = [
     tamanho: "XXG",
     condicao: "Usado",
     marca: "",
-    preco: 34.90
+    preco: 34.90,
+    favorito: false
   },
   {
     id: 25,
@@ -272,7 +298,8 @@ const produtos = [
     tamanho: "M",
     condicao: "Novo",
     marca: "Ralph Lauren",
-    preco: 439.50
+    preco: 439.50,
+    favorito: false
   },
   {
     id: 26,
@@ -283,7 +310,8 @@ const produtos = [
     tamanho: "42",
     condicao: "Usado",
     marca: "",
-    preco: 64.90
+    preco: 64.90,
+    favorito: false
   },
   {
     id: 27,
@@ -294,7 +322,8 @@ const produtos = [
     tamanho: "40",
     condicao: "Novo",
     marca: "",
-    preco: 99.90
+    preco: 99.90,
+    favorito: false
   },
   {
     id: 28,
@@ -305,7 +334,8 @@ const produtos = [
     tamanho: "GG",
     condicao: "Usado",
     marca: "Nike",
-    preco: 129.90
+    preco: 129.90,
+    favorito: false
   },
   {
     id: 29,
@@ -316,7 +346,8 @@ const produtos = [
     tamanho: "G",
     condicao: "Usado",
     marca: "Nike",
-    preco: 79.90
+    preco: 79.90,
+    favorito: false
   },
   {
     id: 30,
@@ -327,7 +358,8 @@ const produtos = [
     tamanho: "42",
     condicao: "Usado",
     marca: "",
-    preco: 39.90
+    preco: 39.90,
+    favorito: false
   },
   {
     id: 31,
@@ -338,7 +370,8 @@ const produtos = [
     tamanho: "G",
     condicao: "Novo",
     marca: "",
-    preco: 49.90
+    preco: 49.90,
+    favorito: false
   },
   {
     id: 32,
@@ -349,7 +382,8 @@ const produtos = [
     tamanho: "36",
     condicao: "Usado",
     marca: "Havaianas",
-    preco: 24.90
+    preco: 24.90,
+    favorito: false
   },
   {
     id: 33,
@@ -360,7 +394,8 @@ const produtos = [
     tamanho: "38",
     condicao: "Novo",
     marca: "Crocs",
-    preco: 229.90
+    preco: 229.90,
+    favorito: false
   },
   {
     id: 34,
@@ -371,7 +406,8 @@ const produtos = [
     tamanho: "36",
     condicao: "Usado",
     marca: "Anacapri",
-    preco: 89.90
+    preco: 89.90,
+    favorito: false
   },
   {
     id: 35,
@@ -382,7 +418,8 @@ const produtos = [
     tamanho: "35",
     condicao: "Novo",
     marca: "Vans",
-    preco: 103.90
+    preco: 103.90,
+    favorito: false
   },
   {
     id: 36,
@@ -393,7 +430,8 @@ const produtos = [
     tamanho: "40",
     condicao: "Novo",
     marca: "ASICS",
-    preco: 219.90
+    preco: 219.90,
+    favorito: false
   },
   {
     id: 37,
@@ -404,7 +442,8 @@ const produtos = [
     tamanho: "36",
     condicao: "Usado",
     marca: "Adidas",
-    preco: 332.90
+    preco: 332.90,
+    favorito: false
   },
   {
     id: 38,
@@ -415,7 +454,8 @@ const produtos = [
     tamanho: "42",
     condicao: "Usado",
     marca: "Reebok",
-    preco: 105.90
+    preco: 105.90,
+    favorito: false
   },
   {
     id: 39,
@@ -426,7 +466,8 @@ const produtos = [
     tamanho: "40",
     condicao: "Novo",
     marca: "Converse",
-    preco: 169.90
+    preco: 169.90,
+    favorito: false
   },
   {
     id: 40,
@@ -437,7 +478,8 @@ const produtos = [
     tamanho: "",
     condicao: "Usado",
     marca: "Golden Goose",
-    preco: 271.80
+    preco: 271.80,
+    favorito: false
   },
   {
     id: 41,
@@ -448,7 +490,8 @@ const produtos = [
     tamanho: "36",
     condicao: "Novo",
     marca: "Vans",
-    preco: 189.90
+    preco: 189.90,
+    favorito: false
   },
   {
     id: 42,
@@ -459,7 +502,8 @@ const produtos = [
     tamanho: "37",
     condicao: "Usado",
     marca: "Adidas",
-    preco: 74.90
+    preco: 74.90,
+    favorito: false
   },
   {
     id: 43,
@@ -470,7 +514,8 @@ const produtos = [
     tamanho: "",
     condicao: "Usado",
     marca: "",
-    preco: 69.90
+    preco: 69.90,
+    favorito: false
   },
   {
     id: 44,
@@ -481,7 +526,8 @@ const produtos = [
     tamanho: "",
     condicao: "Novo",
     marca: "",
-    preco: 99.90
+    preco: 99.90,
+    favorito: false
   },
   {
     id: 45,
@@ -492,7 +538,8 @@ const produtos = [
     tamanho: "",
     condicao: "Usado",
     marca: "",
-    preco: 49.90
+    preco: 49.90,
+    favorito: false
   },
   {
     id: 46,
@@ -503,7 +550,8 @@ const produtos = [
     tamanho: "",
     condicao: "Usado",
     marca: "Polo Ralph Lauren",
-    preco: 279.50
+    preco: 279.50,
+    favorito: false
   },
   {
     id: 47,
@@ -514,7 +562,8 @@ const produtos = [
     tamanho: "",
     condicao: "Novo",
     marca: "",
-    preco: 49.90
+    preco: 49.90,
+    favorito: false
   },
   {
     id: 48,
@@ -525,7 +574,8 @@ const produtos = [
     tamanho: "",
     condicao: "Novo",
     marca: "",
-    preco: 34.90
+    preco: 34.90,
+    favorito: false
   },
   {
     id: 49,
@@ -536,7 +586,8 @@ const produtos = [
     tamanho: "",
     condicao: "Usado",
     marca: "",
-    preco: 29.90
+    preco: 29.90,
+    favorito: false
   },
   {
     id: 50,
@@ -547,7 +598,8 @@ const produtos = [
     tamanho: "",
     condicao: "Novo",
     marca: "",
-    preco: 79.90
+    preco: 79.90,
+    favorito: false
   },
   {
     id: 51,
@@ -558,7 +610,8 @@ const produtos = [
     tamanho: "",
     condicao: "Usado",
     marca: "Oakley",
-    preco: 559.90
+    preco: 559.90,
+    favorito: false
   },
   {
     id: 52,
@@ -569,7 +622,8 @@ const produtos = [
     tamanho: "",
     condicao: "Novo",
     marca: "",
-    preco: 19.90
+    preco: 19.90,
+    favorito: false
   },
   {
     id: 53,
@@ -580,8 +634,9 @@ const produtos = [
     tamanho: "40mm",
     condicao: "Usado",
     marca: "Casio",
-    preco: 105.90
+    preco: 105.90,
+    favorito: false
   }
-]; 
+]); 
 
 export default produtos

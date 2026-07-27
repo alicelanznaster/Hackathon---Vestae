@@ -1,12 +1,21 @@
 <script setup>
 import { formataPreco } from '@/utils/currencyUtils'
+import { favoritarProduto } from '@/utils/favoritesUtils';
 
-defineProps(['produto'])
+const props = defineProps(['produto'])
 
+function favoritar() {
+    favoritarProduto(props.produto)
+}
 </script>
 
 <template>
     <div class="card">
+
+        <button class="favorito" @click="favoritar">
+            <img :src="produto.favorito ? '/icons/coracao-preenchido.svg' : '/icons/coracao.svg'" alt="Favoritar" />
+        </button>
+
         <img :src="produto.imagem" :alt="produto.titulo" class="imagem">
 
         <div class="informacoes">
@@ -30,10 +39,26 @@ defineProps(['produto'])
     transition: .3s;
     cursor: pointer;
     box-sizing: border-box;
+    position: relative;
 }
 
 .card:hover {
     transform: translateY(-5px);
+}
+
+.favorito {
+    position: absolute;
+    top: 5%;
+    right: 10%;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    padding: 0;
+}
+
+.favorito img {
+    width: 3rem;
+    height: 3rem;
 }
 
 .imagem {
@@ -74,6 +99,11 @@ h3 {
         font-size: 1.7rem;
     }
 
+    .favorito img {
+        width: 2.5rem;
+        height: 2.5rem;
+    }
+
 }
 
 /* ---------- Celular ---------- */
@@ -95,5 +125,18 @@ h3 {
         font-size: 1.2rem;
     }
 
+    .favorito img {
+        width: 2rem;
+        height: 2rem;
+    }
+
 }
+
+@media (max-width: 480px){
+    .favorito img {
+        width: 1.6rem;
+        height: 1.6rem;
+    }
+}
+
 </style>

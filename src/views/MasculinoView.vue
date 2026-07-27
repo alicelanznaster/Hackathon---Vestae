@@ -4,7 +4,7 @@ import ProductCard from '@/components/products/ProductCard.vue';
 import { computed } from 'vue';
 
 const masculino = computed (() => {
-  return produtos.filter(produto => produto.categoria === 'Masculino')
+  return produtos.value.filter(produto => produto.categoria === 'Masculino')
 })
 </script>
 

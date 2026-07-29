@@ -38,8 +38,8 @@
         </div>
 
         <div class="membro">
-          <img src="/sobre/flavia.jpg" alt="Flávia">
-          <p>Flávia</p>
+          <img src="/sobre/flavia.jpg" alt="Flavia">
+          <p>Flavia</p>
         </div>
 
         <div class="membro">

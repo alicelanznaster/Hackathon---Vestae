@@ -31,7 +31,7 @@ const selecionarArquivo = (evento) => {
 
 <template>
   <div class="upload">
-    <h2>Fotos</h2>
+    <h2>Foto do Produto</h2>
 
     <div class="input-group">
       <input

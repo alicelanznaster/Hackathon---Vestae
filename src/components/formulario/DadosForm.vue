@@ -45,21 +45,16 @@ const enviarFormulario = () => {
 
 <form class="dados" @submit.prevent="enviarFormulario">
     <div class="campo">
-
         <label>Descrição</label>
-
         <textarea v-model="descricao" placeholder="Descreva seu produto..." required></textarea>
-
     </div>
 
     <div class="informacoes">
-
         <h2>Informações</h2>
         <br>
         <div class="campos">
 
             <input v-model="titulo" type="text" placeholder="Título*" required>
-
             <select v-model="categoria" required>
                 <option disabled value="">Categoria*</option>
                 <option>Masculino</option>
@@ -69,7 +64,6 @@ const enviarFormulario = () => {
             </select>
 
             <input v-model="tamanho" type="text" placeholder="Tamanho*" required>
-
             <select v-model="condicao" required>
                 <option disabled value="">Condição*</option>
                 <option>Novo</option>
@@ -77,24 +71,18 @@ const enviarFormulario = () => {
             </select>
 
             <input v-model="marca" type="text"placeholder="Marca">
-
         </div>
-
     </div>
 
     <div class="campo preco">
-
         <label>Preço</label>
-
         <input v-model="preco" type="number" placeholder="Preço*" min="0" max="1000" @input="limitarPreco" required>
-
     </div>
 
     <button>
         ENVIAR ANÚNCIO
     </button>
 </form>
-
 </template>
 
 <style scoped>

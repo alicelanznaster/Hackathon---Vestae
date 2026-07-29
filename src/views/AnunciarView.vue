@@ -12,7 +12,7 @@ const salvarImagem = (dados) => {
 
 const publicar = (produto) => {
   if (!imagem.value) {
-    alert('Selecione uma imagem.')
+    alert('Por favor, selecione uma imagem.')
     return
   }
 

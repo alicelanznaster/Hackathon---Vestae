@@ -30,12 +30,10 @@ const selecionarArquivo = (evento) => {
 </script>
 
 <template>
-  <div class="upload-container">
-
+  <div class="upload">
     <h2>Fotos</h2>
 
     <div class="input-group">
-
       <input
         type="file"
         @change="selecionarArquivo"
@@ -72,7 +70,7 @@ const selecionarArquivo = (evento) => {
 
 <style scoped>
 
-.upload-container{
+.upload{
   display: flex;
   flex-direction: column;
   gap: 18px;

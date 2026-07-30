@@ -1,6 +1,7 @@
 <script setup>
 import { formataPreco } from '@/utils/currencyUtils'
 import { favoritarProduto } from '@/utils/favoritesUtils';
+import { RouterLink } from 'vue-router';
 
 const props = defineProps(['produto'])
 
@@ -15,8 +16,10 @@ function favoritar() {
         <button class="favorito" @click="favoritar">
             <img :src="produto.favorito ? '/icons/coracao-preenchido.svg' : '/icons/coracao.svg'" alt="Favoritar" />
         </button>
-
-        <img :src="produto.imagem" :alt="produto.titulo" class="imagem">
+        <RouterLink :to="{ name: 'produto', params: { id: produto.id } }">
+            <img :src="produto.imagem" :alt="produto.titulo" class="imagem">
+        </RouterLink>
+        
 
         <div class="informacoes">
             <h3>{{ produto.titulo }}</h3>

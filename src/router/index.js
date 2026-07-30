@@ -8,7 +8,7 @@ import AcessoriosView from '../views/AcessoriosView.vue'
 import CalcadosView from '../views/CalcadosView.vue'
 import SobreView from '../views/SobreView.vue'
 import FavoritosView from '../views/FavoritosView.vue'
-import ProdutoDetail from '../views/ProdutoDetailView.vue'
+import ProductDetail from '@/components/products/ProductDetail.vue'
 import AnunciarView from '../views/AnunciarView.vue'
 import PerfilView from '../views/PerfilView.vue'
 
@@ -63,7 +63,7 @@ const router = createRouter({
     {
       path: '/produto/:id',
       name: 'produto',
-      component: ProdutoDetail,
+      component: ProductDetail,
     },
     {
       path: '/anunciar',

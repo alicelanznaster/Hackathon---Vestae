@@ -640,7 +640,7 @@ export const produtos = ref([
   },
   {
     id: 50,
-    titulo: "Óculos Marrom",
+    titulo: "Óculos Miu Miu Marrom",
     imagem: "/produtos/oculosmarromace.png",
     descricao: "Comprei pela internet, mas o modelo não ficou como eu esperava. Nunca foi usado.",
     categoria: "Acessório",

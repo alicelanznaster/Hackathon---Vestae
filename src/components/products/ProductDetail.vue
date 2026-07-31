@@ -153,7 +153,7 @@ const produto = computed(() => {
     position: absolute;
     top: 28px;
     right: 28px;
-    background: rgba(255, 255, 255, 0.716);
+    background: rgba(255, 255, 255, 0.67);
     border: none;
     cursor: pointer;
     transition: transform 0.2s ease;
@@ -266,5 +266,129 @@ const produto = computed(() => {
     font-size: 1.2rem;
 }
 
+@media (max-width: 1024px) and (min-width: 769px){
+    .pagina{
+        padding: 20px 30px 40px 30px;
+        min-height: 85vh;
+    }
 
+    .detalhe {
+        gap: 30px;
+    }
+
+    .detalhe-img {
+        width: 340px;
+        height: 450px;
+        margin-left: 15px; /* Tira os 100px do desktop */
+    }
+
+    .favoritar{
+        height: 45px;
+        width: 45px;
+    }
+
+    .favoritar img{
+        width: 27px;
+        height: 27px;
+    }
+
+
+    .dados h1 {
+        font-size: 1.9rem;
+    }
+
+    .preco {
+        font-size: 1.35rem;
+        
+    }
+
+    .carrinho {
+        width: fit-content;
+        max-width: 100%;
+        padding: 12px 24px;
+        font-size: 1.15rem;
+        white-space: nowrap;
+    }
+}
+
+@media (max-width: 768px) {
+    .pagina {
+        padding: 15px 20px 40px 20px;
+    }
+
+    .detalhe {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 20px;
+        width: 100%;
+    }
+
+    .detalhe-img {
+        width: 100%;
+        max-width: 340px;
+        height: auto;
+        aspect-ratio: 1 / 1.3;
+        margin-left: 0;
+        margin-right: 0;
+        border-radius: 16px;
+    }
+
+    .imagem-produto {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .favoritar{
+        height: 40px;
+        width: 40px;
+    }
+
+    .favoritar img{
+        width: 25px;
+        height: 25px;
+    }
+
+    .dados {
+        width: 100%;
+        align-items: flex-start;
+    }
+
+    .dados h1 {
+        font-size: 1.5rem;
+        margin-bottom: 5px;
+  }
+
+    .preco {
+        font-size: 1.2rem;
+        margin: 5px 0 15px 0;
+    }
+
+    .carrinho {
+        width: 100%;
+        padding: 14px;
+        font-size: 1.18rem;
+        text-align: center;
+    }
+
+    .protegido {
+        font-size: 0.85rem;
+        margin-bottom: 20px;
+    }
+
+    .descricao {
+        font-size: 0.95rem;
+        max-width: 100%;
+        margin-bottom: 20px;
+    }
+
+    .informacoes {
+        gap: 6px;
+    }
+
+    .info {
+        font-size: 0.8rem;
+        padding: 5px 10px;
+    }
+}
 </style>

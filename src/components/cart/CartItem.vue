@@ -41,6 +41,7 @@ defineProps({
 
 <style scoped>
 .card {
+  position: relative;
   display: flex;
   gap: 16px;
   padding: 20px 30px;
@@ -83,6 +84,7 @@ h2 {
     display: flex;
     flex-direction: column;
     align-items: flex-end;
+    justify-content: flex-end;
     margin-right: 20px;
 }
 .preco {
@@ -92,10 +94,14 @@ h2 {
 }
 
 .lixeira {
+  position: absolute;
+  top: 15px;
+  right: 20px;
   background: none;
   border: none;
   cursor: pointer;
-  
+  padding: 5px;
+  transition: transform 0.2s ease;
 }
 
 .lixeira img {

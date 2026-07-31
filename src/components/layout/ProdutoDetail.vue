@@ -1,9 +1,3 @@
-<script setup>
-</script>
-
 <template>
-    
+    <h1>Página do produto</h1>
 </template>
-
-<style scoped>
-</style>

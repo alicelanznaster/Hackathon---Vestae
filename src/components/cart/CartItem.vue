@@ -1,6 +1,5 @@
 <script setup>
 import { removerCarrinho } from '@/utils/cartUtils';
-import { RouterLink } from 'vue-router';
 import { formataPreco } from '@/utils/currencyUtils';
 
 defineProps({
@@ -13,9 +12,7 @@ defineProps({
 
 <template>
   <div class="card">
-    <RouterLink :to="{ name: 'produto', params: { id: item.id } }">
-      <img :src="item.imagem" :alt="item.titulo" class="imagem">
-    </RouterLink>
+    <img :src="item.imagem" :alt="item.titulo" class="imagem">
 
     <div class="info">
       <div class="topo">
@@ -25,7 +22,7 @@ defineProps({
         </div>
 
         <button class="lixeira" @click="removerCarrinho(item.id)">
-          <img src="/public/lixeira.svg" alt="Remover">
+          <img src="/icons/lixeira.svg" alt="Remover">
         </button>
 
       </div>

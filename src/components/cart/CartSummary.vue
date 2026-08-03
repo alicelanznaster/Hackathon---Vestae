@@ -3,7 +3,6 @@ import { computed } from 'vue';
 import { carrinho, totalCarrinho } from '@/utils/cartUtils'
 import { formataPreco } from '@/utils/currencyUtils'
 import { RouterLink } from 'vue-router';
-const emit = defineEmits(['finalizarCompra'])
 
 
 const total = computed(() => {
@@ -15,17 +14,18 @@ const quantidadeItens = computed(() => {
   return carrinho.value.length
 })
 
-function finalizar() {
-  emit('finalizarCompra')
-}
+
 </script>
 
 
 <template>
   <div class="card">
     <h3>Total ({{ quantidadeItens }} {{ quantidadeItens === 1 ? 'item' : 'itens' }}): {{ formataPreco(total) }}</h3>  
-   
-    <button @click="finalizar"> Finalizar Compra </button>
+    
+    <RouterLink to="/pagamento">
+      <button> Finalizar Compra </button>
+    </RouterLink>
+    
    
     <RouterLink to="/"> <p class="continuar">Ver mais produtos</p> </RouterLink>
   </div>
@@ -64,7 +64,8 @@ button{
 
 
 button:hover{
-  opacity:.9;
+  opacity: 0.9;
+  transition: 0.2s;
 }
 
 

@@ -33,18 +33,18 @@ import { RouterLink } from 'vue-router';
                 <div class="contato">
                     <h2>Contatos</h2>
                         <a href="https://wa.me/5547996259734" target="_blank">
-                        <img src="/whatsapp.svg" alt="WhatsApp">
+                        <img src="/icons/whatsapp.svg" alt="WhatsApp">
                         <span>+55 (47) 99625-9734</span>
                         </a>
 
                         <a href="mailto:vestae.desapego@gmail.com">
-                        <img src="/mail.svg" alt="E-mail">
+                        <img src="/icons/mail.svg" alt="E-mail">
                         <span>vestae.desapego@gmail.com</span>
                         </a>
                         
                         <div class="icones">
-                            <a href="#"><img src="/instagram.svg" alt="Instagram"></a>
-                            <a href="#"><img src="/x.svg" alt="Facebook"></a>
+                            <a href="#"><img src="/icons/instagram.svg" alt="Instagram"></a>
+                            <a href="#"><img src="/icons/x.svg" alt="Facebook"></a>
                         </div>
                 </div>
             </div>

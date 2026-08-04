@@ -19,7 +19,7 @@ function favoritar() {
         <RouterLink :to="{ name: 'produto', params: { id: produto.id } }">
             <img :src="produto.imagem" :alt="produto.titulo" class="imagem">
         </RouterLink>
-        
+
 
         <div class="informacoes">
             <h3>{{ produto.titulo }}</h3>
@@ -51,17 +51,23 @@ function favoritar() {
 
 .favorito {
     position: absolute;
-    top: 5%;
+    top: 6%;
     right: 10%;
+    background: rgba(255, 255, 255, 0.67);
     border: none;
-    background: transparent;
     cursor: pointer;
-    padding: 0;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
 }
 
 .favorito img {
-    width: 3rem;
-    height: 3rem;
+    width: 2rem;
+    height: 2rem;
 }
 
 .imagem {
@@ -71,18 +77,14 @@ function favoritar() {
     border-radius: 8px;
 }
 
-.informacoes {
-    margin-top: 10px;
-}
-
 h3 {
-    font-size: 1.8rem;
+    font-size: 1.5rem;
     font-weight: 400;
     color: #444;
 }
 
 .preco {
-    font-size: 2rem;
+    font-size: 1.6rem;
     font-weight: 500;
     color: #000;
 }
@@ -102,9 +104,14 @@ h3 {
         font-size: 1.7rem;
     }
 
+    .favorito {
+        width: 38px;
+        height: 38px;
+    }
+
     .favorito img {
-        width: 2.5rem;
-        height: 2.5rem;
+        width: 1.8rem;
+        height: 1.8rem;
     }
 
 }
@@ -128,18 +135,21 @@ h3 {
         font-size: 1.2rem;
     }
 
+    .favorito{
+        width: 35px;
+        height: 35px;
+    }
     .favorito img {
-        width: 2rem;
-        height: 2rem;
+        width: 1.5rem;
+        height: 1.5rem;
     }
 
 }
 
-@media (max-width: 480px){
+@media (max-width: 480px) {
     .favorito img {
         width: 1.6rem;
         height: 1.6rem;
     }
 }
-
 </style>

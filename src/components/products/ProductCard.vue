@@ -43,6 +43,7 @@ function favoritar() {
     cursor: pointer;
     box-sizing: border-box;
     position: relative;
+    margin-bottom: 40px;
 }
 
 .card:hover {

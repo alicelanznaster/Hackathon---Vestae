@@ -28,6 +28,7 @@ import { RouterLink } from 'vue-router';
                     <li><RouterLink to="/favoritos">Favoritos</RouterLink></li>
                     <li><RouterLink to="/anunciar">Quero Vender</RouterLink></li>
                     <li><RouterLink to="/perfil">Meu Perfil</RouterLink></li>
+                    <li><RouterLink to="/sobre">Sobre Nós</RouterLink></li>
                 </ul>
             </div>
                 <div class="contato">
@@ -43,7 +44,7 @@ import { RouterLink } from 'vue-router';
                         </a>
                         
                         <div class="icones">
-                            <a href="#"><img src="/icons/instagram.svg" alt="Instagram"></a>
+                            <a href="https://www.instagram.com/vestae.desapego/?utm_source=ig_web_button_share_sheet"><img src="/icons/instagram.svg" alt="Instagram"></a>
                             <a href="#"><img src="/icons/x.svg" alt="Facebook"></a>
                         </div>
                 </div>
@@ -135,8 +136,8 @@ footer{
 }
 
 .icones img {
-  width: 32px;
-  height: 32px;
+  width: 37px;
+  height: 37px;
   object-fit: contain;
   transition: 0.2s;
 }

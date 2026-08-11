@@ -279,20 +279,19 @@ header {
 
 .link {
   font-size: 1.2rem;
+  font-weight: 600;
   text-decoration: none;
   color: black;
   transition: .2s;
   white-space: nowrap;
+  color: #dfdfdfad;
 }
 
-.link:hover {
-  opacity: .75;
-}
-
+.link:hover,
 .link.router-link-active {
-  font-weight: 500;
+  color: rgb(255, 255, 255);
+  font-weight: 600;
 }
-
 .menu-celular{
   display: none;
 }

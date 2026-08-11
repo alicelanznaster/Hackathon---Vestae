@@ -113,7 +113,7 @@ const produto = computed(() => {
 .pagina {
     background-color: #FEF6EC;
     padding: 35px 80px 60px 80px;
-    min-height: 100vh;
+    min-height: 85vh;
     box-sizing: border-box;
 }
 

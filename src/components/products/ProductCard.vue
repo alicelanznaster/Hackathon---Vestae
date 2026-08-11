@@ -67,8 +67,8 @@ function favoritar() {
 }
 
 .favorito img {
-    width: 2rem;
-    height: 2rem;
+    width: 27px;
+    height: 27px;
 }
 
 .imagem {

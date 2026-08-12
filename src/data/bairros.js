@@ -44,6 +44,6 @@ export const bairros = [
     "Vila Nova",
     "Zona Industrial Norte",
     "Zona Industrial Tupy",
-    "Área Rural"
+    "Área Rural",
     ]
     

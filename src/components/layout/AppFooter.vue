@@ -161,6 +161,7 @@ footer{
   .conteudo {
     flex-direction: column;
     gap: 30px;
+    padding: 0;
   }
 }
 </style>

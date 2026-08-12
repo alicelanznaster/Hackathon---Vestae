@@ -22,9 +22,12 @@ const quantidadeItens = computed(() => {
   <div class="card">
     <h3>Total ({{ quantidadeItens }} {{ quantidadeItens === 1 ? 'item' : 'itens' }}): {{ formataPreco(total) }}</h3>  
     
-    <RouterLink to="/pagamento">
-      <button> Finalizar Compra </button>
+    <div class="btn">
+      <RouterLink to="/pagamento">
+      <button> FINALIZAR COMPRA </button>
     </RouterLink>
+    </div>
+    
     
    
     <RouterLink to="/"> <p class="continuar">Ver mais produtos</p> </RouterLink>
@@ -50,14 +53,19 @@ h3{
   text-align: right;
 }
 
+.btn{
+  text-align: center;
+}
 
 button{
-  width:100%;
-  padding:14px; border:none;
-  border-radius:999px;
+  max-width: 90vw;
+  width: 100%;
+  padding: 12px 14px; 
+  border:none;
+  border-radius: 17px;
   background:#C00B63;
   color:white;
-  font-size:18px;
+  font-size: 25px;
   cursor:pointer;
   font-family: "Marcellus", serif;
 }

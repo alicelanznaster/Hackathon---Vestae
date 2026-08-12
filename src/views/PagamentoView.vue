@@ -44,6 +44,18 @@ function confirmarPagamento() {
   alert('Agradecemos por escolher o Vestæ! Esta funcionalidade será implementada em breve!')
 }
 
+/*  API CEP */
+async function buscarCep() {
+  if (cep.value.length !== 8) {
+    return
+  }
+
+  const resposta = await fetch(`https://viacep.com.br/ws/${cep.value}/json/`)
+  const dados = await resposta.json()
+
+  rua.value = dados.logradouro
+  bairro.value = dados.bairro
+}
 </script>
 
 <template>
@@ -67,6 +79,8 @@ function confirmarPagamento() {
                         type="text"
                         placeholder="CEP *"
                         v-model="cep"
+                        maxlength="8"
+                        @blur="buscarCep" 
                     />
 
                     <input

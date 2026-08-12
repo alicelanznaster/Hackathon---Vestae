@@ -53,6 +53,11 @@ async function buscarCep() {
   const resposta = await fetch(`https://viacep.com.br/ws/${cep.value}/json/`)
   const dados = await resposta.json()
 
+  if (dados.erro) {
+    alert('CEP não encontrado!')
+    return
+  }
+
   rua.value = dados.logradouro
   bairro.value = dados.bairro
 }

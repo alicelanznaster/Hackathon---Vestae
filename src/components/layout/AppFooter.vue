@@ -60,22 +60,23 @@ import { RouterLink } from 'vue-router';
 
 <style scoped>
 footer{
-    background-color: #C00B63;
-    color: white;
-    padding: 30px 40px;
-    padding-bottom: 15px;
+  background-color: #C00B63;
+  color: white;
+  padding: 30px 35px;
+  padding-bottom: 15px;
 }
 
 .conteudo{
-    display:flex;
-    justify-content:space-between;
-    gap:120px;
-    align-items:flex-start;
+  display: flex;
+  justify-content: space-between;
+  gap: 120px;
+  align-items: flex-start;
 }
 
 .marca{
-    margin-top: 100px;
+  margin-top: 100px;
 }
+
 .marca h1 {
   font-size: 2.2rem;
 }
@@ -161,7 +162,23 @@ footer{
   .conteudo {
     flex-direction: column;
     gap: 30px;
-    padding: 0;
+    padding: 5px 0;
+  }
+
+  .marca{
+    margin-top: 8px;
+  }
+
+  .marca h1{
+    font-size: 1.75rem;
+  }
+
+  .marca p{
+    font-size: 1rem;
+  }
+
+  .direitos p{
+    font-size: 12px;
   }
 }
 </style>

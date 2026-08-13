@@ -108,4 +108,52 @@ h2 {
 .lixeira:hover {
   transform: translateY(-1px);
 }
+
+@media (max-width: 768px) {
+  .card {
+    gap: 12px;
+    padding: 15px;
+  }
+
+  .imagem {
+    width: 100px;
+    height: 100px;
+  }
+
+  .info {
+    min-width: 0;
+  }
+
+  .topo {
+    padding-right: 25px;
+  }
+
+  h2 {
+    font-size: 17px;
+    margin-bottom: 5px;
+  }
+
+  .descricao {
+    font-size: 13px;
+    line-height: 1.2;
+    max-width: none;
+  }
+
+  .subtotal {
+    margin-right: 0;
+  }
+
+  .preco {
+    font-size: 15px;
+  }
+
+  .lixeira {
+    top: 10px;
+    right: 10px;
+  }
+
+  .lixeira img {
+    width: 20px;
+  }
+}
 </style>

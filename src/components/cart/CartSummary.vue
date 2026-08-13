@@ -39,16 +39,14 @@ const quantidadeItens = computed(() => {
 
 <style scoped>
 .card{
-  background:#F8EFE3;
-  border-radius:12px;
-  padding:25px; width:100%;
+  padding: 25px; 
 }
 
 
 h3{
   color: #000;
   font-size: 22px;
-  margin-bottom:15px;
+  margin-bottom:1 5px;
   font-family: "Google Sans Flex", arial;
   text-align: right;
 }
@@ -65,7 +63,7 @@ button{
   border-radius: 17px;
   background:#C00B63;
   color:white;
-  font-size: 25px;
+  font-size: 20px;
   cursor:pointer;
   font-family: "Marcellus", serif;
 }
@@ -78,15 +76,28 @@ button:hover{
 
 
 .continuar{
-  margin-top:15px;
-  text-align:center;
-  color:#555;
-  text-decoration:underline;
-  cursor:pointer;
+  margin-top: 15px;
+  text-align: center;
+  color: #555;
+  text-decoration: underline;
+  cursor: pointer;
   font-family: "Marcellus", serif;
 }
 
+@media (max-width: 768px){
+  h3{
+    font-size: 18px;
+    margin-bottom: 20px;
+  }
+  
+  button{
+    font-size: 17px;
+  }
 
+  .continuar{
+    font-size: 16px;
+  }
+}
 
 
 </style>

@@ -72,6 +72,15 @@ import CartSummary from './CartSummary.vue';
     color:#666;
 }
 
+@media (max-width: 768px){
+    .topo h1{
+        font-size: 1.6rem;
+    }
 
+    .fechar img{
+        width: 18px;
+        height: 18px;
+    }
+}
 
 </style>

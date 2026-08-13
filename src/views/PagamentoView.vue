@@ -10,6 +10,7 @@ const rua = ref('')
 const numero = ref('')
 const bairro = ref('')
 const metodoPagamento = ref('')
+const mostrarBairros = ref(false)
 
 const bairrosFiltrados = computed(() => {
     let retorno = bairros
@@ -24,6 +25,29 @@ const bairrosFiltrados = computed(() => {
 
 function selecionarBairro(item) {
   bairro.value = item
+  mostrarBairros.value= false;
+}
+
+
+/*  API CEP */
+async function buscarCep() {
+    const cepSemHifen = cep.value.replace('-', '')
+
+    if (cepSemHifen.length !== 8) {
+        return
+    }
+
+    const resposta = await fetch(`https://viacep.com.br/ws/${cepSemHifen}/json/`)
+    const dados = await resposta.json()
+
+    if (dados.erro) {
+        alert('CEP não encontrado!')
+        return
+    }
+
+    rua.value = dados.logradouro
+    bairro.value = dados.bairro
+    mostrarBairros.value = false
 }
 
 function confirmarPagamento() {
@@ -44,29 +68,12 @@ function confirmarPagamento() {
   alert('Agradecemos por escolher o Vestæ! Esta funcionalidade será implementada em breve!')
 }
 
-/*  API CEP */
-async function buscarCep() {
-  if (cep.value.length !== 8) {
-    return
-  }
-
-  const resposta = await fetch(`https://viacep.com.br/ws/${cep.value}/json/`)
-  const dados = await resposta.json()
-
-  if (dados.erro) {
-    alert('CEP não encontrado!')
-    return
-  }
-
-  rua.value = dados.logradouro
-  bairro.value = dados.bairro
-}
 </script>
 
 <template>
     <main class="topo">
         <RouterLink to="/sacola" class="voltar">
-            <img src="/public/icons/voltar.svg" alt="Voltar">
+            <img src="/icons/voltar.svg" alt="Voltar">
         </RouterLink>
 
         <div class="pagamento">
@@ -84,8 +91,9 @@ async function buscarCep() {
                         type="text"
                         placeholder="CEP *"
                         v-model="cep"
-                        maxlength="8"
+                        maxlength="9"
                         @blur="buscarCep" 
+                        @input="cep = cep.replace(/\D/g, '').replace(/^(\d{5})(\d)/, '$1-$2')"
                     />
 
                     <input
@@ -98,15 +106,17 @@ async function buscarCep() {
                         type="text"
                         placeholder="Número *"
                         v-model="numero"
+                        maxlength="5"
                     />
 
                     <input
                         type="text"
                         placeholder="Bairro *"
                         v-model="bairro"
+                        @input="mostrarBairros = true"
                     />
                 
-                    <div v-if="bairro && bairrosFiltrados.length" class="lista-bairros">
+                    <div v-if="bairro && mostrarBairros" class="lista-bairros">
                         <p v-for="item in bairrosFiltrados"
                         :key="item"
                         @click="selecionarBairro(item)"
@@ -135,7 +145,7 @@ async function buscarCep() {
                 <button @click="confirmarPagamento()" >CONFIRMAR PAGAMENTO</button>
            
                 <div class="protegida">
-                    <img src="/public/icons/protegida.svg" alt="icon-compra-protegida">
+                    <img src="/icons/protegida.svg" alt="icon-compra-protegida">
                     <p>Compra protegida pelo Vestæ</p>
                 </div>
             </section>
@@ -179,8 +189,6 @@ async function buscarCep() {
     background-color: #FEF6EC;
     max-width: 440px;
     width: 100%;
-    max-height: 110vh;
-    height: 100%;
     padding: 35px 30px;
     border-radius: 18px;
     box-sizing: border-box;
@@ -285,5 +293,78 @@ select {
 .protegida img{
     width: 15px;
     height: 15px;
+}
+
+@media (max-width: 1024px) and (min-width: 769px) {
+    
+}
+
+@media (max-width: 768px) {
+    .topo {
+    padding: 10px 18px 35px;
+    min-height: 100vh;
+  }
+
+  .voltar {
+    padding: 10px;
+  }
+
+  .voltar img {
+    width: 20px;
+    height: 20px;
+  }
+
+  .logo {
+    font-size: 25px;
+    margin-bottom: 18px;
+  }
+
+  .card {
+    width: 100%;
+    max-width: 440px;
+    padding: 25px 20px;
+    border-radius: 15px;
+    max-height: none;
+  }
+
+  h2 {
+    font-size: 24px;
+    line-height: 1.2;
+  }
+
+  .subtitulo {
+    font-size: 16px;
+    margin-bottom: 25px;
+  }
+
+  form {
+    gap: 8px;
+  }
+
+  input,
+  select {
+    font-size: 15px;
+    padding: 13px 14px;
+  }
+
+  .valor {
+    font-size: 14px;
+    margin-top: 5px;
+    margin-bottom: 18px;
+  }
+
+  .card button {
+    width: 100%;
+    font-size: 16px;
+    padding: 14px;
+  }
+
+  .protegida {
+    margin-top: 10px;
+  }
+
+  .protegida p {
+    font-size: 11px;
+  }
 }
 </style>

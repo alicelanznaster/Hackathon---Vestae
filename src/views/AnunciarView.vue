@@ -35,19 +35,46 @@ const publicar = (produto) => {
 </template>
 
 <style scoped>
-.anunciar{
-  max-width: 1200px;
-  margin: 35px auto;
-  display: flex;
-  flex-direction: column;
-  gap: 40px;
+.anunciar {
+ max-width: 1200px;
+ margin: 35px auto;
+ display: flex;
+ flex-direction: column;
+ gap: 40px;
 }
 
-.anunciar h2{
-  margin: 0;
-  font-size: 40px;
-  color: #000;
-  font-weight: 400;
-  font-family: "Marcellus", serif;
+.anunciar h2 {
+ margin: 0;
+ font-size: 40px;
+ color: #000;
+ font-weight: 400;
+ font-family: 'Marcellus', serif;
+}
+
+/*responsivo*/
+
+@media (max-width: 1024px) {
+ .anunciar {
+   max-width: 900px;
+   gap: 35px;
+   padding: 0 25px;
+ }
+
+ .anunciar h2 {
+   font-size: 36px;
+ }
+}
+
+@media (max-width: 768px) {
+ .anunciar {
+   width: 100%;
+   padding: 0 18px;
+   gap: 28px;
+   box-sizing: border-box;
+ }
+
+ .anunciar h2 {
+   font-size: 30px;
+ }
 }
 </style>

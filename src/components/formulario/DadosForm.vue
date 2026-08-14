@@ -70,7 +70,7 @@ const enviarFormulario = () => {
                 <option>Usado</option>
             </select>
 
-            <input v-model="marca" type="text"placeholder="Marca">
+            <input v-model="marca" type="text" placeholder="Marca">
         </div>
     </div>
 
@@ -86,110 +86,165 @@ const enviarFormulario = () => {
 </template>
 
 <style scoped>
-
-.dados{
-    display:flex;
-    flex-direction:column;
-    gap:40px;
+.dados {
+ display: flex;
+ flex-direction: column;
+ gap: 40px;
 }
 
-label{
-    display:block;
-    margin-bottom:15px;
-    font-size: 22px;
-    color:#000000;
-    font-family: "Marcellus", serif;
+label {
+ display: block;
+ margin-bottom: 15px;
+ font-size: 22px;
+ color: #000000;
+ font-family: 'Marcellus', serif;
 }
 
-textarea{
-    width:100%;
-    max-width: 700px;
-    height:140px;
-    padding:18px;
-    border:none;
-    border-radius:18px;
-    resize:none;
-    background:white;
-    font-size:15px;
-    box-sizing:border-box;
-    outline:none;
+textarea {
+ width: 100%;
+ max-width: 700px;
+ height: 140px;
+ padding: 18px;
+ border: none;
+ border-radius: 18px;
+ resize: none;
+ background: white;
+ font-size: 15px;
+ box-sizing: border-box;
+ outline: none;
 }
 
-.informacoes h2{
-    margin:0 0 18px;
-    font-size: 22px;
-    font-weight:400;
-    color:#000000;
+.informacoes h2 {
+ margin: 0 0 18px;
+ font-size: 22px;
+ font-weight: 400;
+ color: #000000;
 }
 
-.campos{
-    display: grid;
-    grid-template-columns: repeat(3, 260px);
-    gap: 15px;
-    justify-content: start;
+.campos {
+ display: grid;
+ grid-template-columns: repeat(3, 260px);
+ gap: 15px;
+ justify-content: start;
 }
 
 .campos input,
-.campos select{
-    width:100%;
-    padding: 20px;
-    border:none;
-    border-radius:14px;
-    background:white;
-    font-size:14px;
-    box-sizing:border-box;
-    outline:none;
+.campos select {
+ width: 100%;
+ padding: 20px;
+ border: none;
+ border-radius: 14px;
+ background: white;
+ font-size: 14px;
+ box-sizing: border-box;
+ outline: none;
 }
 
-.campos select{
-    cursor:pointer;
-    color: #6d6b6c;
+.campos select {
+ cursor: pointer;
+ color: #6d6b6c;
 }
 
-.campos select:valid{
-    cursor:pointer;
-    color: #000000;
+.campos select:valid {
+ cursor: pointer;
+ color: #000000;
 }
 
-.preco input{
-    width:220px;
-    padding:15px;
-    border:none;
-    border-radius:14px;
-    background:white;
-    font-size:14px;
-    outline:none;
+.preco input {
+ width: 220px;
+ padding: 15px;
+ border: none;
+ border-radius: 14px;
+ background: white;
+ font-size: 14px;
+ outline: none;
 }
 
-button{
-    width:240px;
-    padding: 18px;
-    border:none;
-    border-radius:14px;
-    background:#C40C6C;
-    color:white;
-    font-size: 20px;
-    cursor:pointer;
-    transition:.2s;
-    font-family: "Marcellus", serif;
-    margin: auto;
+button {
+ width: 240px;
+ padding: 18px;
+ border: none;
+ border-radius: 14px;
+ background: #c40c6c;
+ color: white;
+ font-size: 20px;
+ cursor: pointer;
+ transition: 0.2s;
+ font-family: 'Marcellus', serif;
+ margin: auto;
 }
 
-button:hover{
-    opacity:.9;
+button:hover {
+ opacity: 0.9;
 }
 
-@media(max-width:900px){
+/*responsivo*/
+@media (max-width: 1024px) {
+ .dados {
+   gap: 35px;
+ }
 
-    .campos{
-        grid-template-columns:1fr;
-    }
+ .campos {
+   grid-template-columns: repeat(3, 1fr);
+   width: 100%;
+   max-width: 820px;
+ }
 
-    .preco input,
-    button{
-        width:100%;
-    }
+ textarea {
+   max-width: 100%;
+ }
 
+ .preco input {
+   width: 200px;
+ }
+
+ button {
+   width: 220px;
+   font-size: 18px;
+ }
 }
 
+@media (max-width: 768px) {
+ .dados {
+   width: 100%;
+   gap: 28px;
+ }
+
+ label {
+   font-size: 20px;
+ }
+
+ textarea {
+   width: 100%;
+   max-width: 100%;
+   height: 130px;
+   box-sizing: border-box;
+ }
+
+ .campos {
+   grid-template-columns: 1fr;
+   width: 100%;
+   gap: 14px;
+ }
+
+ .campos input,
+ .campos select {
+   width: 100%;
+   padding: 18px;
+   box-sizing: border-box;
+ }
+
+ .preco input {
+   width: 100%;
+   box-sizing: border-box;
+   padding: 18px;
+ }
+
+ button {
+   width: 100%;
+   max-width: none;
+   padding: 18px;
+   font-size: 19px;
+ }
+}
 </style>

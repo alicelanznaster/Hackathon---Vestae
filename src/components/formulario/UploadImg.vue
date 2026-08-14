@@ -69,82 +69,93 @@ const selecionarArquivo = (evento) => {
 </template>
 
 <style scoped>
-
-.upload{
-  display: flex;
-  flex-direction: column;
-  gap: 18px;
-  align-items: flex-start;
-
+.upload {
+ display: flex;
+ flex-direction: column;
+ gap: 18px;
+ align-items: flex-start;
 }
 
-.upload-container h2{
-  margin: 0;
-  font-size: 25px;
-  font-weight: 400;
-  color: #000000;
+.upload h2 {
+ margin: 0;
+ font-size: 25px;
+ font-weight: 400;
+ color: #000000;
 }
 
-.input-group{
-  width: 100%;
+.input-group {
+ width: 100%;
 }
 
-input[type="file"]{
-  display: none;
+input[type='file'] {
+ display: none;
 }
 
-.area-upload{
-  width: min(370px, 100%);
-  aspect-ratio: 3 / 4;
-  margin: 0;
-  background: #fff;
-  border-radius: 20px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  overflow: hidden;
-  cursor: pointer;
-  transition: .2s;
+.area-upload {
+ width: min(370px, 100%);
+ aspect-ratio: 3 / 4;
+ margin: 0;
+ background: #fff;
+ border-radius: 20px;
+ display: flex;
+ justify-content: center;
+ align-items: center;
+ overflow: hidden;
+ cursor: pointer;
+ transition: 0.2s;
 }
 
-.area-upload:hover{
-  border-color: #bcbcbc;
-  background: #fafafa;
+.area-upload:hover {
+ border-color: #bcbcbc;
+ background: #fafafa;
 }
 
-.placeholder{
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 12px;
+.placeholder {
+ display: flex;
+ flex-direction: column;
+ align-items: center;
+ gap: 12px;
 }
 
-.placeholder img{
-  width: 30px;
+.placeholder img {
+ width: 30px;
 }
 
-.placeholder p{
-  margin: 0;
-  font-size: 15px;
-  color: #555;
+.placeholder p {
+ margin: 0;
+ font-size: 15px;
+ color: #555;
 }
 
-.preview{
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+.preview {
+ width: 100%;
+ height: 100%;
+ object-fit: cover;
 }
 
-@media (max-width:768px){
-
-  .upload-container h2{
-    font-size: 1.6rem;
-  }
-
-  .area-upload{
-    width: 90%;
-  }
-
+/*responsividade*/
+@media (max-width: 1024px) {
+ .area-upload {
+   width: 330px;
+ }
 }
 
+@media (max-width: 768px) {
+ .upload {
+   width: 100%;
+ }
+
+ .upload h2 {
+   font-size: 22px;
+ }
+
+ .input-group {
+   width: 100%;
+ }
+
+ .area-upload {
+   width: 100%;
+   max-width: 360px;
+ }
+}
 </style>

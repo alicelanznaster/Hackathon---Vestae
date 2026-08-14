@@ -10,6 +10,7 @@ const rua = ref('')
 const numero = ref('')
 const bairro = ref('')
 const metodoPagamento = ref('')
+const complemento = ref();
 const mostrarBairros = ref(false)
 
 const bairrosFiltrados = computed(() => {
@@ -51,17 +52,19 @@ async function buscarCep() {
 }
 
 function confirmarPagamento() {
-    if (!bairros.includes(bairro.value)) {
-        alert('Selecione um bairro válido!')
-    return
+    if (
+    !cep.value ||
+    !rua.value ||
+    !numero.value ||
+    !bairro.value ||
+    !metodoPagamento.value
+    ) {
+        alert('Preencha todos os campos obrigatórios')
+        return
     }
 
-    if (!cep.value ||
-        !rua.value ||
-        !numero.value ||
-        !bairro.value ||
-        !metodoPagamento.value) {
-            alert('Preencha todos os campos obrigatórios')
+    if (!bairros.includes(bairro.value)) {
+        alert('Selecione um bairro válido!')
         return
     }
 
@@ -87,14 +90,30 @@ function confirmarPagamento() {
                 </p>
 
                 <form>
-                   <input
+                    <input
                         type="text"
                         placeholder="CEP *"
                         v-model="cep"
                         maxlength="9"
-                        @blur="buscarCep" 
                         @input="cep = cep.replace(/\D/g, '').replace(/^(\d{5})(\d)/, '$1-$2')"
+                        @blur="buscarCep"
                     />
+                        
+                    <input
+                        type="text"
+                        placeholder="Bairro *"
+                        v-model="bairro"
+                        @input="mostrarBairros = true"
+                    />  
+                    
+                     <div v-if="bairro && mostrarBairros" class="lista-bairros">
+                        <p v-for="item in bairrosFiltrados"
+                        :key="item"
+                        @click="selecionarBairro(item)"
+                        >
+                        {{ item }}
+                        </p>
+                    </div>
 
                     <input
                         type="text"
@@ -107,23 +126,14 @@ function confirmarPagamento() {
                         placeholder="Número *"
                         v-model="numero"
                         maxlength="5"
+                        @input="numero = numero.replace(/\D/g, '')"
                     />
-
-                    <input
+                    
+                    <input 
                         type="text"
-                        placeholder="Bairro *"
-                        v-model="bairro"
-                        @input="mostrarBairros = true"
+                        placeholder="Complemento "
+                        v-model="complemento"
                     />
-                
-                    <div v-if="bairro && mostrarBairros" class="lista-bairros">
-                        <p v-for="item in bairrosFiltrados"
-                        :key="item"
-                        @click="selecionarBairro(item)"
-                        >
-                        {{ item }}
-                        </p>
-                    </div>
 
                     <select v-model="metodoPagamento">
                     <option disabled value="">
@@ -134,6 +144,8 @@ function confirmarPagamento() {
                     <option>Cartão de Crédito</option>
                     <option>Cartão de Débito</option>
                     </select> 
+                    
+                    
                 </form>
                 
 
@@ -229,6 +241,7 @@ input, select{
     border-radius: 8px;
     box-sizing: border-box;
     font-size: 16px;
+    font-family: 'Google Sans Flex', sans-serif ;
 
 }
 
@@ -254,7 +267,7 @@ select {
 }
 
 .valor {
-  font-size: 15px;
+  font-size: 18px;
   color: #111;
   margin-bottom: 20px;
   text-align: left;

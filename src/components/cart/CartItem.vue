@@ -156,4 +156,36 @@ h2 {
     width: 20px;
   }
 }
+
+@media (max-width: 400px) {
+
+  .card {
+    gap: 10px;
+    padding: 15px;
+  }
+
+  .imagem {
+    width: 100px;
+    height: 105px;
+  }
+
+  h2 {
+    font-size: 16px;
+    line-height: 1;
+  }
+
+  .descricao {
+    font-size: 12px;
+  }
+
+  
+  .preco {
+    font-size: 14px;
+  }
+
+  .lixeira img {
+    width: 22px;
+  }
+
+} 
 </style>

@@ -28,8 +28,6 @@ const quantidadeItens = computed(() => {
     </RouterLink>
     </div>
     
-    
-   
     <RouterLink to="/"> <p class="continuar">Ver mais produtos</p> </RouterLink>
   </div>
  
@@ -39,20 +37,21 @@ const quantidadeItens = computed(() => {
 
 <style scoped>
 .card{
-  padding: 25px; 
+  padding: 35px; 
 }
 
 
 h3{
   color: #000;
   font-size: 22px;
-  margin-bottom:1 5px;
+  margin-bottom: 15px;
   font-family: "Google Sans Flex", arial;
   text-align: right;
 }
 
 .btn{
   text-align: center;
+  padding-top: 80px;
 }
 
 button{
@@ -62,9 +61,9 @@ button{
   border:none;
   border-radius: 17px;
   background:#C00B63;
-  color:white;
+  color: white;
   font-size: 20px;
-  cursor:pointer;
+  cursor: pointer;
   font-family: "Marcellus", serif;
 }
 
@@ -76,7 +75,7 @@ button:hover{
 
 
 .continuar{
-  margin-top: 15px;
+  margin-top: 10px;
   text-align: center;
   color: #555;
   text-decoration: underline;
@@ -91,7 +90,7 @@ button:hover{
   }
   
   button{
-    font-size: 17px;
+    font-size: 16px;
   }
 
   .continuar{

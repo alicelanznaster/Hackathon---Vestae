@@ -180,5 +180,9 @@ footer{
   .direitos p{
     font-size: 12px;
   }
+
+  .icones{
+    margin-top: 0;
+  }
 }
 </style>

@@ -3,7 +3,6 @@ import { carrinho } from '@/utils/cartUtils'
 import CartItem from './CartItem.vue';
 import CartSummary from './CartSummary.vue';
 
-
 </script>
 
 <template>
@@ -11,7 +10,7 @@ import CartSummary from './CartSummary.vue';
 
     <div class="topo">
         <a href="/" class="fechar">
-            <img src="/icons/fechar.svg" alt="fechar-botao">
+            <img src="/icons/fechar.svg" alt="botao-fechar">
         </a>
       
         <h1>Sacola ({{ carrinho.length }})</h1>
@@ -45,7 +44,6 @@ import CartSummary from './CartSummary.vue';
 
 .topo{
     display: flex;
-    align-items: center;
     gap: 15px;
     border-bottom: 1px solid #ddd;
     padding: 20px 30px;
@@ -56,6 +54,16 @@ import CartSummary from './CartSummary.vue';
     color: #222;
     padding: 0;
     margin-left: 5px;
+}
+
+.topo a img{
+    height: 29px;
+    width: 29px;
+} 
+
+.fechar{
+    display: flex;
+    align-items: center;
 }
 
 .vazio{

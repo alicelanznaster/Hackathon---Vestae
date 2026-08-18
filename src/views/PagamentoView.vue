@@ -68,6 +68,14 @@ function confirmarPagamento() {
         return
     }
 
+    cep.value = ''
+    rua.value = ''
+    numero.value = ''
+    bairro.value = ''
+    metodoPagamento.value = ''
+    complemento.value = ''
+    mostrarBairros.value = false    
+
   alert('Agradecemos por escolher o Vestæ! Esta funcionalidade será implementada em breve!')
 }
 

@@ -1,30 +1,40 @@
+```vue
 <script setup>
 import { ref } from 'vue'
 
-const arquivo = ref(null)
-const preview = ref(null)
+const imagem = ref('')
+const nomeImagem = ref('')
 const inputFile = ref(null)
 
 const emit = defineEmits(['imagemSelecionada'])
 
-const selecionarArquivo = (evento) => {
-  const file = evento.target.files[0]
+function selecionarArquivo(evento) {
+  const arquivo = evento.target.files?.[0]
 
-  if (file) {
-    arquivo.value = file
+  if (!arquivo) return
 
-    const reader = new FileReader()
+  nomeImagem.value = arquivo.name
 
-    reader.onload = (e) => {
-      preview.value = e.target.result
+  const leitor = new FileReader()
 
-      emit('imagemSelecionada', {
-        arquivo: file,
-        preview: e.target.result
-      })
-    }
+  leitor.onload = () => {
+    imagem.value = String(leitor.result)
 
-    reader.readAsDataURL(file)
+    emit('imagemSelecionada', {
+      arquivo: arquivo,
+      preview: imagem.value
+    })
+  }
+
+  leitor.readAsDataURL(arquivo)
+}
+
+function limparImagem() {
+  imagem.value = ''
+  nomeImagem.value = ''
+
+  if (inputFile.value) {
+    inputFile.value.value = ''
   }
 }
 </script>
@@ -38,7 +48,7 @@ const selecionarArquivo = (evento) => {
         type="file"
         @change="selecionarArquivo"
         ref="inputFile"
-        accept="image/*"
+        accept="image/png, image/jpeg, image/webp"
       >
 
       <div
@@ -47,7 +57,7 @@ const selecionarArquivo = (evento) => {
       >
 
         <div
-          v-if="!preview"
+          v-if="!imagem"
           class="placeholder"
         >
           <img src="/form/upload.png" alt="">
@@ -56,12 +66,21 @@ const selecionarArquivo = (evento) => {
 
         <img
           v-else
-          :src="preview"
+          :src="imagem"
           class="preview"
-          alt="Preview"
+          alt="Prévia do produto"
         >
 
       </div>
+
+      <button
+        v-if="imagem"
+        type="button"
+        class="botao-limpar"
+        @click="limparImagem"
+      >
+        LIMPAR IMAGEM
+      </button>
 
     </div>
 
@@ -133,6 +152,22 @@ input[type='file'] {
  object-fit: cover;
 }
 
+.botao-limpar {
+ margin-top: 8px;
+ padding: 4px 15px;
+ border: none;
+ border-radius: 20px;
+ background: #c40c6c;
+ color: white;
+ font-family: 'Marcellus', serif;
+ font-size: 13px;
+ cursor: pointer;
+}
+
+.botao-limpar:hover {
+ opacity: 0.9;
+}
+
 /*responsividade*/
 @media (max-width: 1024px) {
  .area-upload {
@@ -159,3 +194,4 @@ input[type='file'] {
  }
 }
 </style>
+```

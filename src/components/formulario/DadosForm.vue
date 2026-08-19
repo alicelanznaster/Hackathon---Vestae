@@ -1,7 +1,14 @@
 <script setup>
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
 
 const emit = defineEmits(['enviar'])
+
+const props = defineProps({
+  publicado: {
+    type: Boolean,
+    default: false
+  }
+})
 
 const titulo = ref('')
 const categoria = ref('')
@@ -28,17 +35,24 @@ const limparFormulario = () => {
 
 const enviarFormulario = () => {
   emit('enviar', {
-    titulo: titulo.value,
+    titulo: titulo.value.trim(),
     categoria: categoria.value,
-    tamanho: tamanho.value,
+    tamanho: tamanho.value.trim(),
     condicao: condicao.value,
-    marca: marca.value,
-    descricao: descricao.value,
+    marca: marca.value.trim(),
+    descricao: descricao.value.trim(),
     preco: Number(preco.value)
   })
-
-  limparFormulario()
 }
+
+watch(
+  () => props.publicado,
+  (valor) => {
+    if (valor) {
+      limparFormulario()
+    }
+  }
+)
 </script>
 
 <template>

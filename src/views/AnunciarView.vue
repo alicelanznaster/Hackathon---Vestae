@@ -1,36 +1,57 @@
 <script setup>
 import { ref } from 'vue'
-import produtos from '@/data/product'
 import UploadImg from '@/components/formulario/UploadImg.vue'
 import DadosForm from '@/components/formulario/DadosForm.vue'
 
 const imagem = ref(null)
+const publicado = ref(false)
 
 const salvarImagem = (dados) => {
   imagem.value = dados
 }
 
 const publicar = (produto) => {
+  publicado.value = false
+
   if (!imagem.value) {
     alert('Por favor, selecione uma imagem.')
     return
   }
 
-  produtos.value.push({
+  const anunciosSalvos = JSON.parse(
+    localStorage.getItem('vestae-anuncios') ?? '[]'
+  )
+
+  const novoAnuncio = {
     id: Date.now(),
     ...produto,
     imagem: imagem.value.preview
-  })
+  }
+
+  anunciosSalvos.push(novoAnuncio)
+
+  localStorage.setItem(
+    'vestae-anuncios',
+    JSON.stringify(anunciosSalvos)
+  )
 
   alert('Anúncio publicado! Agradecemos a preferência!')
+
+  publicado.value = true
+  imagem.value = null
 }
 </script>
 
 <template>
   <main class="anunciar">
     <h2>ANUNCIAR</h2>
+
     <UploadImg @imagemSelecionada="salvarImagem" />
-    <DadosForm @enviar="publicar" />
+
+    <DadosForm
+      :publicado="publicado"
+      @enviar="publicar"
+    />
   </main>
 </template>
 

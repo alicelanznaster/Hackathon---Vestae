@@ -11,6 +11,58 @@ let termos = ref(false)
 
 let mostrarSenha = ref(false)
 let mostrarConfirmarSenha = ref(false)
+
+function cadastrar() {
+
+  if (
+    nome.value === '' ||
+    email.value === '' ||
+    telefone.value === '' ||
+    senha.value === '' ||
+    confirmarSenha.value === '' ||
+    termos.value === false
+  ) {
+    alert('Preencha todos os campos!')
+    return
+  }
+
+  if (!email.value.includes('@')) {
+    alert('Digite um e-mail válido!')
+    return
+  }
+
+  if (senha.value.length < 8) {
+    alert('A senha deve ter pelo menos 8 caracteres!')
+    return
+  }
+
+  if (senha.value !== confirmarSenha.value) {
+    alert('As senhas não são iguais!')
+    return
+  }
+
+    let usuarios = JSON.parse(localStorage.getItem('usuarios')) || []
+
+  // adiciona o novo usuário
+  usuarios.push({
+    nome: nome.value,
+    email: email.value,
+    telefone: telefone.value,
+    senha: senha.value,
+    termos: termos.value
+  })
+
+  // salva os usuários
+  localStorage.setItem('usuarios', JSON.stringify(usuarios))
+
+  nome.value = ''
+  email.value = ''
+  telefone.value = ''
+  senha.value = ''
+  confirmarSenha.value = ''
+  termos.value = false
+  alert('Cadastro realizado com sucesso!')
+}
 </script>
 
 <template>
@@ -83,13 +135,14 @@ let mostrarConfirmarSenha = ref(false)
                         </span>
                     </div>
 
-                    <button class="botao">
-                        CADASTRAR
-                    </button>
-                
-        
-                    
                 </form>
+                <button @click="cadastrar()" class="botao">
+                    CADASTRAR
+                </button>
+                <div class="possui">
+                    <p>Já possui uma conta?</p>
+                    <RouterLink to="/login">Entre agora!</RouterLink>
+                </div>
             </section>
       </div>
     </main>
@@ -103,6 +156,11 @@ let mostrarConfirmarSenha = ref(false)
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
+}
+
+.voltar{
+    padding: 20px;
+    display: inline-block;
 }
 
 .cadastro {
@@ -175,11 +233,11 @@ input::placeholder {
 
 .senha {
   display: flex;
+  width: 100%;
 }
 
 .senha input {
-  width: 100%;
-  border-radius: 8px 0 0 8px;
+  border-radius: 9px 0 0 9px;
 }
 
 .senha button {
@@ -197,9 +255,22 @@ input::placeholder {
 }
 
 .termos {
-  display: flex;
-  align-items: center;
-  gap: 8px;
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    margin-top: 5px;
+    font-size: 14px;
+    line-height: 1.4;
+    text-align: left;
+}
+
+.termos input {
+    width: 17px;
+    height: 17px;
+    margin: 1px 0 0;
+    accent-color: #C00B63;
+    cursor: pointer;
+    flex-shrink: 0; /*quer dizer q o checkbox não pode encolher.*/
 }
 
 .botao {
@@ -212,5 +283,25 @@ input::placeholder {
     font-size: 18px;
     cursor: pointer;
     transition: opacity 0.2s ease;
+    width: 90%;
+    margin-top: 20px;
+}
+
+.possui{
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    gap: 5px;
+    margin-top: 10px;
+}
+
+.possui p{
+    font-size: 14px;
+}
+
+.possui a{
+    text-decoration: none;
+    color: #C00B63;
+    font-weight: 500;
 }
 </style>

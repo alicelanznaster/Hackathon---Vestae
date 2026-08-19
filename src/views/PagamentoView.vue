@@ -250,7 +250,6 @@ input, select{
     box-sizing: border-box;
     font-size: 16px;
     font-family: 'Google Sans Flex', sans-serif ;
-
 }
 
 input::placeholder {
@@ -293,6 +292,7 @@ select {
     font-size: 18px;
     cursor: pointer;
     transition: opacity 0.2s ease;
+    width: 90%;
 }
 
 .card button:hover {

@@ -55,8 +55,7 @@ h3{
 }
 
 button{
-  max-width: 90vw;
-  width: 100%;
+  width: 90%;
   padding: 12px 14px; 
   border:none;
   border-radius: 17px;

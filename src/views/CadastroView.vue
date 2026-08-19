@@ -270,7 +270,7 @@ input::placeholder {
     margin: 1px 0 0;
     accent-color: #C00B63;
     cursor: pointer;
-    flex-shrink: 0; /*quer dizer q o checkbox não pode encolher.*/
+    flex-shrink: 0; /*quer dizer q o checkbox não pode encolher*/
 }
 
 .botao {
@@ -303,5 +303,54 @@ input::placeholder {
     text-decoration: none;
     color: #C00B63;
     font-weight: 500;
+}
+
+@media (max-width: 768px){
+    .pagina{
+        padding: 10px 18px 35px;
+        min-height: 100vh;
+    }
+
+    .voltar {
+    padding: 10px;
+  }
+
+  .voltar img {
+    width: 20px;
+    height: 20px;
+  }
+
+  .logo {
+    font-size: 25px;
+    margin-bottom: 18px;
+  }
+
+  .card {
+    width: 100%;
+    max-width: 440px;
+    padding: 25px 20px;
+    border-radius: 15px;
+    max-height: none;
+  }
+
+  h2 {
+    font-size: 24px;
+    line-height: 1.2;
+  }
+
+  .subtitulo {
+    font-size: 16px;
+    margin-bottom: 25px;
+  }
+
+  form {
+    gap: 8px;
+  }
+
+  input,
+  select {
+    font-size: 15px;
+    padding: 13px 14px;
+  }
 }
 </style>

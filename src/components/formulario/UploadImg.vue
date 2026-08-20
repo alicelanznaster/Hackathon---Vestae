@@ -28,15 +28,6 @@ function selecionarArquivo(evento) {
 
   leitor.readAsDataURL(arquivo)
 }
-
-function limparImagem() {
-  imagem.value = ''
-  nomeImagem.value = ''
-
-  if (inputFile.value) {
-    inputFile.value.value = ''
-  }
-}
 </script>
 
 <template>
@@ -72,15 +63,6 @@ function limparImagem() {
         >
 
       </div>
-
-      <button
-        v-if="imagem"
-        type="button"
-        class="botao-limpar"
-        @click="limparImagem"
-      >
-        LIMPAR IMAGEM
-      </button>
 
     </div>
 
@@ -150,22 +132,6 @@ input[type='file'] {
  width: 100%;
  height: 100%;
  object-fit: cover;
-}
-
-.botao-limpar {
- margin-top: 8px;
- padding: 4px 15px;
- border: none;
- border-radius: 20px;
- background: #c40c6c;
- color: white;
- font-family: 'Marcellus', serif;
- font-size: 13px;
- cursor: pointer;
-}
-
-.botao-limpar:hover {
- opacity: 0.9;
 }
 
 /*responsividade*/

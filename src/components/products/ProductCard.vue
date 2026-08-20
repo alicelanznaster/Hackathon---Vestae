@@ -3,7 +3,13 @@ import { formataPreco } from '@/utils/currencyUtils'
 import { favoritarProduto } from '@/utils/favoritesUtils';
 import { RouterLink } from 'vue-router';
 
-const props = defineProps(['produto'])
+const props = defineProps({
+    produto: Object,
+    mostrarFavorito: {
+        type: Boolean,
+        default: true
+    }
+})
 
 function favoritar() {
     favoritarProduto(props.produto)
@@ -13,7 +19,7 @@ function favoritar() {
 <template>
     <div class="card">
 
-        <button class="favorito" @click="favoritar">
+        <button v-if="mostrarFavorito" class="favorito" @click="favoritar">
             <img :src="produto.favorito ? '/icons/coracao-preenchido.svg' : '/icons/coracao.svg'" alt="Favoritar" />
         </button>
         <RouterLink :to="{ name: 'produto', params: { id: produto.id } }">
@@ -136,10 +142,11 @@ h3 {
         font-size: 1.2rem;
     }
 
-    .favorito{
+    .favorito {
         width: 35px;
         height: 35px;
     }
+
     .favorito img {
         width: 1.5rem;
         height: 1.5rem;

@@ -11,58 +11,95 @@ let termos = ref(false)
 
 let mostrarSenha = ref(false)
 let mostrarConfirmarSenha = ref(false)
-
+    
 function cadastrar() {
+    if (
+        nome.value === '' ||
+        email.value === '' ||
+        telefone.value === '' ||
+        senha.value === '' ||
+        confirmarSenha.value === '' ||
+        termos.value === false
+    ) {
+        alert('Preencha todos os campos!')
+        return
+    }
+  
+    if (!email.value.includes('@') || !email.value.includes('.')) {
+        alert('Digite um e-mail válido!')
+        return
+    }
 
-  if (
-    nome.value === '' ||
-    email.value === '' ||
-    telefone.value === '' ||
-    senha.value === '' ||
-    confirmarSenha.value === '' ||
-    termos.value === false
-  ) {
-    alert('Preencha todos os campos!')
+    if (telefone.value.length < 14 || telefone.value.length > 15) {
+        alert('Digite um telefone válido!')
+        return
+    }
+
+    if (senha.value.length < 8) {
+        alert('A senha deve ter pelo menos 8 caracteres!')
+        return
+    }
+
+    if (!/[A-Za-z]/.test(senha.value) || !/[0-9]/.test(senha.value)) {
+    alert('A senha deve conter pelo menos uma letra e um número!')
     return
-  }
+    }
 
-  if (!email.value.includes('@')) {
-    alert('Digite um e-mail válido!')
-    return
-  }
+    if (senha.value !== confirmarSenha.value) {
+        alert('As senhas não são iguais!')
+        return
+    }
 
-  if (senha.value.length < 8) {
-    alert('A senha deve ter pelo menos 8 caracteres!')
-    return
-  }
+    let usuarios = JSON.parse(localStorage.getItem('usuarios')) || [] //pega os usuarios já salvos
 
-  if (senha.value !== confirmarSenha.value) {
-    alert('As senhas não são iguais!')
-    return
-  }
+    let emailExiste = usuarios.some(usuario => usuario.email.toLowerCase() === email.value.toLowerCase()) //evita cadastro de emails iguais
 
-    let usuarios = JSON.parse(localStorage.getItem('usuarios')) || []
+    if (emailExiste) {
+        alert('Este e-mail já está cadastrado!')
+        return
+    }
 
   // adiciona o novo usuário
-  usuarios.push({
-    nome: nome.value,
-    email: email.value,
-    telefone: telefone.value,
-    senha: senha.value,
-    termos: termos.value
-  })
+    usuarios.push({
+        nome: nome.value,
+        email: email.value.toLowerCase(),
+        telefone: telefone.value,
+        senha: senha.value,
+        termos: termos.value
+    })
 
   // salva os usuários
-  localStorage.setItem('usuarios', JSON.stringify(usuarios))
+    localStorage.setItem('usuarios', JSON.stringify(usuarios))
 
-  nome.value = ''
-  email.value = ''
-  telefone.value = ''
-  senha.value = ''
-  confirmarSenha.value = ''
-  termos.value = false
-  alert('Cadastro realizado com sucesso!')
+    nome.value = ''
+    email.value = ''
+    telefone.value = ''
+    senha.value = ''
+    confirmarSenha.value = ''
+    termos.value = false
+
+    alert('Cadastro realizado com sucesso!')
 }
+
+
+function formatarTelefone() {
+
+    telefone.value = telefone.value.replace(/\D/g, '')
+
+    if (telefone.value.length <= 10) {
+
+        telefone.value = telefone.value
+            .replace(/^(\d{2})(\d)/, '($1) $2')
+            .replace(/(\d{4})(\d)/, '$1-$2')
+
+    } else {
+
+        telefone.value = telefone.value
+            .replace(/^(\d{2})(\d)/, '($1) $2')
+            .replace(/(\d{5})(\d)/, '$1-$2')
+    }
+}
+
 </script>
 
 <template>
@@ -87,24 +124,30 @@ function cadastrar() {
                     <input 
                     type="text"
                     v-model="nome"
+                    @input="nome = nome.replace(/[^A-Za-zÀ-ÿ\s]/g, '')"
                     placeholder="Nome Completo *"
                     >
 
                     <input
                     type="email"
                     v-model="email"
+                    @input="email = email.replace(/\s/g, '')"
                     placeholder="E-mail *"
                     >
 
-                    <input 
+                    <input
                     type="text"
                     v-model="telefone"
+                    @input="formatarTelefone"
                     placeholder="Telefone *"
+                    maxlength="15"
                     >
+
                     <div class="senha">
                         <input
                         :type="mostrarSenha ? 'text' : 'password'"
                         v-model="senha"
+                        @input="senha = senha.replace(/\s/g, '')"
                         placeholder="Digite sua senha"
                         >
 
@@ -120,6 +163,7 @@ function cadastrar() {
                         <input
                         :type="mostrarConfirmarSenha ? 'text' : 'password'"
                         v-model="confirmarSenha"
+                        @input="confirmarSenha = confirmarSenha.replace(/\s/g, '')"
                         placeholder="Confirme sua senha *"
                         >
                         <button type="button" @click="mostrarConfirmarSenha = !mostrarConfirmarSenha">
@@ -229,6 +273,32 @@ input{
 
 input::placeholder {
   color: #3f3f3f;
+}
+
+.telefone {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    background-color: #F5ECE0;
+    border-radius: 8px;
+}
+
+.ddd {
+    padding-left: 16px;
+    font-size: 16px;
+    color: #3f3f3f;
+}
+
+.telefone input {
+    background-color: transparent;
+    border: none;
+    border-radius: 0;
+    padding-left: 8px;
+}
+
+.telefone input:focus {
+    border: none;
+    outline: none;
 }
 
 .senha {

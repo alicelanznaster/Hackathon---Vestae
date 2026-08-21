@@ -21,7 +21,7 @@ body {
 }
 
 
-p{
+p, h3{
  font-family: "Google Sans Flex", sans-serif;
 }
 
@@ -39,3 +39,7 @@ h2{
 a{
   font-family: "Google Sans Flex", arial;
 }
+
+
+
+

@@ -21,9 +21,10 @@ defineProps(['produto'])
 <style scoped>
 .card {
     width: 300px;
-    background: #F9F1E8;
+    background: #FEF6EC;
     border-radius: 16px;
     padding: 18px;
+    border: 2px solid #7c7c7c75;
     box-shadow: 0 2px 10px rgba(0, 0, 0, .15);
     transition: .3s;
     cursor: pointer;
@@ -47,6 +48,7 @@ defineProps(['produto'])
 h3 {
     font-size: 1.8rem;
     font-weight: 400;
+    font-family: "Google Sans Flex";
     color: #444;
     margin-bottom: 10px;
 }

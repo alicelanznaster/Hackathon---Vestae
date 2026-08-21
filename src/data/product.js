@@ -65,6 +65,7 @@ export const produtos = ref([
     preco: 84.90,
     favorito: false,
     status: "Disponível",
+    destaque: true
   },
   {
     id: 6,
@@ -156,6 +157,7 @@ export const produtos = ref([
     preco: 36.90,
     favorito: false,
     status: "Disponível",
+    destaque: true
   },
   {
     id: 13,
@@ -234,6 +236,7 @@ export const produtos = ref([
     preco: 59.90,
     favorito: false,
     status: "Disponível",
+    destaque: true
   },
   {
     id: 19,
@@ -364,6 +367,7 @@ export const produtos = ref([
     preco: 129.90,
     favorito: false,
     status: "Disponível",
+    destaque: true
   },
   {
     id: 29,
@@ -481,6 +485,7 @@ export const produtos = ref([
     preco: 332.90,
     favorito: false,
     status: "Disponível",
+    destaque: true
   },
   {
     id: 38,
@@ -624,6 +629,9 @@ export const produtos = ref([
     preco: 34.90,
     favorito: false,
     status: "Disponível",
+    marca: "",
+    preco: 34.90,
+    destaque: true
   },
   {
     id: 49,

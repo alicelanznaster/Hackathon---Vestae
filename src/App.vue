@@ -9,7 +9,3 @@ import AppHeader from './components/layout/AppHeader.vue';
   <RouterView />
 
 </template>
-
-<style scoped>
-
-</style>

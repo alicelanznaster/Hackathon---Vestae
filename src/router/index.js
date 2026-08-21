@@ -11,6 +11,7 @@ import FavoritosView from '../views/FavoritosView.vue'
 import ProductDetail from '@/components/products/ProductDetail.vue'
 import AnunciarView from '../views/AnunciarView.vue'
 import PerfilView from '../views/PerfilView.vue'
+import RatingView from '@/views/RatingView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -74,6 +75,11 @@ const router = createRouter({
       path: '/perfil',
       name: 'perfil',
       component: PerfilView,
+    },
+    {
+      path: '/avaliacao',
+      name: 'avaliacao',
+      component: RatingView,
     },
   ],
 })

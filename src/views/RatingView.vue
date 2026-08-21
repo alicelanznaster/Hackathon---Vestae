@@ -61,10 +61,7 @@ function enviarAvaliacao() {
 
     <h1>AVALIE O VESTÆ</h1>
 
-    <form
-      class="formulario-avaliacao"
-      @submit.prevent="enviarAvaliacao"
-    >
+    <form class="formulario-avaliacao" @submit.prevent="enviarAvaliacao">
 
       <label for="nome">Seu Nome</label>
 
@@ -91,7 +88,7 @@ function enviarAvaliacao() {
       </fieldset>
 
       <div
-        v-if="erro"
+        v-if="erro" 
         class="mensagem-erro"
       >
         {{ erro }}
@@ -105,7 +102,6 @@ function enviarAvaliacao() {
       </button>
 
     </form>
-
   </main>
 </template>
 

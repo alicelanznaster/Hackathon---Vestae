@@ -18,12 +18,11 @@
         dando uma nova vida a roupas e acessórios e promovendo uma forma mais sustentável de consumir moda.
       </p>
     </section>
-
+    
     <hr>
 
     <section class="equipe">
       <h2>Sobre Nós</h2>
-
       <p>
         Somos estudantes do Instituto Federal Catarinense e desenvolvemos o VESTÆ durante o Hackathon
         com o propósito de unir tecnologia, criatividade e sustentabilidade em uma solução que incentive

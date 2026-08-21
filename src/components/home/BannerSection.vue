@@ -22,15 +22,12 @@ const modules = [Navigation, Pagination, Autoplay]
    navigation
  >
 
-
-   <!-- BANNER 1 -->
    <SwiperSlide>
      <picture>
        <source
          media="(max-width: 767px)"
          srcset="/banner/1.png"
        >
-
 
        <img
          src="/banner/banner1.png"
@@ -39,17 +36,12 @@ const modules = [Navigation, Pagination, Autoplay]
      </picture>
    </SwiperSlide>
 
-
-
-
-   <!-- BANNER 2 -->
    <SwiperSlide>
      <picture>
        <source
          media="(max-width: 767px)"
          srcset="/banner/2.png"
        >
-
 
        <img
          src="/banner/banner2.png"
@@ -58,10 +50,6 @@ const modules = [Navigation, Pagination, Autoplay]
      </picture>
    </SwiperSlide>
 
-
-
-
-   <!-- BANNER 3 -->
    <SwiperSlide>
      <picture>
        <source
@@ -69,14 +57,12 @@ const modules = [Navigation, Pagination, Autoplay]
          srcset="/banner/3.png"
        >
 
-
        <img
          src="/banner/banner3.png"
          alt="Banner 3"
        >
      </picture>
    </SwiperSlide>
-
 
  </Swiper>
 </template>
@@ -107,22 +93,13 @@ const modules = [Navigation, Pagination, Autoplay]
  background: #ffffff;
 }
 
-
-
-
-/* =========================
-  TABLET
-========================= */
-
-
+/*responsivo*/
 @media (max-width: 1024px) {
-
 
  .swiper {
    padding-top: 60px;
    --swiper-navigation-size: 30px;
  }
-
 
  :deep(.swiper-button-next),
  :deep(.swiper-button-prev) {
@@ -130,35 +107,23 @@ const modules = [Navigation, Pagination, Autoplay]
  }
 }
 
-
-
-
-/* =========================
-  MOBILE
-========================= */
-
-
 @media (max-width: 767px) {
-
 
  .swiper {
    padding-top: 40px;
    --swiper-navigation-size: 22px;
  }
 
-
  .swiper-slide picture {
    display: block;
    width: 100%;
  }
-
 
  .swiper-slide img {
    width: 100%;
    height: auto;
    display: block;
  }
-
 
  :deep(.swiper-button-next),
  :deep(.swiper-button-prev) {

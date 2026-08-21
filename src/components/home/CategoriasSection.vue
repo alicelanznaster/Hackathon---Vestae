@@ -32,7 +32,6 @@ import { RouterLink } from 'vue-router'
  margin: 90px 0;
 }
 
-
 .categoria {
  width: 170px;
  height: 170px;
@@ -48,38 +47,32 @@ import { RouterLink } from 'vue-router'
  flex-shrink: 0;
 }
 
-
 .categoria:hover {
  transform: scale(1.05);
 }
-
 
 .calcados {
  background: #ffd58c;
 }
 
-
 .masculino {
  background: #ffb494;
 }
-
 
 .feminino {
  background: #ff8e8e;
 }
 
-
 .acessorios {
  background: #ff6b88;
 }
 
-
+/*responsivo*/
 @media (max-width: 1024px) {
  .categorias {
    gap: 20px;
    margin: 70px 20px;
  }
-
 
  .categoria {
    width: 145px;
@@ -87,7 +80,6 @@ import { RouterLink } from 'vue-router'
    font-size: 15px;
  }
 }
-
 
 @media (max-width: 768px) {
  .categorias {
@@ -98,7 +90,6 @@ import { RouterLink } from 'vue-router'
    margin: 60px 30px;
  }
 
-
  .categoria {
    width: 140px;
    height: 140px;
@@ -106,13 +97,11 @@ import { RouterLink } from 'vue-router'
  }
 }
 
-
 @media (max-width: 400px) {
  .categorias {
    gap: 20px 15px;
    margin: 50px 20px;
  }
-
 
  .categoria {
    width: 125px;

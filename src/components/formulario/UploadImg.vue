@@ -1,4 +1,3 @@
-```vue
 <script setup>
 import { ref } from 'vue'
 
@@ -35,37 +34,20 @@ function selecionarArquivo(evento) {
     <h2>Foto do Produto</h2>
 
     <div class="input-group">
-      <input
-        type="file"
-        @change="selecionarArquivo"
-        ref="inputFile"
-        accept="image/png, image/jpeg, image/webp"
-      >
+      <input type="file" @change="selecionarArquivo" ref="inputFile" accept="image/png, image/jpeg, image/webp">
 
-      <div
-        class="area-upload"
-        @click="inputFile.click()"
+      <div class="area-upload" @click="inputFile.click()"
       >
-
         <div
-          v-if="!imagem"
-          class="placeholder"
-        >
+          v-if="!imagem" class="placeholder">
           <img src="/form/upload.png" alt="">
           <p>Carregar Fotos (Formato 3:4)</p>
         </div>
 
-        <img
-          v-else
-          :src="imagem"
-          class="preview"
-          alt="Prévia do produto"
+        <img v-else :src="imagem" class="preview" alt="Prévia do produto"
         >
-
       </div>
-
     </div>
-
   </div>
 </template>
 
@@ -160,4 +142,3 @@ input[type='file'] {
  }
 }
 </style>
-```

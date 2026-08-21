@@ -3,7 +3,6 @@ import { Swiper, SwiperSlide } from 'swiper/vue'
 import { Navigation } from 'swiper/modules'
 import 'swiper/css'
 import 'swiper/css/navigation'
-
 import produtos from '@/data/product'
 import ProductCard from '@/components/products/ProductCard.vue'
 

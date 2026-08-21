@@ -47,11 +47,8 @@ const publicar = (produto) => {
     <h2>ANUNCIAR</h2>
 
     <UploadImg @imagemSelecionada="salvarImagem" />
-
-    <DadosForm
-      :publicado="publicado"
-      @enviar="publicar"
-    />
+    <DadosForm :publicado="publicado" @enviar="publicar"/>
+    
   </main>
 </template>
 

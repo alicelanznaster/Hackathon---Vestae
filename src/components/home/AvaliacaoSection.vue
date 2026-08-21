@@ -2,26 +2,18 @@
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 
-
 import { Swiper, SwiperSlide } from 'swiper/vue'
 import { Navigation, Pagination } from 'swiper/modules'
-
 
 import 'swiper/css'
 import 'swiper/css/navigation'
 import 'swiper/css/pagination'
 
-
 const router = useRouter()
-
-
 const avaliacaoSalva = localStorage.getItem('vestae-avaliacao')
-
-
 const avaliacaoUsuario = ref(
  avaliacaoSalva ? JSON.parse(avaliacaoSalva) : null
 )
-
 
 const avaliacoes = [
  {
@@ -41,16 +33,13 @@ const avaliacoes = [
  }
 ]
 
-
 function avaliar() {
  router.push('/avaliacao')
 }
 
-
 function editarAvaliacao() {
  router.push('/avaliacao')
 }
-
 
 function excluirAvaliacao() {
  localStorage.removeItem('vestae-avaliacao')
@@ -61,8 +50,6 @@ function excluirAvaliacao() {
 
 <template>
  <section class="avaliacoes">
-
-
    <h2>AVALIAÇÕES</h2>
 
 

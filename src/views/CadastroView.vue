@@ -11,7 +11,7 @@ let termos = ref(false)
 
 let mostrarSenha = ref(false)
 let mostrarConfirmarSenha = ref(false)
-    
+
 function cadastrar() {
     if (
         nome.value === '' ||
@@ -24,7 +24,7 @@ function cadastrar() {
         alert('Preencha todos os campos!')
         return
     }
-  
+
     if (!email.value.includes('@') || !email.value.includes('.')) {
         alert('Digite um e-mail válido!')
         return
@@ -41,8 +41,8 @@ function cadastrar() {
     }
 
     if (!/[A-Za-z]/.test(senha.value) || !/[0-9]/.test(senha.value)) {
-    alert('A senha deve conter pelo menos uma letra e um número!')
-    return
+        alert('A senha deve conter pelo menos uma letra e um número!')
+        return
     }
 
     if (senha.value !== confirmarSenha.value) {
@@ -59,17 +59,22 @@ function cadastrar() {
         return
     }
 
-  // adiciona o novo usuário
-    usuarios.push({
+    // adiciona o novo usuário
+    const novoUsuario = {
         nome: nome.value,
         email: email.value.toLowerCase(),
         telefone: telefone.value,
         senha: senha.value,
         termos: termos.value
-    })
+    }
 
-  // salva os usuários
+    usuarios.push(novoUsuario)
+
+    // salva os usuários
     localStorage.setItem('usuarios', JSON.stringify(usuarios))
+
+    // salva o usuário recém-cadastrado como usuário logado
+    localStorage.setItem('usuarioLogado', JSON.stringify(novoUsuario))
 
     nome.value = ''
     email.value = ''
@@ -119,56 +124,33 @@ function formatarTelefone() {
                 <p class="subtitulo">
                     Crie sua conta e entre no VESTÆ.
                 </p>
-                
+
                 <form>
-                    <input 
-                    type="text"
-                    v-model="nome"
-                    @input="nome = nome.replace(/[^A-Za-zÀ-ÿ\s]/g, '')"
-                    placeholder="Nome Completo *"
-                    >
+                    <input type="text" v-model="nome" @input="nome = nome.replace(/[^A-Za-zÀ-ÿ\s]/g, '')"
+                        placeholder="Nome Completo *">
 
-                    <input
-                    type="email"
-                    v-model="email"
-                    @input="email = email.replace(/\s/g, '')"
-                    placeholder="E-mail *"
-                    >
+                    <input type="email" v-model="email" @input="email = email.replace(/\s/g, '')"
+                        placeholder="E-mail *">
 
-                    <input
-                    type="text"
-                    v-model="telefone"
-                    @input="formatarTelefone"
-                    placeholder="Telefone *"
-                    maxlength="15"
-                    >
+                    <input type="text" v-model="telefone" @input="formatarTelefone" placeholder="Telefone *"
+                        maxlength="15">
 
                     <div class="senha">
-                        <input
-                        :type="mostrarSenha ? 'text' : 'password'"
-                        v-model="senha"
-                        @input="senha = senha.replace(/\s/g, '')"
-                        placeholder="Digite sua senha"
-                        >
+                        <input :type="mostrarSenha ? 'text' : 'password'" v-model="senha"
+                            @input="senha = senha.replace(/\s/g, '')" placeholder="Digite sua senha">
 
                         <button type="button" @click="mostrarSenha = !mostrarSenha">
-                            <img
-                            :src="mostrarSenha ? '/icons/fechado.svg' : '/icons/aberto.svg'"
-                            alt="Mostrar senha"
-                            >
+                            <img :src="mostrarSenha ? '/icons/fechado.svg' : '/icons/aberto.svg'" alt="Mostrar senha">
                         </button>
                     </div>
-                    
+
                     <div class="senha">
-                        <input
-                        :type="mostrarConfirmarSenha ? 'text' : 'password'"
-                        v-model="confirmarSenha"
-                        @input="confirmarSenha = confirmarSenha.replace(/\s/g, '')"
-                        placeholder="Confirme sua senha *"
-                        >
+                        <input :type="mostrarConfirmarSenha ? 'text' : 'password'" v-model="confirmarSenha"
+                            @input="confirmarSenha = confirmarSenha.replace(/\s/g, '')"
+                            placeholder="Confirme sua senha *">
                         <button type="button" @click="mostrarConfirmarSenha = !mostrarConfirmarSenha">
-                            <img
-                            :src="mostrarConfirmarSenha ? '/icons/fechado.svg' : '/icons/aberto.svg'" alt="Mostrar senha">
+                            <img :src="mostrarConfirmarSenha ? '/icons/fechado.svg' : '/icons/aberto.svg'"
+                                alt="Mostrar senha">
                         </button>
                     </div>
                     <div class="termos">
@@ -188,12 +170,12 @@ function formatarTelefone() {
                     <RouterLink to="/login">Entre agora!</RouterLink>
                 </div>
             </section>
-      </div>
+        </div>
     </main>
 </template>
 
 <style scoped>
-.pagina{
+.pagina {
     background-color: #EFE4D6;
     padding: 20px 40px 55px;
     min-height: 80vh;
@@ -202,7 +184,7 @@ function formatarTelefone() {
     flex-direction: column;
 }
 
-.voltar{
+.voltar {
     padding: 20px;
     display: inline-block;
 }
@@ -216,14 +198,14 @@ function formatarTelefone() {
     align-items: center;
 }
 
-.logo{
+.logo {
     font-size: 30px;
     margin-bottom: 25px;
     text-align: center;
     color: black;
 }
 
-.card{
+.card {
     background-color: #FEF6EC;
     max-width: 440px;
     width: 100%;
@@ -237,20 +219,20 @@ function formatarTelefone() {
     color: #3f3f3f;
 }
 
-h2{
+h2 {
     color: #C00B63;
     font-size: 30px;
     margin-bottom: 8px;
 }
 
-.subtitulo{
+.subtitulo {
     font-size: 20px;
     line-height: 1.15;
     margin-bottom: 35px;
     color: black;
 }
 
-form{
+form {
     display: flex;
     flex-direction: column;
     gap: 8px;
@@ -259,20 +241,20 @@ form{
     align-items: center;
 }
 
-input{
+input {
     background-color: #F5ECE0;
     border: none;
     padding: 14px 16px;
     max-width: 500px;
-    width: 100%; 
+    width: 100%;
     border-radius: 8px;
     box-sizing: border-box;
     font-size: 16px;
-    font-family: 'Google Sans Flex', sans-serif ;
+    font-family: 'Google Sans Flex', sans-serif;
 }
 
 input::placeholder {
-  color: #3f3f3f;
+    color: #3f3f3f;
 }
 
 .telefone {
@@ -302,26 +284,26 @@ input::placeholder {
 }
 
 .senha {
-  display: flex;
-  width: 100%;
+    display: flex;
+    width: 100%;
 }
 
 .senha input {
-  border-radius: 9px 0 0 9px;
+    border-radius: 9px 0 0 9px;
 }
 
 .senha button {
-  background: #F5ECE0;
-  border: none;
-  border-radius: 0 8px 8px 0;
-  cursor: pointer;
-  padding-right: 10px;
+    background: #F5ECE0;
+    border: none;
+    border-radius: 0 8px 8px 0;
+    cursor: pointer;
+    padding-right: 10px;
 }
 
 .senha button img {
-  width: 20px;
-  height: 20px;
-  object-fit: contain;
+    width: 20px;
+    height: 20px;
+    object-fit: contain;
 }
 
 .termos {
@@ -340,7 +322,8 @@ input::placeholder {
     margin: 1px 0 0;
     accent-color: #C00B63;
     cursor: pointer;
-    flex-shrink: 0; /*quer dizer q o checkbox não pode encolher*/
+    flex-shrink: 0;
+    /*quer dizer q o checkbox não pode encolher*/
 }
 
 .botao {
@@ -357,7 +340,7 @@ input::placeholder {
     margin-top: 20px;
 }
 
-.possui{
+.possui {
     display: flex;
     align-items: center;
     font-size: 14px;
@@ -365,62 +348,62 @@ input::placeholder {
     margin-top: 10px;
 }
 
-.possui p{
+.possui p {
     font-size: 14px;
 }
 
-.possui a{
+.possui a {
     text-decoration: none;
     color: #C00B63;
     font-weight: 500;
 }
 
-@media (max-width: 768px){
-    .pagina{
+@media (max-width: 768px) {
+    .pagina {
         padding: 10px 18px 35px;
         min-height: 100vh;
     }
 
     .voltar {
-    padding: 10px;
-  }
+        padding: 10px;
+    }
 
-  .voltar img {
-    width: 20px;
-    height: 20px;
-  }
+    .voltar img {
+        width: 20px;
+        height: 20px;
+    }
 
-  .logo {
-    font-size: 25px;
-    margin-bottom: 18px;
-  }
+    .logo {
+        font-size: 25px;
+        margin-bottom: 18px;
+    }
 
-  .card {
-    width: 100%;
-    max-width: 440px;
-    padding: 25px 20px;
-    border-radius: 15px;
-    max-height: none;
-  }
+    .card {
+        width: 100%;
+        max-width: 440px;
+        padding: 25px 20px;
+        border-radius: 15px;
+        max-height: none;
+    }
 
-  h2 {
-    font-size: 24px;
-    line-height: 1.2;
-  }
+    h2 {
+        font-size: 24px;
+        line-height: 1.2;
+    }
 
-  .subtitulo {
-    font-size: 16px;
-    margin-bottom: 25px;
-  }
+    .subtitulo {
+        font-size: 16px;
+        margin-bottom: 25px;
+    }
 
-  form {
-    gap: 8px;
-  }
+    form {
+        gap: 8px;
+    }
 
-  input,
-  select {
-    font-size: 15px;
-    padding: 13px 14px;
-  }
+    input,
+    select {
+        font-size: 15px;
+        padding: 13px 14px;
+    }
 }
 </style>

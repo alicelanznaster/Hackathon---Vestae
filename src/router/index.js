@@ -13,6 +13,8 @@ import AnunciarView from '../views/AnunciarView.vue'
 import PerfilView from '../views/PerfilView.vue'
 import RatingView from '@/views/RatingView.vue'
 import PagamentoView from '@/views/PagamentoView.vue'
+import CadastroView from '@/views/CadastroView.vue'
+import LoginView from '@/views/LoginView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -87,6 +89,16 @@ const router = createRouter({
       name: 'avaliacao',
       component: RatingView,
     },
+    {
+      path: '/cadastro',
+      nome: 'cadastro',
+      component: CadastroView, 
+    }, 
+    {
+      path: '/login',
+      nome: 'login',
+      component: LoginView, 
+    }, 
   ],
 })
 

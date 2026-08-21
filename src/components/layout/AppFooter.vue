@@ -14,7 +14,7 @@ import { RouterLink } from 'vue-router';
                 </p>
             </div>
             
-            <div class="rotas">
+              <div class="rotas">
                 <h2>
                     Explorar
                 </h2>
@@ -49,6 +49,7 @@ import { RouterLink } from 'vue-router';
                         </div>
                 </div>
             </div>
+            
         <div class="direitos">
             <p>
                 © 2026 VESTÆ. Todos os direitos reservados.
@@ -86,7 +87,7 @@ footer{
 }
 
 .rotas h2{
-    margin-bottom: 18px;
+  margin-bottom: 18px;
 }
 
 .rotas ul {
@@ -100,7 +101,6 @@ footer{
 .rotas a {
   color: white;
   text-decoration: none;
- 
 }
 
 .rotas a:hover {
@@ -161,10 +161,14 @@ footer{
 @media (max-width: 768px) {
   .conteudo {
     flex-direction: column;
-    gap: 30px;
-    padding: 5px 0;
+    gap: 10px;
+    padding: 0;
   }
 
+  .resposivo{
+    display: flex;
+    gap: 80px;
+  }
   .marca{
     margin-top: 8px;
   }
@@ -177,12 +181,46 @@ footer{
     font-size: 1rem;
   }
 
+  .rotas h2{
+    font-size: 21px;
+    margin-bottom: 8px;
+  }
+
+  .rotas li{
+    margin-bottom: 5px;
+  }
+
+  .contato h2 {
+    font-size: 21px;
+    margin-bottom: 8px;
+  }
+
+  .contato img{
+    width: 24px;
+    height: 24px;
+  }
+
   .direitos p{
     font-size: 12px;
   }
 
   .icones{
     margin-top: 0;
+  }
+
+  .icones img{
+    width: 35px;
+    height: 35px;
+  }
+
+  .direitos {
+    margin-top: 15px;
+    padding-top: 10px;
+    line-height: 1.5;
+  }
+  
+  .direitos p{
+    font-size: 12px;
   }
 }
 </style>

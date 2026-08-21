@@ -1,5 +1,4 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import HomeView from '../views/HomeView.vue'
 import CartPanel from '@/components/cart/CartPanel.vue'
 import ProductList from '@/components/products/ProductList.vue'
 import FemininoView from '../views/FemininoView.vue'
@@ -12,29 +11,25 @@ import ProductDetail from '@/components/products/ProductDetail.vue'
 import AnunciarView from '../views/AnunciarView.vue'
 import PerfilView from '../views/PerfilView.vue'
 import RatingView from '@/views/RatingView.vue'
+import PagamentoView from '@/views/PagamentoView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
-      path: '/',
-      name: 'home',
-      component: HomeView,
-    },
-    {
       path: '/sacola',
       name: 'sacola',
       component: CartPanel,
-    }, 
-    {
-      path: '/feminino',
-      name: 'feminino',
-      component: FemininoView,
     },
     {
       path: '/masculino',
       name: 'masculino',
       component: MasculinoView,
+    },
+    {
+      path: '/feminino',
+      name: 'feminino',
+      component: FemininoView,
     },
     {
       path: '/acessorios',
@@ -75,6 +70,11 @@ const router = createRouter({
       path: '/perfil',
       name: 'perfil',
       component: PerfilView,
+    },
+    {
+      path: '/pagamento',
+      name: 'pagamento',
+      component: PagamentoView,
     },
     {
       path: '/avaliacao',

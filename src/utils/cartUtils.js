@@ -1,4 +1,4 @@
-import produtos from '@/data/product'
+import { produtos } from '@/data/product'
 import { ref } from 'vue'
 
 const ultimoProdAdd = ref('')

@@ -33,22 +33,22 @@
       <div class="membros">
 
         <div class="membro">
-          <img src="/sobre/alice.jpg" alt="Alice">
+          <img src="/sobre/alice.png" alt="Alice">
           <p>Alice</p>
         </div>
 
         <div class="membro">
-          <img src="/sobre/flavia.jpg" alt="Flavia">
+          <img src="/sobre/flavia.png" alt="Flavia">
           <p>Flavia</p>
         </div>
 
         <div class="membro">
-          <img src="/sobre/sofia.jpg" alt="Sofia">
+          <img src="/sobre/sofia.png" alt="Sofia">
           <p>Sofia</p>
         </div>
 
         <div class="membro">
-          <img src="/sobre/otavio.jpg" alt="Otávio">
+          <img src="/sobre/otavio.png" alt="Otávio">
           <p>Otávio</p>
         </div>
 

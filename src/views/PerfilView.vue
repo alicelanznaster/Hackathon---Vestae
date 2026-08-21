@@ -2,34 +2,22 @@
 import { ref, computed, onMounted } from 'vue'
 import ProductCard from '@/components/products/ProductCard.vue'
 
-
-// Dados do usuário logado
 const usuario = ref(null)
 const fotoPerfil = ref(null)
 const inputFile = ref(null)
 
-
-// Produtos anunciados
 const produtos = ref([])
 
-
-// Pega o usuário logado a partir do que foi salvo no CadastroView.vue
 function carregarUsuario() {
-  const usuarios = JSON.parse(localStorage.getItem('usuarios')) || []
+  const salvo = localStorage.getItem('usuarioLogado')
 
-
-  // ideal: o LoginView.vue salvar o e-mail de quem logou nessa chave
-  const emailLogado = localStorage.getItem('vestae-usuario-logado')
-
-
-  usuario.value =
-    usuarios.find((u) => u.email === emailLogado) ||
-    usuarios[usuarios.length - 1] ||
-    null
+  if (salvo) {
+    usuario.value = JSON.parse(salvo)
+  } else {
+    usuario.value = null
+  }
 }
 
-
-// Pega os anúncios publicados no AnunciarView.vue
 function carregarProdutos() {
   produtos.value = JSON.parse(localStorage.getItem('vestae-anuncios')) || []
   // Observação: o objeto do anúncio ainda não guarda o e-mail de quem publicou.
@@ -38,35 +26,27 @@ function carregarProdutos() {
   // 2) aqui, trocar por: .filter(p => p.email === usuario.value?.email)
 }
 
-
-// Carrega a foto de perfil salva (se o usuário já tiver enviado uma)
 function carregarFoto() {
   if (!usuario.value) return
   const salva = localStorage.getItem(`vestae-foto-${usuario.value.email}`)
   if (salva) fotoPerfil.value = salva
 }
 
-
-// Inicial do nome, usada como avatar enquanto não há foto
 const inicial = computed(() => {
-  return usuario.value?.nome?.trim().charAt(0).toUpperCase() || '?'
+  return usuario.value?.nome?.trim().charAt(0).toUpperCase() || ''
 })
 
-
 const quantidadeProdutos = computed(() => produtos.value.length)
-
 
 // Abre o seletor de arquivos ao clicar no avatar
 function abrirSeletorDeArquivo() {
   inputFile.value.click()
 }
 
-
-// Lê a imagem escolhida e salva no localStorage (mesmo padrão do UploadImg.vue)
+// Lê a imagem escolhida e salva no localStorage 
 function selecionarFoto(evento) {
   const arquivo = evento.target.files?.[0]
   if (!arquivo) return
-
 
   const leitor = new FileReader()
   leitor.onload = () => {
@@ -75,7 +55,6 @@ function selecionarFoto(evento) {
   }
   leitor.readAsDataURL(arquivo)
 }
-
 
 onMounted(() => {
   carregarUsuario()
@@ -86,72 +65,87 @@ onMounted(() => {
 
 <template>
   <main class="perfil">
-    <section class="cabecalho">
-      <button class="avatar" type="button" @click="abrirSeletorDeArquivo">
-        <img v-if="fotoPerfil" :src="fotoPerfil" alt="Foto de perfil" class="foto" />
-        <span v-else class="inicial">{{ inicial }}</span>
-      </button>
+    <div class="conteudo-perfil">
+      <section class="cabecalho">
+        <button class="avatar" type="button" @click="abrirSeletorDeArquivo">
+          <img v-if="fotoPerfil" :src="fotoPerfil" alt="Foto de perfil" class="foto" />
 
-      <input type="file" ref="inputFile" @change="selecionarFoto" accept="image/png, image/jpeg, image/webp"
-        class="input-oculto" />
+          <span v-else-if="inicial" class="inicial">
+            {{ inicial }}
+          </span>
 
-      <div class="info">
-        <h1>{{ usuario?.nome || 'Meu Perfil' }}</h1>
-        <p class="quantidade">{{ quantidadeProdutos }} peças anunciadas</p>
-      </div>
-    </section>
+          <img v-else src="/icons/user-circle.svg" alt="Usuário" class="icone-usuario" />
+        </button>
 
-    <hr class="divisoria" />
+        <input type="file" ref="inputFile" @change="selecionarFoto" accept="image/png, image/jpeg, image/webp"
+          class="input-oculto" />
 
-    <section class="impacto">
-      <h2>
-        <img src="/icons/reciclagem.svg" alt="" class="icone-reciclagem" />
-        Seu Impacto
-      </h2>
+        <div class="info">
+          <h1>{{ usuario?.nome || 'Meu Perfil' }}</h1>
+          <p class="quantidade">
+            {{ quantidadeProdutos }}
+            {{ quantidadeProdutos === 1 ? 'peça anunciada' : 'peças anunciadas' }}
+          </p>
+        </div>
+      </section>
 
-      <p class="destaque">
-        <span class="numero">{{ quantidadeProdutos }} peças</span>
-        anunciadas no VESTÆ
-      </p>
+      <hr class="divisoria" />
 
-      <p class="texto">
-        Você está contribuindo para que roupas continuem circulando em vez de
-        serem descartadas.
-      </p>
-    </section>
+      <section class="impacto">
+        <h2>
+          <img src="/icons/reciclagem.svg" alt="" class="icone-reciclagem" />
+          Seu Impacto
+        </h2>
+
+        <p class="destaque">
+          <span class="numero">{{ quantidadeProdutos }} {{ quantidadeProdutos === 1 ? 'peça anunciada' : 'peças anunciadas' }}</span> no VESTÆ
+        </p>
+
+        <p v-if="quantidadeProdutos > 0" class="texto">
+          Você está contribuindo para que roupas continuem circulando em vez de
+          serem descartadas.
+        </p>
+
+        <p v-else class="texto">
+          Comece a anunciar suas peças e ajude roupas a continuarem circulando
+          em vez de serem descartadas.
+        </p>
+      </section>
 
 
-    <section class="produtos">
-      <h2>Meus Produtos</h2>
+      <section class="produtos">
+        <h2>Meus Produtos</h2>
 
+        <p v-if="produtos.length === 0" class="vazio">
+          Você ainda não anunciou nenhuma peça.
+        </p>
 
-      <p v-if="produtos.length === 0" class="vazio">
-        Você ainda não anunciou nenhuma peça.
-      </p>
-
-
-      <div v-else class="grid">
-        <ProductCard v-for="produto in produtos" :key="produto.id" :produto="produto" :mostrar-favorito="false" />
-      </div>
-    </section>
+        <div v-else class="grid">
+          <ProductCard v-for="produto in produtos" :key="produto.id" :produto="produto" :mostrar-favorito="false" />
+        </div>
+      </section>
+    </div>
   </main>
 </template>
 
 <style scoped>
 .perfil {
   width: 100%;
-  max-width: 800px;
   min-height: 100vh;
-  margin: 0 auto;
-  padding: 35px 50px 45px;
+  margin: 0;
+  padding: 35px 0 45px;
   box-sizing: border-box;
   background-color: #fcf5eb;
   color: black;
 }
 
-/* =========================
-   CABEÇALHO DO PERFIL
-========================= */
+.conteudo-perfil {
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 50px;
+  box-sizing: border-box;
+}
 
 .cabecalho {
   display: flex;
@@ -189,6 +183,13 @@ onMounted(() => {
   color: #fcf5eb;
   font-family: "Marcellus", sans-serif;
   font-size: 4.5rem;
+}
+
+.icone-usuario {
+  width: 110%;
+  height: 110%;
+  object-fit: contain;
+  background-color: #f6c3d885;
 }
 
 .info h1 {
@@ -275,18 +276,24 @@ onMounted(() => {
 
 .vazio {
   margin: 0 8px;
-
   color: rgb(56, 56, 56);
   font-family: "Google Sans Flex", sans-serif;
   text-align: center;
   font-size: 1.25rem;
 }
 
-@media (max-width:1024px) {
+
+/* TABLET */
+
+@media (max-width: 1024px) {
 
   .perfil {
+    padding: 32px 0 40px;
+  }
+
+  .conteudo-perfil {
     max-width: 650px;
-    padding: 32px 45px 40px;
+    padding: 0 45px;
   }
 
   .cabecalho {
@@ -337,11 +344,18 @@ onMounted(() => {
   }
 }
 
-@media (max-width:768px) {
+
+/* MOBILE / TABLET PEQUENO */
+
+@media (max-width: 768px) {
 
   .perfil {
+    padding: 30px 0 38px;
+  }
+
+  .conteudo-perfil {
     max-width: 620px;
-    padding: 30px 35px 38px;
+    padding: 0 35px;
   }
 
   .cabecalho {
@@ -401,11 +415,18 @@ onMounted(() => {
   }
 }
 
-@media (max-width:480px) {
+
+/* CELULAR */
+
+@media (max-width: 480px) {
 
   .perfil {
+    padding: 25px 0 32px;
+  }
+
+  .conteudo-perfil {
     max-width: 100%;
-    padding: 25px 20px 32px;
+    padding: 0 20px;
   }
 
   .cabecalho {
@@ -469,5 +490,6 @@ onMounted(() => {
     grid-template-columns: repeat(2, 1fr);
     gap: 14px;
   }
+
 }
 </style>

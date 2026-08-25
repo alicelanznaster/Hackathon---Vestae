@@ -20,10 +20,6 @@ function carregarUsuario() {
 
 function carregarProdutos() {
   produtos.value = JSON.parse(localStorage.getItem('vestae-anuncios')) || []
-  // Observação: o objeto do anúncio ainda não guarda o e-mail de quem publicou.
-  // Se quiserem filtrar só os produtos do usuário logado, basta:
-  // 1) no AnunciarView.vue, adicionar `email: usuarioLogado` ao criar `novoAnuncio`
-  // 2) aqui, trocar por: .filter(p => p.email === usuario.value?.email)
 }
 
 function carregarFoto() {
@@ -38,12 +34,12 @@ const inicial = computed(() => {
 
 const quantidadeProdutos = computed(() => produtos.value.length)
 
-// Abre o seletor de arquivos ao clicar no avatar
+// abre o seletor de arquivos quando clica no avatar
 function abrirSeletorDeArquivo() {
   inputFile.value.click()
 }
 
-// Lê a imagem escolhida e salva no localStorage 
+// le a imagem e salva no localStorage
 function selecionarFoto(evento) {
   const arquivo = evento.target.files?.[0]
   if (!arquivo) return
@@ -77,8 +73,13 @@ onMounted(() => {
           <img v-else src="/icons/user-circle.svg" alt="Usuário" class="icone-usuario" />
         </button>
 
-        <input type="file" ref="inputFile" @change="selecionarFoto" accept="image/png, image/jpeg, image/webp"
-          class="input-oculto" />
+        <input
+          type="file"
+          ref="inputFile"
+          @change="selecionarFoto"
+          accept="image/png, image/jpeg, image/webp"
+          class="input-oculto"
+        />
 
         <div class="info">
           <h1>{{ usuario?.nome || 'Meu Perfil' }}</h1>
@@ -98,30 +99,35 @@ onMounted(() => {
         </h2>
 
         <p class="destaque">
-          <span class="numero">{{ quantidadeProdutos }} {{ quantidadeProdutos === 1 ? 'peça anunciada' : 'peças anunciadas' }}</span> no VESTÆ
+          <span class="numero"
+            >{{ quantidadeProdutos }}
+            {{ quantidadeProdutos === 1 ? 'peça anunciada' : 'peças anunciadas' }}</span
+          >
+          no VESTÆ
         </p>
 
         <p v-if="quantidadeProdutos > 0" class="texto">
-          Você está contribuindo para que roupas continuem circulando em vez de
-          serem descartadas.
+          Você está contribuindo para que roupas continuem circulando em vez de serem descartadas.
         </p>
 
         <p v-else class="texto">
-          Comece a anunciar suas peças e ajude roupas a continuarem circulando
-          em vez de serem descartadas.
+          Comece a anunciar suas peças e ajude roupas a continuarem circulando em vez de serem
+          descartadas.
         </p>
       </section>
-
 
       <section class="produtos">
         <h2>Meus Produtos</h2>
 
-        <p v-if="produtos.length === 0" class="vazio">
-          Você ainda não anunciou nenhuma peça.
-        </p>
+        <p v-if="produtos.length === 0" class="vazio">Você ainda não anunciou nenhuma peça.</p>
 
         <div v-else class="grid">
-          <ProductCard v-for="produto in produtos" :key="produto.id" :produto="produto" :mostrar-favorito="false" />
+          <ProductCard
+            v-for="produto in produtos"
+            :key="produto.id"
+            :produto="produto"
+            :mostrar-favorito="false"
+          />
         </div>
       </section>
     </div>
@@ -181,7 +187,7 @@ onMounted(() => {
 
 .inicial {
   color: #fcf5eb;
-  font-family: "Marcellus", sans-serif;
+  font-family: 'Marcellus', sans-serif;
   font-size: 4.5rem;
 }
 
@@ -194,14 +200,14 @@ onMounted(() => {
 
 .info h1 {
   margin: 0 0 7px;
-  font-family: "Marcellus", sans-serif;
+  font-family: 'Marcellus', sans-serif;
   font-size: 3rem;
   font-weight: 400;
 }
 
 .quantidade {
   margin: 0;
-  font-family: "Google Sans Flex", sans-serif;
+  font-family: 'Google Sans Flex', sans-serif;
   font-size: 1.4rem;
   color: #555;
 }
@@ -233,7 +239,7 @@ onMounted(() => {
   align-items: center;
   gap: 10px;
   margin: 0 0 23px;
-  font-family: "Marcellus", sans-serif;
+  font-family: 'Marcellus', sans-serif;
   font-size: 2rem;
   font-weight: 400;
 }
@@ -245,7 +251,7 @@ onMounted(() => {
 
 .destaque {
   margin: 0 0 19px;
-  font-family: "Google Sans Flex", sans-serif;
+  font-family: 'Google Sans Flex', sans-serif;
   font-size: 1.45rem;
   line-height: 1.4;
 }
@@ -256,14 +262,14 @@ onMounted(() => {
 
 .texto {
   margin: 0;
-  font-family: "Google Sans Flex", sans-serif;
+  font-family: 'Google Sans Flex', sans-serif;
   font-size: 1.4rem;
   line-height: 1.45;
 }
 
 .produtos h2 {
   margin: 0 0 38px 8px;
-  font-family: "Marcellus", sans-serif;
+  font-family: 'Marcellus', sans-serif;
   font-size: 2.4rem;
   font-weight: 400;
 }
@@ -277,16 +283,14 @@ onMounted(() => {
 .vazio {
   margin: 0 8px;
   color: rgb(56, 56, 56);
-  font-family: "Google Sans Flex", sans-serif;
+  font-family: 'Google Sans Flex', sans-serif;
   text-align: center;
   font-size: 1.25rem;
 }
 
-
 /* TABLET */
 
 @media (max-width: 1024px) {
-
   .perfil {
     padding: 32px 0 40px;
   }
@@ -344,11 +348,9 @@ onMounted(() => {
   }
 }
 
-
 /* MOBILE / TABLET PEQUENO */
 
 @media (max-width: 768px) {
-
   .perfil {
     padding: 30px 0 38px;
   }
@@ -415,11 +417,9 @@ onMounted(() => {
   }
 }
 
-
 /* CELULAR */
 
 @media (max-width: 480px) {
-
   .perfil {
     padding: 25px 0 32px;
   }
@@ -490,6 +490,5 @@ onMounted(() => {
     grid-template-columns: repeat(2, 1fr);
     gap: 14px;
   }
-
 }
 </style>

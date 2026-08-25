@@ -1,10 +1,10 @@
 <script setup>
-import produtos from '@/data/product';
-import { computed } from 'vue';
-import FiltroPreco from '@/components/products/FiltroPreco.vue';
+import produtos from '@/data/product'
+import { computed } from 'vue'
+import FiltroPreco from '@/components/products/FiltroPreco.vue'
 
-const masculino = computed (() => {
-  return produtos.value.filter(produto => produto.categoria === 'Masculino')
+const masculino = computed(() => {
+  return produtos.value.filter((produto) => produto.categoria === 'Masculino')
 })
 </script>
 
@@ -30,7 +30,6 @@ h1 {
   color: black;
   margin-bottom: 10px;
 }
-
 
 @media (max-width: 1024px) {
   .pagina {

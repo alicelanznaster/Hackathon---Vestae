@@ -40,7 +40,6 @@ const produtosFiltrados = computed(() => {
     margin: 0 auto;
 }
 
-/* --- Tablet --- */
 @media (max-width:1024px) {
     .product-list {
         grid-template-columns: repeat(3, 1fr);
@@ -49,7 +48,6 @@ const produtosFiltrados = computed(() => {
     }
 }
 
-/* --- Celular --- */
 @media (max-width:768px) {
     .product-list {
         grid-template-columns: repeat(2, 1fr);

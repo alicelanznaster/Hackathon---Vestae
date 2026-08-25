@@ -1,16 +1,15 @@
 <script setup>
-import produtos from '@/data/product';
-import ProductCard from '@/components/products/ProductCard.vue';
-import { computed } from 'vue';
+import produtos from '@/data/product'
+import ProductCard from '@/components/products/ProductCard.vue'
+import { computed } from 'vue'
 
 const favoritos = computed(() => {
-  return produtos.value.filter(produto => produto.favorito)
+  return produtos.value.filter((produto) => produto.favorito)
 })
 </script>
 
 <template>
   <div class="pagina">
-
     <h1>Favoritos</h1>
 
     <div v-if="favoritos.length > 0" class="lista-produtos">
@@ -20,7 +19,6 @@ const favoritos = computed(() => {
     <div v-else class="vazio">
       <p>Você ainda não favoritou nenhum produto.</p>
     </div>
-
   </div>
 </template>
 
@@ -32,16 +30,16 @@ const favoritos = computed(() => {
 }
 
 h1 {
-  font-family: "Marcellus", sans-serif;
+  font-family: 'Marcellus', sans-serif;
   font-size: 3rem;
   font-weight: 400;
   color: black;
   margin-bottom: 40px;
 }
 
-.vazio{
+.vazio {
   color: rgb(56, 56, 56);
-  font-family: "Google Sans Flex", sans-serif;
+  font-family: 'Google Sans Flex', sans-serif;
   text-align: center;
   font-size: 1.3rem;
 }
@@ -52,8 +50,7 @@ h1 {
   gap: 30px;
 }
 
-@media (max-width:1024px) {
-
+@media (max-width: 1024px) {
   .pagina {
     padding: 30px 20px;
   }
@@ -67,11 +64,9 @@ h1 {
     grid-template-columns: repeat(3, 1fr);
     gap: 20px;
   }
-
 }
 
-@media (max-width:768px) {
-
+@media (max-width: 768px) {
   .pagina {
     padding: 24px 16px;
   }
@@ -85,6 +80,5 @@ h1 {
     grid-template-columns: repeat(2, 1fr);
     gap: 20px;
   }
-
 }
 </style>

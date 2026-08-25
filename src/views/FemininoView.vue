@@ -15,7 +15,6 @@ const feminino = computed(() => {
     <div class="filtro-preco">
       <FiltroPreco :produtos="feminino" />
     </div>
-    
   </div>
 </template>
 
@@ -33,7 +32,6 @@ h1 {
   color: black;
   margin-bottom: 10px;
 }
-
 
 @media (max-width: 1024px) {
   .pagina {

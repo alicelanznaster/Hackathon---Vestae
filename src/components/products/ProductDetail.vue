@@ -31,7 +31,7 @@ const produto = computed(() => {
 
     <div v-if="produto" class="pagina">
         <button class="voltar" @click="voltarPagina">
-            <img src="/icons/voltar.svg" alt="botão voltar">
+            <img src="/voltar.svg" alt="botão voltar">
         </button>
 
         <div class="detalhe">

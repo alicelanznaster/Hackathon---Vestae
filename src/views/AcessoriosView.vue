@@ -1,16 +1,15 @@
 <script setup>
-import produtos from '@/data/product';
-import { computed } from 'vue';
-import FiltroPreco from '@/components/products/FiltroPreco.vue';
+import produtos from '@/data/product'
+import { computed } from 'vue'
+import FiltroPreco from '@/components/products/FiltroPreco.vue'
 
 const acessorios = computed(() => {
-  return produtos.value.filter(produto => produto.categoria === 'Acessório')
+  return produtos.value.filter((produto) => produto.categoria === 'Acessório')
 })
 </script>
 
 <template>
   <div class="pagina">
-
     <h1>Acessórios</h1>
 
     <FiltroPreco :produtos="acessorios" />

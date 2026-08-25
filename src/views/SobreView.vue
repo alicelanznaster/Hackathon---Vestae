@@ -1,56 +1,54 @@
-<script setup>
-</script>
+<script setup></script>
 
 <template>
   <main class="sobre">
-
     <section class="projeto">
       <h2>Sobre o Projeto</h2>
 
       <p>
-        O VESTÆ é um projeto institucional desenvolvido durante o Hackathon com o objetivo de unir tecnologia,
-        moda e sustentabilidade. O site foi criado a partir de problemas recorrentes relacionados ao consumo
-        excessivo de roupas e aos impactos ambientais causados pela indústria da moda.
+        O VESTÆ é um projeto institucional desenvolvido durante o Hackathon com o objetivo de unir
+        tecnologia, moda e sustentabilidade. O site foi criado a partir de problemas recorrentes
+        relacionados ao consumo excessivo de roupas e aos impactos ambientais causados pela
+        indústria da moda.
       </p>
 
       <p>
-        Nossa proposta é incentivar o consumo consciente por meio da reutilização de peças,
-        dando uma nova vida a roupas e acessórios e promovendo uma forma mais sustentável de consumir moda.
+        Nossa proposta é incentivar o consumo consciente por meio da reutilização de peças, dando
+        uma nova vida a roupas e acessórios e promovendo uma forma mais sustentável de consumir
+        moda.
       </p>
     </section>
-    
-    <hr>
+
+    <hr />
 
     <section class="equipe">
       <h2>Sobre Nós</h2>
       <p>
-        Somos estudantes do Instituto Federal Catarinense e desenvolvemos o VESTÆ durante o Hackathon
-        com o propósito de unir tecnologia, criatividade e sustentabilidade em uma solução que incentive
-        o consumo consciente e a reutilização de peças.
+        Somos estudantes do Instituto Federal Catarinense e desenvolvemos o VESTÆ durante o
+        Hackathon com o propósito de unir tecnologia, criatividade e sustentabilidade em uma solução
+        que incentive o consumo consciente e a reutilização de peças.
       </p>
 
       <div class="membros">
-
         <div class="membro">
-          <img src="/sobre/alice.png" alt="Alice">
+          <img src="/sobre/alice.png" alt="Alice" />
           <p>Alice</p>
         </div>
 
         <div class="membro">
-          <img src="/sobre/flavia.png" alt="Flavia">
+          <img src="/sobre/flavia.png" alt="Flavia" />
           <p>Flavia</p>
         </div>
 
         <div class="membro">
-          <img src="/sobre/sofia.png" alt="Sofia">
+          <img src="/sobre/sofia.png" alt="Sofia" />
           <p>Sofia</p>
         </div>
 
         <div class="membro">
-          <img src="/sobre/otavio.png" alt="Otávio">
+          <img src="/sobre/otavio.png" alt="Otávio" />
           <p>Otávio</p>
         </div>
-
       </div>
     </section>
   </main>
@@ -104,7 +102,6 @@ hr {
 .membro {
   text-align: center;
   cursor: default;
-
 }
 
 .membro img {
@@ -113,7 +110,7 @@ hr {
   height: 180px;
   border-radius: 50%;
   object-fit: cover;
-  transition: .3s;
+  transition: 0.3s;
   cursor: default;
 }
 
@@ -124,12 +121,12 @@ hr {
 .membro p {
   margin: 0;
   font-size: 25px;
-  font-family: "Marcellus", serif;
+  font-family: 'Marcellus', serif;
   color: black;
   cursor: default;
 }
 
-@media (max-width:1024px) {
+@media (max-width: 1024px) {
   h2 {
     font-size: 2.5rem;
   }
@@ -150,7 +147,7 @@ hr {
   }
 }
 
-@media (max-width:768px) {
+@media (max-width: 768px) {
   h2 {
     margin-bottom: 20px;
     font-size: 2rem;
@@ -172,29 +169,25 @@ hr {
   .membro img {
     width: 140px;
     height: 140px;
-
   }
 
   .membro p {
     font-size: 23px;
   }
-
 }
 
-@media (max-width:490px){
+@media (max-width: 490px) {
   .membro img {
     width: 120px;
     height: 120px;
-
   }
 
-  .membro p{
+  .membro p {
     font-size: 20px;
   }
 
   .membros {
     column-gap: 20px;
   }
-
 }
 </style>

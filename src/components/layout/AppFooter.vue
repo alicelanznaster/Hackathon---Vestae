@@ -29,6 +29,7 @@ import { RouterLink } from 'vue-router';
                     <li><RouterLink to="/anunciar">Quero Vender</RouterLink></li>
                     <li><RouterLink to="/perfil">Meu Perfil</RouterLink></li>
                     <li><RouterLink to="/sobre">Sobre Nós</RouterLink></li>
+                    <li><RouterLink to="cadastro">Cadastro</RouterLink> </li>
                 </ul>
             </div>
                 <div class="contato">

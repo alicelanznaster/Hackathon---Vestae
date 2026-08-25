@@ -8,6 +8,7 @@ const inputFile = ref(null)
 
 const produtos = ref([])
 
+// pega o usuário que ta logado
 function carregarUsuario() {
   const salvo = localStorage.getItem('usuarioLogado')
 
@@ -18,20 +19,24 @@ function carregarUsuario() {
   }
 }
 
+// pega os produtos salvos no localStorage
 function carregarProdutos() {
   produtos.value = JSON.parse(localStorage.getItem('vestae-anuncios')) || []
 }
 
+// pega a foto de perfil salva
 function carregarFoto() {
   if (!usuario.value) return
   const salva = localStorage.getItem(`vestae-foto-${usuario.value.email}`)
   if (salva) fotoPerfil.value = salva
 }
 
+// pega a inicial do nome do usuário
 const inicial = computed(() => {
   return usuario.value?.nome?.trim().charAt(0).toUpperCase() || ''
 })
 
+// conta quantos produtos foram anunciados
 const quantidadeProdutos = computed(() => produtos.value.length)
 
 // abre o seletor de arquivos quando clica no avatar
@@ -52,6 +57,7 @@ function selecionarFoto(evento) {
   leitor.readAsDataURL(arquivo)
 }
 
+// carrega os dados do perfil quando a página abre
 onMounted(() => {
   carregarUsuario()
   carregarProdutos()
@@ -99,10 +105,10 @@ onMounted(() => {
         </h2>
 
         <p class="destaque">
-          <span class="numero"
-            >{{ quantidadeProdutos }}
-            {{ quantidadeProdutos === 1 ? 'peça anunciada' : 'peças anunciadas' }}</span
-          >
+          <span class="numero">
+            {{ quantidadeProdutos }}
+            {{ quantidadeProdutos === 1 ? 'peça anunciada' : 'peças anunciadas' }}
+          </span>
           no VESTÆ
         </p>
 
@@ -122,12 +128,7 @@ onMounted(() => {
         <p v-if="produtos.length === 0" class="vazio">Você ainda não anunciou nenhuma peça.</p>
 
         <div v-else class="grid">
-          <ProductCard
-            v-for="produto in produtos"
-            :key="produto.id"
-            :produto="produto"
-            :mostrar-favorito="false"
-          />
+          <ProductCard v-for="produto in produtos" :key="produto.id" :produto="produto" :mostrar-favorito="false" />
         </div>
       </section>
     </div>
@@ -288,8 +289,6 @@ onMounted(() => {
   font-size: 1.25rem;
 }
 
-/* TABLET */
-
 @media (max-width: 1024px) {
   .perfil {
     padding: 32px 0 40px;
@@ -347,8 +346,6 @@ onMounted(() => {
     gap: 17px;
   }
 }
-
-/* MOBILE / TABLET PEQUENO */
 
 @media (max-width: 768px) {
   .perfil {
@@ -416,8 +413,6 @@ onMounted(() => {
     gap: 18px;
   }
 }
-
-/* CELULAR */
 
 @media (max-width: 480px) {
   .perfil {

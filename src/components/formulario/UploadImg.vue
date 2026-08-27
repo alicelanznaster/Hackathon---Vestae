@@ -27,6 +27,13 @@ function selecionarArquivo(evento) {
 
   leitor.readAsDataURL(arquivo)
 }
+function limparImagem() {
+  imagem.value = ''
+  nomeImagem.value = ''
+  inputFile.value.value = ''
+
+  emit('imagemSelecionada', null)
+}
 </script>
 
 <template>
@@ -47,9 +54,17 @@ function selecionarArquivo(evento) {
         <img v-else :src="imagem" class="preview" alt="Prévia do produto"
         >
       </div>
+      <button
+              v-if="imagem"
+        type="button"
+        @click="limparImagem"
+      >
+        Limpar imagem
+      </button>
     </div>
   </div>
 </template>
+
 
 <style scoped>
 .upload {
@@ -114,6 +129,17 @@ input[type='file'] {
  width: 100%;
  height: 100%;
  object-fit: cover;
+}
+
+.input-group button{
+  color: #FFFFFF;
+  background-color: #C00B63;
+  border-radius: 15px;
+  border: none;
+  padding: 5px 25px;
+  font-size: 1.15rem;
+  font-family: "Marcellus", serif;
+  margin-top: 2vh;
 }
 
 /*responsividade*/

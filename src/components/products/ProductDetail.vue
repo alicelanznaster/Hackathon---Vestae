@@ -26,7 +26,7 @@ const produto = computed(() => {
 
 <template>
     <div v-if="mostrarAviso" class="aviso">
-        "{{produto.titulo}}" adicionado(a) ao carrinho!
+        "{{produto.titulo}}" adicionado(a) à sacola!
     </div>
 
     <div v-if="produto" class="pagina">

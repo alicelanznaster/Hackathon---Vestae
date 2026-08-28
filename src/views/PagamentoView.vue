@@ -74,7 +74,7 @@ function confirmarPagamento() {
 <template>
   <main class="topo">
     <RouterLink to="/sacola" class="voltar">
-      <img src="/icons/voltar.svg" alt="Voltar" />
+      <img src="/voltar.svg" alt="Voltar" />
     </RouterLink>
 
     <div class="pagamento">

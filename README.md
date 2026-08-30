@@ -3,7 +3,7 @@
 > Vista histórias, compartilhe estilos.
 
 
-## 🔗 Links de Acesso
+## Links de Acesso
 
 * **Vercel:** [https://hackathon-vestae.vercel.app/](https://hackathon-vestae.vercel.app/)
 * **Surge:** [https://vestae.surge.sh/](https://vestae.surge.sh/)

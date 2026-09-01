@@ -18,12 +18,17 @@ const publicar = (produto) => {
     return
   }
 
+  const usuarioLogado = JSON.parse(
+    localStorage.getItem('usuarioLogado') ?? 'null'
+  )
+
   const anunciosSalvos = JSON.parse(localStorage.getItem('vestae-anuncios') ?? '[]')
 
   const novoAnuncio = {
     id: Date.now(),
     ...produto,
     imagem: imagem.value.preview,
+    email: usuarioLogado.email
   }
 
   anunciosSalvos.push(novoAnuncio)

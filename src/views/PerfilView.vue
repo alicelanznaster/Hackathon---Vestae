@@ -1,12 +1,15 @@
 <script setup>
 import { ref, computed, onMounted } from 'vue'
+import { useRouter } from 'vue-router'
 import ProductCard from '@/components/products/ProductCard.vue'
 
+const router = useRouter()
 const usuario = ref(null)
 const fotoPerfil = ref(null)
 const inputFile = ref(null)
-
 const produtos = ref([])
+const editandoNome = ref(false)
+const novoNome = ref('')
 
 // pega o usuário que ta logado
 function carregarUsuario() {
@@ -19,9 +22,63 @@ function carregarUsuario() {
   }
 }
 
+function sair() {
+  localStorage.removeItem('usuarioLogado')
+  router.push('/login')
+}
+
+function editarNome() {
+  novoNome.value = usuario.value?.nome || ''
+  editandoNome.value = true
+}
+
+function salvarNome() {
+  const nome = novoNome.value.trim()
+
+  if (!nome) {
+    alert('O nome não pode ficar vazio.')
+    return
+  }
+
+  usuario.value.nome = nome
+
+  localStorage.setItem(
+    'usuarioLogado',
+    JSON.stringify(usuario.value)
+  )
+
+  const usuarios = JSON.parse(
+    localStorage.getItem('usuarios') || '[]'
+  )
+
+  const indice = usuarios.findIndex(
+    (usuarioSalvo) => usuarioSalvo.email === usuario.value.email
+  )
+
+  if (indice !== -1) {
+    usuarios[indice].nome = nome
+
+    localStorage.setItem(
+      'usuarios',
+      JSON.stringify(usuarios)
+    )
+  }
+
+  editandoNome.value = false
+}
+
 // pega os produtos salvos no localStorage
 function carregarProdutos() {
-  produtos.value = JSON.parse(localStorage.getItem('vestae-anuncios')) || []
+  const anunciosSalvos = JSON.parse(localStorage.getItem('vestae-anuncios')) || []
+
+  if (!usuario.value) {
+    produtos.value = []
+    return
+  }
+
+  produtos.value = anunciosSalvos.filter(
+    (produto) => produto.email === usuario.value.email
+  )
 }
 
 // pega a foto de perfil salva
@@ -79,21 +136,32 @@ onMounted(() => {
           <img v-else src="/icons/user-circle.svg" alt="Usuário" class="icone-usuario" />
         </button>
 
-        <input
-          type="file"
-          ref="inputFile"
-          @change="selecionarFoto"
-          accept="image/png, image/jpeg, image/webp"
-          class="input-oculto"
-        />
+        <input type="file" ref="inputFile" @change="selecionarFoto" accept="image/png, image/jpeg, image/webp"
+          class="input-oculto" />
 
         <div class="info">
-          <h1>{{ usuario?.nome || 'Meu Perfil' }}</h1>
+          <div v-if="!editandoNome" class="nome-perfil">
+            <button class="nome" type="button" @click="editarNome">
+              {{ usuario?.nome || 'Meu Perfil' }}
+            </button>
+          </div>
+          <div v-else class="edicao-nome">
+            <input v-model="novoNome" type="text" maxlength="50" @keyup.enter="salvarNome" />
+
+            <button type="button" @click="salvarNome">
+              Salvar
+            </button>
+          </div>
+
           <p class="quantidade">
             {{ quantidadeProdutos }}
             {{ quantidadeProdutos === 1 ? 'peça anunciada' : 'peças anunciadas' }}
           </p>
         </div>
+
+        <button class="botao-sair" type="button" @click="sair">
+          <img src="/icons/exit.svg" alt="Sair" class="sair" />
+        </button>
       </section>
 
       <hr class="divisoria" />
@@ -199,11 +267,58 @@ onMounted(() => {
   background-color: #f6c3d885;
 }
 
-.info h1 {
+.nome {
   margin: 0 0 7px;
+  padding: 0;
+  border: none;
+  background: none;
+  color: black;
   font-family: 'Marcellus', sans-serif;
   font-size: 3rem;
   font-weight: 400;
+  cursor: pointer;
+  text-align: left;
+}
+
+.nome:hover {
+  opacity: 0.6;
+}
+
+.edicao-nome {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 7px;
+}
+
+.edicao-nome input {
+  width: 280px;
+  padding: 8px 10px;
+  border: 1px solid #d3cec8;
+  border-radius: 6px;
+  background-color: white;
+  font-family: 'Marcellus', sans-serif;
+  font-size: 2rem;
+  outline: none;
+}
+
+.edicao-nome input:focus {
+  border-color: #c40c6c;
+}
+
+.edicao-nome button {
+  padding: 9px 14px;
+  border: none;
+  border-radius: 6px;
+  background-color: #c40c6c;
+  color: white;
+  font-family: 'Marcellus', sans-serif;
+  font-size: 1.4rem;
+  cursor: pointer;
+}
+
+.edicao-nome button:hover {
+  opacity: 0.8;
 }
 
 .quantidade {
@@ -211,6 +326,25 @@ onMounted(() => {
   font-family: 'Google Sans Flex', sans-serif;
   font-size: 1.4rem;
   color: #555;
+}
+
+.botao-sair {
+  margin-left: auto;
+  margin-top: 15px;
+  margin-bottom: auto;
+  background-color: transparent;
+  border-color: transparent;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+}
+
+.sair {
+  width: 32px;
+  height: 32px;
+}
+
+.botao-sair:hover {
+  opacity: 0.6;
 }
 
 .input-oculto {
@@ -314,12 +448,28 @@ onMounted(() => {
     font-size: 4.3rem;
   }
 
-  .info h1 {
+  .nome {
     font-size: 2.3rem;
+  }
+
+  .edicao-nome input {
+    width: 220px;
+    font-size: 1.8rem;
+  }
+
+
+  .edicao-nome button {
+    font-size: 1.4rem;
+
   }
 
   .quantidade {
     font-size: 1.15rem;
+  }
+
+  .sair{
+    width: 28px;
+    height: 28px;
   }
 
   .impacto {
@@ -372,13 +522,34 @@ onMounted(() => {
     font-size: 4rem;
   }
 
-  .info h1 {
+  .nome {
     font-size: 2.1rem;
+  }
+
+  .edicao-nome input {
+    width: 190px;
+    font-size: 1.6rem;
+  }
+
+
+  .edicao-nome button {
+    font-size: 1.2rem;
+
   }
 
   .quantidade {
     font-size: 1.1rem;
   }
+
+  .botao-sair {
+    margin-top: 5px;
+  }
+
+  .sair{
+    width: 28px;
+    height: 28px;
+  }
+
 
   .divisoria {
     margin-bottom: 42px;
@@ -439,12 +610,36 @@ onMounted(() => {
     font-size: 3.3rem;
   }
 
-  .info h1 {
+  .nome {
     font-size: 1.8rem;
+  }
+
+  .edicao-nome {
+    flex-wrap: wrap;
+  }
+
+  .edicao-nome input {
+    width: 160px;
+    font-size: 1.4rem;
+  }
+
+  .edicao-nome button {
+    font-size: 1rem;
+    padding-left: 20px;
+    padding-right: 20px;
   }
 
   .quantidade {
     font-size: 1rem;
+  }
+
+  .botao-sair {
+    margin-top: 5px;
+  }
+
+  .sair {
+    width: 24px;
+    height: 24px;
   }
 
   .divisoria {

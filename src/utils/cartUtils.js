@@ -15,6 +15,32 @@ const carrinho = ref([
         marca: "",
         preco: 39.90
     },
+    {
+      id: 2,
+      titulo: "Calça Jeans",
+      imagem: "/produtos/calcajeansfem.png",
+      descricao: "Calça confortável e bem conservada. Estou desapegando porque já não faz mais parte do meu estilo.",
+      categoria: "Feminino",
+      tamanho: "40",
+      condicao: "Usado",
+      marca: "",
+      preco: 49.90,
+      favorito: false,
+      status: "Disponível",
+    },
+    {
+      id: 3,
+      titulo: "Calça Rosa",
+      imagem: "/produtos/calcarosafem.png",
+      descricao: "Comprei pela internet, mas acabou não servindo. Nunca foi usada.",
+      categoria: "Feminino",
+      tamanho: "38",
+      condicao: "Novo",
+      marca: "",
+      preco: 39.90,
+      favorito: false,
+      status: "Disponível",
+  },
 ])
 
 function addCarrinho(idItem) {
@@ -56,4 +82,7 @@ function totalCarrinho() {
   return total
 }
 
-export { ultimoProdAdd, mostrarAviso, carrinho, addCarrinho, removerCarrinho, totalCarrinho}
+function limparCarrinho() {
+  carrinho.value = []
+}
+export { ultimoProdAdd, mostrarAviso, carrinho, addCarrinho, removerCarrinho, totalCarrinho, limparCarrinho}

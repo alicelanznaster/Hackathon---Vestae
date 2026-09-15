@@ -1,13 +1,17 @@
 <script setup>
 import { ref, computed, onMounted } from 'vue'
+import { useRouter } from 'vue-router'
 import ProductCard from '@/components/products/ProductCard.vue'
 
+const router = useRouter()
 const usuario = ref(null)
 const fotoPerfil = ref(null)
 const inputFile = ref(null)
-
 const produtos = ref([])
+const editandoNome = ref(false)
+const novoNome = ref('')
 
+// pega o usuário que ta logado
 function carregarUsuario() {
   const salvo = localStorage.getItem('usuarioLogado')
 
@@ -18,32 +22,90 @@ function carregarUsuario() {
   }
 }
 
-function carregarProdutos() {
-  produtos.value = JSON.parse(localStorage.getItem('vestae-anuncios')) || []
-  // Observação: o objeto do anúncio ainda não guarda o e-mail de quem publicou.
-  // Se quiserem filtrar só os produtos do usuário logado, basta:
-  // 1) no AnunciarView.vue, adicionar `email: usuarioLogado` ao criar `novoAnuncio`
-  // 2) aqui, trocar por: .filter(p => p.email === usuario.value?.email)
+function sair() {
+  localStorage.removeItem('usuarioLogado')
+  router.push('/login')
 }
 
+function editarNome() {
+  novoNome.value = usuario.value?.nome || ''
+  editandoNome.value = true
+}
+
+function cancelarEdicaoNome() {
+  editandoNome.value = false
+}
+
+function salvarNome() {
+  const nome = novoNome.value.trim()
+
+  if (!nome) {
+    alert('O nome não pode ficar vazio.')
+    return
+  }
+
+  usuario.value.nome = nome
+
+  localStorage.setItem(
+    'usuarioLogado',
+    JSON.stringify(usuario.value)
+  )
+
+  const usuarios = JSON.parse(
+    localStorage.getItem('usuarios') || '[]'
+  )
+
+  const indice = usuarios.findIndex(
+    (usuarioSalvo) => usuarioSalvo.email === usuario.value.email
+  )
+
+  if (indice !== -1) {
+    usuarios[indice].nome = nome
+
+    localStorage.setItem(
+      'usuarios',
+      JSON.stringify(usuarios)
+    )
+  }
+
+  editandoNome.value = false
+}
+
+// pega os produtos salvos no localStorage
+function carregarProdutos() {
+  const anunciosSalvos = JSON.parse(localStorage.getItem('vestae-anuncios')) || []
+
+  if (!usuario.value) {
+    produtos.value = []
+    return
+  }
+
+  produtos.value = anunciosSalvos.filter(
+    (produto) => produto.email === usuario.value.email
+  )
+}
+
+// pega a foto de perfil salva
 function carregarFoto() {
   if (!usuario.value) return
   const salva = localStorage.getItem(`vestae-foto-${usuario.value.email}`)
   if (salva) fotoPerfil.value = salva
 }
 
+// pega a inicial do nome do usuário
 const inicial = computed(() => {
   return usuario.value?.nome?.trim().charAt(0).toUpperCase() || ''
 })
 
+// conta quantos produtos foram anunciados
 const quantidadeProdutos = computed(() => produtos.value.length)
 
-// Abre o seletor de arquivos ao clicar no avatar
+// abre o seletor de arquivos quando clica no avatar
 function abrirSeletorDeArquivo() {
   inputFile.value.click()
 }
 
-// Lê a imagem escolhida e salva no localStorage 
+// le a imagem e salva no localStorage
 function selecionarFoto(evento) {
   const arquivo = evento.target.files?.[0]
   if (!arquivo) return
@@ -56,6 +118,7 @@ function selecionarFoto(evento) {
   leitor.readAsDataURL(arquivo)
 }
 
+// carrega os dados do perfil quando a página abre
 onMounted(() => {
   carregarUsuario()
   carregarProdutos()
@@ -77,16 +140,37 @@ onMounted(() => {
           <img v-else src="/icons/user-circle.svg" alt="Usuário" class="icone-usuario" />
         </button>
 
-        <input type="file" ref="inputFile" @change="selecionarFoto" accept="image/png, image/jpeg, image/webp"
-          class="input-oculto" />
+        <input type="file" ref="inputFile" @change="selecionarFoto" accept="image/png, image/jpeg, image/webp" class="input-oculto" />
 
         <div class="info">
-          <h1>{{ usuario?.nome || 'Meu Perfil' }}</h1>
+          <div v-if="!editandoNome" class="nome-perfil">
+            <button class="nome" type="button" @click="editarNome">
+              {{ usuario?.nome || 'Meu Perfil' }}
+            </button>
+          </div>
+          <div v-else class="edicao-nome">
+            <input v-model="novoNome" type="text" maxlength="50" @keyup.enter="salvarNome" />
+
+            <div class="botoes-edicao">
+              <button type="button" @click="salvarNome">
+                Salvar
+              </button>
+
+              <button type="button" class="botao-cancelar" @click="cancelarEdicaoNome">
+                Cancelar
+              </button>
+            </div>
+          </div>
+
           <p class="quantidade">
             {{ quantidadeProdutos }}
             {{ quantidadeProdutos === 1 ? 'peça anunciada' : 'peças anunciadas' }}
           </p>
         </div>
+
+        <button class="botao-sair" type="button" @click="sair">
+          <img src="/icons/exit.svg" alt="Sair" class="sair" />
+        </button>
       </section>
 
       <hr class="divisoria" />
@@ -98,27 +182,32 @@ onMounted(() => {
         </h2>
 
         <p class="destaque">
-          <span class="numero">{{ quantidadeProdutos }} {{ quantidadeProdutos === 1 ? 'peça anunciada' : 'peças anunciadas' }}</span> no VESTÆ
+          <span class="numero">
+            {{ quantidadeProdutos }}
+            {{ quantidadeProdutos === 1 ? 'peça anunciada' : 'peças anunciadas' }}
+          </span>
+          no VESTÆ
         </p>
 
         <p v-if="quantidadeProdutos > 0" class="texto">
-          Você está contribuindo para que roupas continuem circulando em vez de
-          serem descartadas.
+          Você está contribuindo para que roupas continuem circulando em vez de serem descartadas.
         </p>
 
         <p v-else class="texto">
-          Comece a anunciar suas peças e ajude roupas a continuarem circulando
-          em vez de serem descartadas.
+          Comece a anunciar suas peças e ajude roupas a continuarem circulando em vez de serem
+          descartadas.
         </p>
       </section>
-
 
       <section class="produtos">
         <h2>Meus Produtos</h2>
 
-        <p v-if="produtos.length === 0" class="vazio">
-          Você ainda não anunciou nenhuma peça.
-        </p>
+        <div v-if="produtos.length === 0" class="vazio">
+          <p class="texto-vazio">Você ainda não anunciou nenhuma peça</p>
+          <RouterLink to="/anunciar">
+            <p class="botao-anunciar">Clique aqui para anunciar</p>
+          </RouterLink>
+        </div>
 
         <div v-else class="grid">
           <ProductCard v-for="produto in produtos" :key="produto.id" :produto="produto" :mostrar-favorito="false" />
@@ -181,7 +270,7 @@ onMounted(() => {
 
 .inicial {
   color: #fcf5eb;
-  font-family: "Marcellus", sans-serif;
+  font-family: 'Marcellus', sans-serif;
   font-size: 4.5rem;
 }
 
@@ -192,18 +281,96 @@ onMounted(() => {
   background-color: #f6c3d885;
 }
 
-.info h1 {
+.nome {
   margin: 0 0 7px;
-  font-family: "Marcellus", sans-serif;
+  padding: 0;
+  border: none;
+  background: none;
+  color: black;
+  font-family: 'Marcellus', sans-serif;
   font-size: 3rem;
   font-weight: 400;
+  cursor: pointer;
+  text-align: left;
+}
+
+.nome:hover {
+  opacity: 0.6;
+}
+
+.edicao-nome {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+  margin-bottom: 7px;
+}
+
+.edicao-nome input {
+  width: 280px;
+  padding: 8px 10px;
+  border: 1px solid #d3cec8;
+  border-radius: 6px;
+  background-color: white;
+  font-family: 'Marcellus', sans-serif;
+  font-size: 2rem;
+  outline: none;
+}
+
+.edicao-nome input:focus {
+  border-color: #c40c6c;
+}
+
+.botoes-edicao {
+  display: flex;
+  gap: 10px;
+}
+
+.edicao-nome button {
+  padding: 9px 14px;
+  border: none;
+  border-radius: 6px;
+  background-color: #c40c6c;
+  color: white;
+  font-family: 'Marcellus', sans-serif;
+  font-size: 1.4rem;
+  cursor: pointer;
+}
+
+.botao-cancelar {
+  background-color: transparent !important /* important serve para o botão cancelar não ficar com o css do edicao-nome, e sim do botao-cancelar como prioridade*/;
+  color: #c40c6c !important;
+  border: 1px solid #c40c6c !important;
+}
+
+.edicao-nome button:hover {
+  opacity: 0.8;
 }
 
 .quantidade {
   margin: 0;
-  font-family: "Google Sans Flex", sans-serif;
+  font-family: 'Google Sans Flex', sans-serif;
   font-size: 1.4rem;
   color: #555;
+}
+
+.botao-sair {
+  margin-left: auto;
+  margin-top: 15px;
+  margin-bottom: auto;
+  background-color: transparent;
+  border-color: transparent;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+}
+
+.sair {
+  width: 32px;
+  height: 32px;
+}
+
+.botao-sair:hover {
+  opacity: 0.6;
 }
 
 .input-oculto {
@@ -233,7 +400,7 @@ onMounted(() => {
   align-items: center;
   gap: 10px;
   margin: 0 0 23px;
-  font-family: "Marcellus", sans-serif;
+  font-family: 'Marcellus', sans-serif;
   font-size: 2rem;
   font-weight: 400;
 }
@@ -245,7 +412,7 @@ onMounted(() => {
 
 .destaque {
   margin: 0 0 19px;
-  font-family: "Google Sans Flex", sans-serif;
+  font-family: 'Google Sans Flex', sans-serif;
   font-size: 1.45rem;
   line-height: 1.4;
 }
@@ -256,14 +423,14 @@ onMounted(() => {
 
 .texto {
   margin: 0;
-  font-family: "Google Sans Flex", sans-serif;
+  font-family: 'Google Sans Flex', sans-serif;
   font-size: 1.4rem;
   line-height: 1.45;
 }
 
 .produtos h2 {
   margin: 0 0 38px 8px;
-  font-family: "Marcellus", sans-serif;
+  font-family: 'Marcellus', sans-serif;
   font-size: 2.4rem;
   font-weight: 400;
 }
@@ -275,18 +442,22 @@ onMounted(() => {
 }
 
 .vazio {
-  margin: 0 8px;
-  color: rgb(56, 56, 56);
-  font-family: "Google Sans Flex", sans-serif;
+  font-family: 'Google Sans Flex', sans-serif;
   text-align: center;
-  font-size: 1.25rem;
 }
 
+.vazio .texto-vazio {
+  color: #555;
+  font-size: 1.4rem;
+}
 
-/* TABLET */
+.vazio .botao-anunciar {
+  color: #c40c6c;
+  font-size: 1.25rem;
+  text-decoration: underline;
+}
 
 @media (max-width: 1024px) {
-
   .perfil {
     padding: 32px 0 40px;
   }
@@ -311,12 +482,25 @@ onMounted(() => {
     font-size: 4.3rem;
   }
 
-  .info h1 {
+  .nome {
     font-size: 2.3rem;
+  }
+  .edicao-nome input {
+    width: 220px;
+    font-size: 1.8rem;
+  }
+
+  .edicao-nome button {
+    font-size: 1.4rem;
   }
 
   .quantidade {
     font-size: 1.15rem;
+  }
+
+  .sair {
+    width: 28px;
+    height: 28px;
   }
 
   .impacto {
@@ -332,7 +516,7 @@ onMounted(() => {
   }
 
   .texto {
-    font-size: 1.05rem;
+    font-size: 1.1rem;
   }
 
   .produtos h2 {
@@ -342,13 +526,17 @@ onMounted(() => {
   .grid {
     gap: 17px;
   }
+
+  .vazio .texto-vazio {
+    font-size: 1.1rem;
+  }
+
+  .vazio .botao-anunciar {
+    font-size: 1.1rem;
+  }
 }
 
-
-/* MOBILE / TABLET PEQUENO */
-
 @media (max-width: 768px) {
-
   .perfil {
     padding: 30px 0 38px;
   }
@@ -373,12 +561,30 @@ onMounted(() => {
     font-size: 4rem;
   }
 
-  .info h1 {
+  .nome {
     font-size: 2.1rem;
+  }
+
+  .edicao-nome input {
+    width: 190px;
+    font-size: 1.6rem;
+  }
+
+  .edicao-nome button {
+    font-size: 1.2rem;
   }
 
   .quantidade {
     font-size: 1.1rem;
+  }
+
+  .botao-sair {
+    margin-top: 5px;
+  }
+
+  .sair {
+    width: 28px;
+    height: 28px;
   }
 
   .divisoria {
@@ -413,13 +619,17 @@ onMounted(() => {
     grid-template-columns: repeat(2, 1fr);
     gap: 18px;
   }
+
+  .vazio .texto-vazio {
+    font-size: 1rem;
+  }
+
+  .vazio .botao-anunciar {
+    font-size: 1rem;
+  }
 }
 
-
-/* CELULAR */
-
 @media (max-width: 480px) {
-
   .perfil {
     padding: 25px 0 32px;
   }
@@ -444,12 +654,37 @@ onMounted(() => {
     font-size: 3.3rem;
   }
 
-  .info h1 {
+  .nome {
     font-size: 1.8rem;
+  }
+
+  .edicao-nome {
+    flex-wrap: wrap;
+  }
+
+  .edicao-nome input {
+    width: 160px;
+    font-size: 1.4rem;
+  }
+
+  .edicao-nome button {
+    font-size: 1rem;
+    padding: 5px 10px;
+
+
   }
 
   .quantidade {
     font-size: 1rem;
+  }
+
+  .botao-sair {
+    margin-top: 5px;
+  }
+
+  .sair {
+    width: 24px;
+    height: 24px;
   }
 
   .divisoria {
@@ -490,6 +725,10 @@ onMounted(() => {
     grid-template-columns: repeat(2, 1fr);
     gap: 14px;
   }
-
 }
 </style>
+
+
+
+
+

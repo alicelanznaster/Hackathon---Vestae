@@ -26,12 +26,12 @@ const produto = computed(() => {
 
 <template>
     <div v-if="mostrarAviso" class="aviso">
-        "{{produto.titulo}}" adicionado(a) ao carrinho!
+        "{{produto.titulo}}" adicionado(a) à sacola!
     </div>
 
     <div v-if="produto" class="pagina">
         <button class="voltar" @click="voltarPagina">
-            <img src="/icons/voltar.svg" alt="botão voltar">
+            <img src="/voltar.svg" alt="botão voltar">
         </button>
 
         <div class="detalhe">

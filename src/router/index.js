@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import HomeView from '../views/HomeView.vue'
+import HomeView from '@/views/HomeView.vue'
 import CartPanel from '@/components/cart/CartPanel.vue'
 import ProductList from '@/components/products/ProductList.vue'
 import FemininoView from '../views/FemininoView.vue'
@@ -12,6 +12,9 @@ import ProductDetail from '@/components/products/ProductDetail.vue'
 import AnunciarView from '../views/AnunciarView.vue'
 import PerfilView from '../views/PerfilView.vue'
 import RatingView from '@/views/RatingView.vue'
+import PagamentoView from '@/views/PagamentoView.vue'
+import CadastroView from '@/views/CadastroView.vue'
+import LoginView from '@/views/LoginView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -25,16 +28,16 @@ const router = createRouter({
       path: '/sacola',
       name: 'sacola',
       component: CartPanel,
-    }, 
-    {
-      path: '/feminino',
-      name: 'feminino',
-      component: FemininoView,
     },
     {
       path: '/masculino',
       name: 'masculino',
       component: MasculinoView,
+    },
+    {
+      path: '/feminino',
+      name: 'feminino',
+      component: FemininoView,
     },
     {
       path: '/acessorios',
@@ -77,10 +80,25 @@ const router = createRouter({
       component: PerfilView,
     },
     {
+      path: '/pagamento',
+      name: 'pagamento',
+      component: PagamentoView,
+    },
+    {
       path: '/avaliacao',
       name: 'avaliacao',
       component: RatingView,
     },
+    {
+      path: '/cadastro',
+      nome: 'cadastro',
+      component: CadastroView, 
+    }, 
+    {
+      path: '/login',
+      nome: 'login',
+      component: LoginView, 
+    }, 
   ],
 })
 

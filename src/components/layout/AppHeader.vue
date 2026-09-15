@@ -71,7 +71,7 @@ function alternarMenu() {
       <RouterLink to="/acessorios" class="link">Acessórios</RouterLink>
     </nav>
 
-    <!-- fundo escurecido, fecha o menu ao clicar fora -->
+    <!-- navBar responsivo -->
     <div v-show="menuAberto" class="overlay" @click="alternarMenu"></div>
 
     <div v-show="menuAberto" class="menu-celular">
@@ -80,6 +80,7 @@ function alternarMenu() {
         <img src="/icons/fechar.png" alt="fechar" class="icone-fechar">
       </button>
 
+      <RouterLink to="/" class="link-mobile" @click="menuAberto = false">Home</RouterLink>
       <RouterLink to="/calcados" class="link-mobile" @click="menuAberto = false">Calçados</RouterLink>
       <RouterLink to="/masculino" class="link-mobile" @click="menuAberto = false">Masculino</RouterLink>
       <RouterLink to="/feminino" class="link-mobile" @click="menuAberto = false">Feminino</RouterLink>

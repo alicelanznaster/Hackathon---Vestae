@@ -10,48 +10,45 @@ const rua = ref('')
 const numero = ref('')
 const bairro = ref('')
 const metodoPagamento = ref('')
-const complemento = ref();
+const complemento = ref()
 const mostrarBairros = ref(false)
 const carregando = ref(false)
 const compraConcluida = ref(false)
 const mostrarCheck = ref(false)
 
 const bairrosFiltrados = computed(() => {
-    let retorno = bairros
+  let retorno = bairros
 
-    if (bairro.value) {
-        retorno = retorno.filter((b) =>
-        b.toLowerCase().startsWith(bairro.value.toLowerCase())
-        )
-    }
-    return retorno
+  if (bairro.value) {
+    retorno = retorno.filter((b) => b.toLowerCase().startsWith(bairro.value.toLowerCase()))
+  }
+  return retorno
 })
 
 function selecionarBairro(item) {
   bairro.value = item
-  mostrarBairros.value= false;
+  mostrarBairros.value = false
 }
-
 
 /*  API CEP */
 async function buscarCep() {
-    const cepSemHifen = cep.value.replace('-', '')
+  const cepSemHifen = cep.value.replace('-', '')
 
-    if (cepSemHifen.length !== 8) {
-        return
-    }
+  if (cepSemHifen.length !== 8) {
+    return
+  }
 
-    const resposta = await fetch(`https://viacep.com.br/ws/${cepSemHifen}/json/`)
-    const dados = await resposta.json()
+  const resposta = await fetch(`https://viacep.com.br/ws/${cepSemHifen}/json/`)
+  const dados = await resposta.json()
 
-    if (dados.erro) {
-        alert('CEP não encontrado!')
-        return
-    }
+  if (dados.erro) {
+    alert('CEP não encontrado!')
+    return
+  }
 
-    rua.value = dados.logradouro
-    bairro.value = dados.bairro
-    mostrarBairros.value = false
+  rua.value = dados.logradouro
+  bairro.value = dados.bairro
+  mostrarBairros.value = false
 }
 
 function confirmarPagamento() {
@@ -91,7 +88,6 @@ function confirmarPagamento() {
         }, 2000)
     }, 3000) 
 }
-
 </script>
 
 <template>
@@ -237,32 +233,33 @@ function confirmarPagamento() {
 
             </div>
         </div>
-        
-    </main>
+      </section>
+    </div>
+  </main>
 </template>
 
 <style scoped>
-.topo{
-    background-color: #EFE4D6;
-    padding: 20px 40px 55px;
-    min-height: 80vh;
-    box-sizing: border-box;
-    display: flex;
-    flex-direction: column;
+.topo {
+  background-color: #efe4d6;
+  padding: 20px 40px 55px;
+  min-height: 80vh;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
 }
 
-.voltar{
-    padding: 20px;
-    display: inline-block;
+.voltar {
+  padding: 20px;
+  display: inline-block;
 }
 
-.pagamento{
-    display: flex;
-    flex-direction: column;
-    text-align: center;
-    justify-content: center;
-    width: 100%;
-    align-items: center;
+.pagamento {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  justify-content: center;
+  width: 100%;
+  align-items: center;
 }
 
 .aviso-carregando {
@@ -318,17 +315,17 @@ function confirmarPagamento() {
     color: black;
 }
 
-h2{
-    color: #C00B63;
-    font-size: 30px;
-    margin-bottom: 8px;
+h2 {
+  color: #c00b63;
+  font-size: 30px;
+  margin-bottom: 8px;
 }
 
-.subtitulo{
-    font-size: 20px;
-    line-height: 1.15;
-    margin-bottom: 35px;
-    color: black;
+.subtitulo {
+  font-size: 20px;
+  line-height: 1.15;
+  margin-bottom: 35px;
+  color: black;
 }
 
 .sucesso {
@@ -430,12 +427,12 @@ select {
     color: #3f3f3f;
 }
 
-.lista-bairros p{
-    padding: 8px 12px;
-    margin: 0;
-    cursor: pointer;
-    font-size: 13px;
-    color: #333;
+.lista-bairros p {
+  padding: 8px 12px;
+  margin: 0;
+  cursor: pointer;
+  font-size: 13px;
+  color: #333;
 }
 
 .lista-bairros p:hover {
@@ -468,14 +465,14 @@ select {
     gap: 5px;
 }
 
-.protegida p{
-    color: black;
-    font-size: 12px;
+.protegida p {
+  color: black;
+  font-size: 12px;
 }
 
-.protegida img{
-    width: 15px;
-    height: 15px;
+.protegida img {
+  width: 15px;
+  height: 15px;
 }
 
 .produto-resumo {

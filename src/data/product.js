@@ -8,8 +8,10 @@ export const produtos = ref([
     categoria: "Feminino",
     tamanho: "M",
     condicao: "Usado",
-    marca: "",
-    preco: 39.90
+    marca: "Just Because",
+    preco: 39.90,
+    favorito: false,
+    status: "Disponível",
   },
   {
     id: 2,
@@ -20,7 +22,9 @@ export const produtos = ref([
     tamanho: "40",
     condicao: "Usado",
     marca: "",
-    preco: 49.90
+    preco: 49.90,
+    favorito: false,
+    status: "Disponível",
   },
   {
     id: 3,
@@ -28,10 +32,12 @@ export const produtos = ref([
     imagem: "/produtos/calcarosafem.png",
     descricao: "Comprei pela internet, mas acabou não servindo. Nunca foi usada.",
     categoria: "Feminino",
-    tamanho: "",
+    tamanho: "38",
     condicao: "Novo",
     marca: "",
-    preco: 39.90
+    preco: 39.90,
+    favorito: false,
+    status: "Disponível",
   },
   {
     id: 4,
@@ -42,7 +48,9 @@ export const produtos = ref([
     tamanho: "P",
     condicao: "Novo",
     marca: "",
-    preco: 99.90
+    preco: 99.90,
+    favorito: false,
+    status: "Disponível",
   },
   {
     id: 5,
@@ -53,7 +61,10 @@ export const produtos = ref([
     tamanho: "PP",
     condicao: "Novo",
     marca: "",
-    preco: 84.90
+    preco: 84.90,
+    favorito: false,
+    status: "Disponível",
+    destaque: true
   },
   {
     id: 6,
@@ -64,7 +75,9 @@ export const produtos = ref([
     tamanho: "P",
     condicao: "Usado",
     marca: "Zara",
-    preco: 54.90
+    preco: 54.90,
+    favorito: false,
+    status: "Disponível", 
   },
   {
     id: 7,
@@ -75,7 +88,9 @@ export const produtos = ref([
     tamanho: "G",
     condicao: "Usado",
     marca: "",
-    preco: 24.90
+    preco: 24.90,
+    favorito: false,
+    status: "Disponível",
   },
   {
     id: 8,
@@ -86,7 +101,9 @@ export const produtos = ref([
     tamanho: "P",
     condicao: "Novo",
     marca: "",
-    preco: 44.90
+    preco: 44.90,
+    favorito: false,
+    status: "Disponível",
   },
   {
     id: 9,
@@ -97,7 +114,9 @@ export const produtos = ref([
     tamanho: "PP",
     condicao: "Usado",
     marca: "",
-    preco: 22.90
+    preco: 22.90,
+    favorito: false,
+    status: "Disponível",
   },
   {
     id: 10,
@@ -108,7 +127,9 @@ export const produtos = ref([
     tamanho: "M",
     condicao: "Usado",
     marca: "",
-    preco: 26.90
+    preco: 26.90,
+    favorito: false,
+    status: "Disponível",
   },
   {
     id: 11,
@@ -119,7 +140,9 @@ export const produtos = ref([
     tamanho: "P",
     condicao: "Usado",
     marca: "",
-    preco: 69.90
+    preco: 69.90,
+    favorito: false,
+    status: "Disponível",
   },
   {
     id: 12,
@@ -130,7 +153,10 @@ export const produtos = ref([
     tamanho: "38",
     condicao: "Usado",
     marca: "",
-    preco: 36.90
+    preco: 36.90,
+    favorito: false,
+    status: "Disponível",
+    destaque: true
   },
   {
     id: 13,
@@ -141,7 +167,9 @@ export const produtos = ref([
     tamanho: "34",
     condicao: "Usado",
     marca: "",
-    preco: 49.90
+    preco: 49.90,
+    favorito: false,
+    status: "Disponível",
   },
   {
     id: 14,
@@ -152,7 +180,9 @@ export const produtos = ref([
     tamanho: "G",
     condicao: "Novo",
     marca: "Scuffers",
-    preco: 294.90
+    preco: 294.90,
+    favorito: false,
+    status: "Disponível",
   },
   {
     id: 15,
@@ -163,7 +193,9 @@ export const produtos = ref([
     tamanho: "34",
     condicao: "Usado",
     marca: "Hollister",
-    preco: 34.90
+    preco: 34.90,
+    favorito: false,
+    status: "Disponível",
   },
   {
     id: 16,
@@ -174,7 +206,9 @@ export const produtos = ref([
     tamanho: "34",
     condicao: "Usado",
     marca: "",
-    preco: 29.90
+    preco: 29.90,
+    favorito: false,
+    status: "Disponível",
   },
   {
     id: 17,
@@ -184,8 +218,10 @@ export const produtos = ref([
     categoria: "Feminino",
     tamanho: "36",
     condicao: "Novo",
-    marca: "",
-    preco: 39.90
+    marca: "Sunkissed",
+    preco: 39.90,
+    favorito: false,
+    status: "Disponível",
   },
   {
     id: 18,
@@ -196,7 +232,10 @@ export const produtos = ref([
     tamanho: "PP",
     condicao: "Usado",
     marca: "",
-    preco: 59.90
+    preco: 59.90,
+    favorito: false,
+    status: "Disponível",
+    destaque: true
   },
   {
     id: 19,
@@ -207,7 +246,9 @@ export const produtos = ref([
     tamanho: "P",
     condicao: "Novo",
     marca: "",
-    preco: 84.90
+    preco: 84.90,
+    favorito: false,
+    status: "Disponível",
   },
   {
     id: 20,
@@ -215,10 +256,12 @@ export const produtos = ref([
     imagem: "/produtos/vestidoflorfem.png",
     descricao: "Peça muito bem cuidada e cheia de vida. Estou desapegando porque já não uso mais.",
     categoria: "Feminino",
-    tamanho: "",
+    tamanho: "M",
     condicao: "Usado",
     marca: "",
-    preco: 54.90
+    preco: 54.90,
+    favorito: false,
+    status: "Disponível",
   },
   {
     id: 21,
@@ -228,8 +271,10 @@ export const produtos = ref([
     categoria: "Masculino",
     tamanho: "42",
     condicao: "Usado",
-    marca: "",
-    preco: 49.90
+    marca: "Levi's",
+    preco: 49.90,
+    favorito: false,
+    status: "Disponível",
   },
   {
     id: 22,
@@ -240,7 +285,9 @@ export const produtos = ref([
     tamanho: "M",
     condicao: "Novo",
     marca: "",
-    preco: 34.90
+    preco: 34.90,
+    favorito: false,
+    status: "Disponível",
   },
   {
     id: 23,
@@ -250,8 +297,10 @@ export const produtos = ref([
     categoria: "Masculino",
     tamanho: "M",
     condicao: "Usado",
-    marca: "",
-    preco: 75.90
+    marca: "Nike",
+    preco: 75.90,
+    favorito: false,
+    status: "Disponível"
   },
   {
     id: 24,
@@ -261,19 +310,23 @@ export const produtos = ref([
     categoria: "Masculino",
     tamanho: "XXG",
     condicao: "Usado",
-    marca: "",
-    preco: 34.90
+    marca: "NFL Apparel",
+    preco: 44.90,
+    favorito: false,
+    status: "Disponível",
   },
   {
     id: 25,
-    titulo: "Camisa Polo Ralph Lauren",
+    titulo: "Camisa Tricot Ralph Lauren",
     imagem: "/produtos/camisapolopretamasc.png",
     descricao: "Comprei para usar em um evento, mas acabei escolhendo outra roupa. Nunca foi usada.",
     categoria: "Masculino",
     tamanho: "M",
     condicao: "Novo",
-    marca: "Ralph Lauren",
-    preco: 439.50
+    marca: "Polo Ralph Lauren",
+    preco: 439.50,
+    favorito: false,
+    status: "Disponível",
   },
   {
     id: 26,
@@ -281,10 +334,12 @@ export const produtos = ref([
     imagem: "/produtos/jeanscinzaclaromasc.png",
     descricao: "Calça em ótimo estado, sem rasgos ou manchas. Ainda tem muito uso pela frente.",
     categoria: "Masculino",
-    tamanho: "42",
+    tamanho: "38",
     condicao: "Usado",
     marca: "",
-    preco: 64.90
+    preco: 64.90,
+    favorito: false,
+    status: "Disponível",
   },
   {
     id: 27,
@@ -295,7 +350,9 @@ export const produtos = ref([
     tamanho: "40",
     condicao: "Novo",
     marca: "",
-    preco: 99.90
+    preco: 99.90,
+    favorito: false,
+    status: "Disponível",
   },
   {
     id: 28,
@@ -303,10 +360,13 @@ export const produtos = ref([
     imagem: "/produtos/moletomnikemasc.png",
     descricao: "Moletom muito confortável e bem cuidado. Estou vendendo porque quase não uso mais.",
     categoria: "Masculino",
-    tamanho: "GG",
+    tamanho: "G",
     condicao: "Usado",
     marca: "Nike",
-    preco: 129.90
+    preco: 129.90,
+    favorito: false,
+    status: "Disponível",
+    destaque: true
   },
   {
     id: 29,
@@ -317,7 +377,9 @@ export const produtos = ref([
     tamanho: "G",
     condicao: "Usado",
     marca: "Nike",
-    preco: 79.90
+    preco: 79.90,
+    favorito: false,
+    status: "Disponível",
   },
   {
     id: 30,
@@ -328,7 +390,9 @@ export const produtos = ref([
     tamanho: "42",
     condicao: "Usado",
     marca: "",
-    preco: 39.90
+    preco: 39.90,
+    favorito: false,
+    status: "Disponível",
   },
   {
     id: 31,
@@ -339,128 +403,153 @@ export const produtos = ref([
     tamanho: "G",
     condicao: "Novo",
     marca: "",
-    preco: 49.90
+    preco: 49.90,
+    favorito: false,
+    status: "Disponível",
   },
   {
     id: 32,
-    titulo: "Havaianas Farm",
+    titulo: "Chinelo Farm",
     imagem: "/produtos/chinelocal.png",
     descricao: "Chinelo confortável e bem conservado. Ainda está em ótimo estado para o dia a dia.",
     categoria: "Calçado",
     tamanho: "36",
     condicao: "Usado",
     marca: "Havaianas",
-    preco: 24.90
+    preco: 24.90,
+    favorito: false,
+    status: "Disponível",
   },
   {
     id: 33,
-    titulo: "Crocs com Brilho",
+    titulo: "Crocs Classic Glitter Clog",
     imagem: "/produtos/crocsbrilhocal.png",
     descricao: "Ganhei de presente, mas nunca fez muito meu estilo. Está sem uso.",
     categoria: "Calçado",
     tamanho: "38",
     condicao: "Novo",
     marca: "Crocs",
-    preco: 229.90
+    preco: 189.90,
+    favorito: false,
+    status: "Disponível",
   },
   {
     id: 34,
-    titulo: "Sandália Rosa",
+    titulo: "Sandália Anacapri Laço",
     imagem: "/produtos/sandaliarosacal.png",
     descricao: "Sandália muito bem cuidada, confortável e sem detalhes importantes.",
     categoria: "Calçado",
     tamanho: "36",
     condicao: "Usado",
     marca: "Anacapri",
-    preco: 89.90
+    preco: 89.90,
+    favorito: false,
+    status: "Disponível",
   },
   {
     id: 35,
-    titulo: "Chinelo Slide",
+    titulo: "Chinelo Vans Slide",
     imagem: "/produtos/slidecal.png",
     descricao: "Comprei pela internet, mas o número ficou pequeno. Nunca foi usado.",
     categoria: "Calçado",
     tamanho: "35",
     condicao: "Novo",
     marca: "Vans",
-    preco: 103.90
+    preco: 103.90,
+    favorito: false,
+    status: "Disponível",
   },
   {
     id: 36,
-    titulo: "Tênis Asics",
+    titulo: "Tênis Asics EX89",
     imagem: "/produtos/tenisasicscal.png",
     descricao: "Comprei para um evento pois combinava com minha roupa, mas acabei não usando. Está novinho.",
     categoria: "Calçado",
     tamanho: "40",
     condicao: "Novo",
-    marca: "ASICS",
-    preco: 219.90
+    marca: "Asics",
+    preco: 219.90,
+    favorito: false,
+    status: "Disponível",
   },
   {
     id: 37,
-    titulo: "Adidas Spezial",
+    titulo: "Tênis Adidas Spezial",
     imagem: "/produtos/tenisazulcal.png",
     descricao: "Tênis confortável e bem conservado. Estou desapegando porque comprei outro.",
     categoria: "Calçado",
     tamanho: "36",
     condicao: "Usado",
     marca: "Adidas",
-    preco: 332.90
+    preco: 332.90,
+    favorito: false,
+    status: "Disponível",
+    destaque: true
   },
   {
     id: 38,
-    titulo: "Tênis Reebok",
+    titulo: "Tênis Reebok Club C Revenge",
     imagem: "/produtos/tenisbrancocal.png",
     descricao: "Usei poucas vezes e sempre cuidei muito bem. Continua em ótimo estado.",
     categoria: "Calçado",
     tamanho: "42",
     condicao: "Usado",
     marca: "Reebok",
-    preco: 105.90
+    preco: 205.90,
+    favorito: false,
+    status: "Disponível",
   },
   {
     id: 39,
-    titulo: "All Star Preto",
+    titulo: "Tênis Converse All Star",
     imagem: "/produtos/tenisconversecal.png",
     descricao: "Comprei porque achei lindo, mas acabou ficando um pouco apertado. Nunca foi usado.",
     categoria: "Calçado",
     tamanho: "40",
     condicao: "Novo",
     marca: "Converse",
-    preco: 169.90
+    preco: 169.90,
+    favorito: false,
+    status: "Disponível",
   },
   {
     id: 40,
-    titulo: "Tênis Golden Goose",
+    titulo: "Tênis Golden Goose Super-Star",
     imagem: "/produtos/tenisestrelacal.png",
     descricao: "Tênis em ótimo estado, bem confortável e ainda com bastante tempo de uso pela frente.",
     categoria: "Calçado",
-    tamanho: "",
+    tamanho: "37",
     condicao: "Usado",
     marca: "Golden Goose",
-    preco: 271.80
+    preco: 979.80,
+    favorito: false,
+    status: "Disponível",
   },
   {
     id: 41,
-    titulo: "Tênis Vans Azul",
+    titulo: "Tênis Vans Slip-On Classic",
     imagem: "/produtos/tenisvansazulcal.png",
     descricao: "Ganhei de aniversário, mas ficou grande em mim. Nunca chegou a ser usado.",
     categoria: "Calçado",
     tamanho: "36",
     condicao: "Novo",
     marca: "Vans",
-    preco: 189.90
+    preco: 189.90,
+    favorito: false, 
+    status: "Disponível",
   },
   {
     id: 42,
-    titulo: "Tênis Adidas Verde Água",
+    titulo: "Tênis Adidas Gazelle",
     imagem: "/produtos/tenisverdeaguacal.png",
     descricao: "Tênis muito bem conservado, confortável e perfeito para o dia a dia.",
     categoria: "Calçado",
     tamanho: "37",
     condicao: "Usado",
     marca: "Adidas",
-    preco: 74.90
+    preco: 474.90,
+    favorito: false,
+    status: "Disponível",
   },
   {
     id: 43,
@@ -468,10 +557,12 @@ export const produtos = ref([
     imagem: "/produtos/bolsamarromace.png",
     descricao: "Bolsa bem conservada, combina com praticamente qualquer look. Estou desapegando porque quase não uso mais.",
     categoria: "Acessório",
-    tamanho: "",
+    tamanho: "Único",
     condicao: "Usado",
-    marca: "",
-    preco: 69.90
+    marca: "John Galt",
+    preco: 69.90,
+    favorito: false,
+    status: "Disponível",
   },
   {
     id: 44,
@@ -479,21 +570,25 @@ export const produtos = ref([
     imagem: "/produtos/bolsapretaace.png",
     descricao: "Comprei para usar no trabalho, mas acabei optando por outra. Nunca foi usada.",
     categoria: "Acessório",
-    tamanho: "",
+    tamanho: "Único",
     condicao: "Novo",
     marca: "",
-    preco: 99.90
+    preco: 99.90,
+    favorito: false,
+    status: "Disponível",
   },
   {
     id: 45,
-    titulo: "Bolsa de Tricô",
+    titulo: "Bolsa de Crochê",
     imagem: "/produtos/bolsatricotace.png",
     descricao: "Bolsa linda e diferente, usada poucas vezes e muito bem cuidada.",
     categoria: "Acessório",
-    tamanho: "",
+    tamanho: "Único",
     condicao: "Usado",
     marca: "",
-    preco: 49.90
+    preco: 49.90,
+    favorito: false,
+    status: "Disponível",
   },
   {
     id: 46,
@@ -501,10 +596,12 @@ export const produtos = ref([
     imagem: "/produtos/bonemarromace.png",
     descricao: "Boné em ótimo estado. Estou vendendo porque acabei comprando outro modelo.",
     categoria: "Acessório",
-    tamanho: "",
+    tamanho: "Único",
     condicao: "Usado",
-    marca: "Polo Ralph Lauren",
-    preco: 279.50
+    marca: "Ralph Lauren",
+    preco: 279.50,
+    favorito: false,
+    status: "Disponível",
   },
   {
     id: 47,
@@ -512,10 +609,12 @@ export const produtos = ref([
     imagem: "/produtos/cachecolroxoace.png",
     descricao: "Ganhei de presente, mas nunca fez muito meu estilo. Está sem uso.",
     categoria: "Acessório",
-    tamanho: "",
+    tamanho: "Único",
     condicao: "Novo",
     marca: "",
-    preco: 49.90
+    preco: 49.90,
+    favorito: false,
+    status: "Disponível",
   },
   {
     id: 48,
@@ -523,10 +622,15 @@ export const produtos = ref([
     imagem: "/produtos/kitbrincoace.png",
     descricao: "Comprei, mas acabei usando outros acessórios. O kit está novinho.",
     categoria: "Acessório",
-    tamanho: "",
+    tamanho: "Único",
     condicao: "Novo",
+    marca: "Stradivarius",
+    preco: 34.90,
+    favorito: false,
+    status: "Disponível",
     marca: "",
-    preco: 34.90
+    preco: 34.90,
+    destaque: true
   },
   {
     id: 49,
@@ -534,21 +638,25 @@ export const produtos = ref([
     imagem: "/produtos/kitpulseiraace.png",
     descricao: "Kit muito bonito e bem conservado. Estou desapegando porque quase não uso acessórios.",
     categoria: "Acessório",
-    tamanho: "",
+    tamanho: "Único",
     condicao: "Usado",
-    marca: "",
-    preco: 29.90
+    marca: "Mael'Or bijoux",
+    preco: 39.90,
+    favorito: false,
+    status: "Disponível",
   },
   {
     id: 50,
-    titulo: "Óculos Marrom",
+    titulo: "Óculos Miu Miu Marrom",
     imagem: "/produtos/oculosmarromace.png",
     descricao: "Comprei pela internet, mas o modelo não ficou como eu esperava. Nunca foi usado.",
     categoria: "Acessório",
-    tamanho: "",
+    tamanho: "Único",
     condicao: "Novo",
-    marca: "",
-    preco: 79.90
+    marca: "Miu miu",
+    preco: 979.90,
+    favorito: false,
+    status: "Disponível",
   },
   {
     id: 51,
@@ -556,31 +664,39 @@ export const produtos = ref([
     imagem: "/produtos/oculospretoace.png",
     descricao: "Óculos bem conservado e sem riscos nas lentes. Ainda está em ótimo estado e vem com a caixa.",
     categoria: "Acessório",
-    tamanho: "",
+    tamanho: "Único",
     condicao: "Usado",
     marca: "Oakley",
-    preco: 559.90
+    preco: 559.90,
+    favorito: false,
+    status: "Disponível",
   },
   {
     id: 52,
-    titulo: "Piranha Rosa",
+    titulo: "Presilha Rosa",
     imagem: "/produtos/piranharosaace.png",
     descricao: "Comprei junto com outros acessórios, mas nunca cheguei a usar. Está novinha.",
     categoria: "Acessório",
-    tamanho: "",
+    tamanho: "Único",
     condicao: "Novo",
     marca: "",
-    preco: 19.90
+    preco: 19.90,
+    favorito: false,
+    status: "Disponível",
   },
   {
     id: 53,
-    titulo: "Relógio Casio",
+    titulo: "Relógio Casio Vintage",
     imagem: "/produtos/relogioace.png",
     descricao: "Relógio bem cuidado e funcionando normalmente. Estou desapegando porque passei a usar smartwatch.",
     categoria: "Acessório",
-    tamanho: "40mm",
+    tamanho: "20cm",
     condicao: "Usado",
     marca: "Casio",
-    preco: 105.90
+    preco: 105.90,
+    favorito: false,
+    status: "Disponível",
   }
 ]); 
+
+export default produtos

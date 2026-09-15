@@ -14,6 +14,7 @@ const complemento = ref();
 const mostrarBairros = ref(false)
 const carregando = ref(false)
 const compraConcluida = ref(false)
+const mostrarCheck = ref(false)
 
 const bairrosFiltrados = computed(() => {
     let retorno = bairros
@@ -71,7 +72,6 @@ function confirmarPagamento() {
     }
 
     carregando.value = true
-    limparCarrinho()
     cep.value = ''
     rua.value = ''
     numero.value = ''
@@ -83,7 +83,13 @@ function confirmarPagamento() {
     setTimeout(() => {
         carregando.value = false
         compraConcluida.value = true
-    }, 3000)
+        mostrarCheck.value = true
+        limparCarrinho()
+
+        setTimeout(() => {
+            mostrarCheck.value = false
+        }, 2000)
+    }, 3000) 
 }
 
 </script>
@@ -95,6 +101,17 @@ function confirmarPagamento() {
         </RouterLink>
 
         <div class="pagamento">
+
+            <div v-if="carregando" class="aviso-carregando">
+                <div class="bolinha-carregando"></div>
+                <p>Processando seu pagamento...</p>
+            </div>  
+            
+            <div v-if="mostrarCheck" class="aviso-carregando">
+                <div class="check">✓</div>
+                <p>Compra realizada com sucesso!</p>
+            </div>
+
             <h1 class="logo">VESTÆ</h1>
 
             <h2>Efetue seu Pagamento</h2>
@@ -177,12 +194,7 @@ function confirmarPagamento() {
                         </select> 
                         
                     </form>
-
                     <button @click="confirmarPagamento()">FINALIZAR COMPRA</button>
-
-                    <div v-if="carregando" class="loading">
-                        <p>Processando pagamento...</p>
-                    </div>
 
                     <div class="protegida">
                         <img src="/icons/protegida.svg" alt="icon-compra-protegida">
@@ -253,6 +265,52 @@ function confirmarPagamento() {
     align-items: center;
 }
 
+.aviso-carregando {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #f8e0ec;
+    border: 2px solid #C00B63;
+    border-radius: 18px;
+    padding: 35px;
+    width: 400px;
+    text-align: center;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, .2);
+    z-index: 99999;
+    color: black;
+}
+
+.bolinha-carregando {
+    width: 55px;
+    height: 55px;
+    border: 5px solid #E7B7C8;
+    border-top: 5px solid #C00B63;
+    border-radius: 50%;
+    margin: 0 auto 15px;
+    animation: carregar 1s linear infinite;
+}
+
+@keyframes carregar {
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.check {
+    width: 50px;
+    height: 50px;
+    background-color: #C00B63;
+    color: white;
+    border-radius: 50%;
+    margin: 0 auto 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 32px;
+    font-weight: bold;
+}
+
 .logo{
     font-size: 30px;
     margin-bottom: 20px;
@@ -281,6 +339,7 @@ h2{
     border-radius: 18px;
     box-sizing: border-box;
     text-align: center;
+    color: black;
 }
 
 .sucesso h2 {
@@ -400,16 +459,6 @@ select {
     opacity: 0.9;
 }
 
-.loading {
-    margin-top: 15px;
-    text-align: center;
-}
-
-.loading p {
-    font-size: 14px;
-    color: #C00B63;
-    font-weight: 600;
-}
 
 .protegida{
     display: flex;

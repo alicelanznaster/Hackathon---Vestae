@@ -3,8 +3,9 @@ import { carrinho, selecionados } from '@/utils/cartUtils'
 import { formataPreco } from '@/utils/currencyUtils'
 import { bairros } from '@/data/bairros'
 import { ref, computed } from 'vue'
-import { RouterLink } from 'vue-router'
+import { useRouter } from 'vue-router'
 
+const router = useRouter()
 const cep = ref('')
 const rua = ref('')
 const numero = ref('')
@@ -15,6 +16,10 @@ const mostrarBairros = ref(false)
 const carregando = ref(false)
 const compraConcluida = ref(false)
 const mostrarCheck = ref(false)
+
+function voltar() {
+  router.back()
+}
 
 const bairrosFiltrados = computed(() => {
   let retorno = bairros
@@ -112,9 +117,9 @@ const produtosSelecionados = computed(() => {
 
 <template>
   <main class="topo">
-    <RouterLink to="/sacola" class="voltar">
+    <button class="voltar" @click="voltar">
       <img src="/voltar.svg" alt="Voltar" />
-    </RouterLink>
+    </button>
 
     <div class="pagamento">
       <div v-if="carregando" class="aviso-carregando">
@@ -243,7 +248,9 @@ const produtosSelecionados = computed(() => {
 
 .voltar {
   padding: 20px;
-  display: inline-block;
+  background: none;
+  border: none;
+  display: flex;
 }
 
 .pagamento {

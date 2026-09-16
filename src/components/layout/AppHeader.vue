@@ -2,6 +2,7 @@
 import { RouterLink, useRouter } from 'vue-router'
 import { ref, watch } from 'vue'
 
+const emit = defineEmits(['abrir-sacola'])
 const busca = ref('')
 const menuAberto = ref(false)
 const router = useRouter()
@@ -20,22 +21,18 @@ function alternarMenu() {
 
 <template>
   <header>
-
     <!-- topBar -->
     <div class="top-bar">
       <p>
         Dê um novo destino às suas roupas |
-        <RouterLink to="/anunciar" class="top-link-vender">
-          Quero vender
-        </RouterLink>
+        <RouterLink to="/anunciar" class="top-link-vender"> Quero vender </RouterLink>
       </p>
     </div>
 
     <!-- header Principal -->
     <div class="header-main">
-
       <button class="menu-mobile" type="button" @click="alternarMenu">
-        <img src="/icons/menu.png" alt="menu" class="icone-menu">
+        <img src="/icons/menu.png" alt="menu" class="icone-menu" />
       </button>
 
       <RouterLink to="/" class="logo">
@@ -43,23 +40,23 @@ function alternarMenu() {
       </RouterLink>
 
       <div class="pesquisa">
-        <input v-model="busca" type="text" placeholder="Pesquisar produtos...">
+        <input v-model="busca" type="text" placeholder="Pesquisar produtos..." />
         <button type="button">
-          <img src="/icons/pesquisar.svg" alt="Pesquisar" class="icone-pesquisa">
+          <img src="/icons/pesquisar.svg" alt="Pesquisar" class="icone-pesquisa" />
         </button>
       </div>
 
       <nav class="acoes">
         <RouterLink to="/anunciar" class="link-vender">Quero vender</RouterLink>
         <RouterLink to="/perfil" class="icones">
-          <img src="/icons/perfil.svg" alt="Perfil" class="icone-perfil">
+          <img src="/icons/perfil.svg" alt="Perfil" class="icone-perfil" />
         </RouterLink>
         <RouterLink to="/favoritos" class="icones">
-          <img src="/icons/coracao.svg" alt="Favoritos" class="icone-coracao">
+          <img src="/icons/coracao.svg" alt="Favoritos" class="icone-coracao" />
         </RouterLink>
-        <RouterLink to="/sacola" class="icones">
-          <img src="/icons/sacola1.svg" alt="Sacola" class="icone-sacola1">
-        </RouterLink>
+        <button class="icones" @click="emit('abrir-sacola')">
+          <img src="/icons/sacola1.svg" alt="Sacola" class="icone-sacola1" />
+        </button>
       </nav>
     </div>
 
@@ -75,19 +72,24 @@ function alternarMenu() {
     <div v-show="menuAberto" class="overlay" @click="alternarMenu"></div>
 
     <div v-show="menuAberto" class="menu-celular">
-
       <button class="fechar-menu" type="button" @click="alternarMenu">
-        <img src="/icons/fechar.png" alt="fechar" class="icone-fechar">
+        <img src="/icons/fechar.png" alt="fechar" class="icone-fechar" />
       </button>
 
       <RouterLink to="/" class="link-mobile" @click="menuAberto = false">Home</RouterLink>
-      <RouterLink to="/calcados" class="link-mobile" @click="menuAberto = false">Calçados</RouterLink>
-      <RouterLink to="/masculino" class="link-mobile" @click="menuAberto = false">Masculino</RouterLink>
-      <RouterLink to="/feminino" class="link-mobile" @click="menuAberto = false">Feminino</RouterLink>
-      <RouterLink to="/acessorios" class="link-mobile" @click="menuAberto = false">Acessórios</RouterLink>
-
+      <RouterLink to="/calcados" class="link-mobile" @click="menuAberto = false"
+        >Calçados</RouterLink
+      >
+      <RouterLink to="/masculino" class="link-mobile" @click="menuAberto = false"
+        >Masculino</RouterLink
+      >
+      <RouterLink to="/feminino" class="link-mobile" @click="menuAberto = false"
+        >Feminino</RouterLink
+      >
+      <RouterLink to="/acessorios" class="link-mobile" @click="menuAberto = false"
+        >Acessórios</RouterLink
+      >
     </div>
-
   </header>
 </template>
 
@@ -100,7 +102,7 @@ header {
 
 /* --- top bar --- */
 .top-bar {
-  background-color: #C00B63;
+  background-color: #c00b63;
   padding: 9px;
   display: flex;
   justify-content: center;
@@ -122,12 +124,12 @@ header {
 }
 
 .top-link-vender:hover {
-  opacity: .8;
+  opacity: 0.8;
 }
 
 /* --- header principal --- */
 .header-main {
-  background: #FEF6EC;
+  background: #fef6ec;
   min-height: 95px;
   display: flex;
   align-items: center;
@@ -159,7 +161,7 @@ header {
 
 .logo span {
   font-size: 2.8rem;
-  font-family: "Tenor Sans", sans-serif;
+  font-family: 'Tenor Sans', sans-serif;
   color: #000;
   letter-spacing: 1px;
 }
@@ -174,7 +176,7 @@ header {
   border-radius: 999px;
   overflow: hidden;
   box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
-  transition: box-shadow .2s;
+  transition: box-shadow 0.2s;
 }
 
 .pesquisa:focus-within {
@@ -187,7 +189,7 @@ header {
   border: none;
   outline: none;
   padding: 15px 20px;
-  font-family: "Google Sans Flex", sans-serif;
+  font-family: 'Google Sans Flex', sans-serif;
   font-size: 1rem;
   color: #000;
 }
@@ -219,19 +221,19 @@ header {
 
 .link-vender {
   text-decoration: none;
-  font-family: "Google Sans Flex", sans-serif;
+  font-family: 'Google Sans Flex', sans-serif;
   font-size: 1.2rem;
   font-weight: 500;
   color: #303030;
-  transition: color .2s;
+  transition: color 0.2s;
 }
 
 .link-vender:hover {
-  color: #C00B63;
+  color: #c00b63;
 }
 
 .link-vender.router-link-active {
-  color: #C00B63;
+  color: #c00b63;
 }
 
 .icones {
@@ -240,7 +242,10 @@ header {
   justify-content: center;
   padding: 6px;
   border-radius: 8px;
-  transition: background .2s;
+  transition: background 0.2s;
+  background: none;
+  border: none;
+  cursor: pointer;
 }
 
 .icone-perfil,
@@ -257,7 +262,6 @@ header {
   object-fit: contain;
   filter: invert(20%);
 }
-
 
 .icones:hover .icone-perfil,
 .icones:hover .icone-coracao,
@@ -283,7 +287,7 @@ header {
   font-weight: 600;
   text-decoration: none;
   color: black;
-  transition: .2s;
+  transition: 0.2s;
   white-space: nowrap;
   color: #dfdfdfad;
 }
@@ -293,7 +297,7 @@ header {
   color: rgb(255, 255, 255);
   font-weight: 600;
 }
-.menu-celular{
+.menu-celular {
   display: none;
 }
 
@@ -303,7 +307,6 @@ header {
 }
 
 @media (max-width: 1024px) {
-
   /* --- top bar --- */
   .top-bar {
     padding: 8px 16px;
@@ -350,11 +353,9 @@ header {
     width: 28px;
     height: 28px;
   }
-
 }
 
 @media (max-width: 768px) {
-
   /* --- top bar --- */
   .top-bar {
     padding: 10px 16px;
@@ -436,7 +437,7 @@ header {
 
   .pesquisa input {
     padding: 14px 16px;
-    font-size: .95rem;
+    font-size: 0.95rem;
   }
 
   .pesquisa button {
@@ -484,7 +485,7 @@ header {
     font-size: 1.2rem;
     font-weight: 500;
     padding: 8px 0;
-    transition: .2s;
+    transition: 0.2s;
   }
 
   .overlay {
@@ -493,13 +494,12 @@ header {
     inset: 0;
     background: rgba(0, 0, 0, 0.4);
     z-index: 9998;
-    animation: aparecerFundo .25s ease;
+    animation: aparecerFundo 0.25s ease;
   }
 
   .menu-celular {
-    animation: abrirMenu .25s ease;
+    animation: abrirMenu 0.25s ease;
   }
-
 }
 
 /* animações — tocam sozinhas toda vez que o elemento aparece */

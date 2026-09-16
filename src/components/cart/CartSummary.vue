@@ -2,7 +2,7 @@
 import { computed } from 'vue'
 import { carrinho, selecionados } from '@/utils/cartUtils'
 import { formataPreco } from '@/utils/currencyUtils'
-import { RouterLink, useRouter} from 'vue-router'
+import { RouterLink, useRouter } from 'vue-router'
 
 const router = useRouter()
 const total = computed(() => {
@@ -26,6 +26,7 @@ function finalizarCompra() {
     alert('Selecione pelo menos um produto para continuar.')
     return
   }
+
   router.push('/pagamento')
 }
 </script>
@@ -38,7 +39,7 @@ function finalizarCompra() {
     </h3>
 
     <div class="btn">
-        <button @click="finalizarCompra">FINALIZAR COMPRA</button>
+      <button @click="finalizarCompra">FINALIZAR COMPRA</button>
     </div>
 
     <RouterLink to="/"> <p class="continuar">Ver mais produtos</p> </RouterLink>
@@ -47,12 +48,12 @@ function finalizarCompra() {
 
 <style scoped>
 .card {
-  padding: 35px;
+  padding: 30px;
 }
 
 h3 {
   color: #000;
-  font-size: 22px;
+  font-size: 20px;
   margin-bottom: 15px;
   font-family: 'Google Sans Flex', arial;
   text-align: right;
@@ -60,17 +61,17 @@ h3 {
 
 .btn {
   text-align: center;
-  padding-top: 80px;
+  padding-top: 70px;
 }
 
 button {
   width: 90%;
-  padding: 12px 14px;
+  padding: 10px 12px;
   border: none;
   border-radius: 17px;
   background: #c00b63;
   color: white;
-  font-size: 20px;
+  font-size: 19px;
   cursor: pointer;
   font-family: 'Marcellus', serif;
 }

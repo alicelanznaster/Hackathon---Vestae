@@ -1,7 +1,7 @@
 <script setup>
 import { removerCarrinho, selecionados, selecionarProduto } from '@/utils/cartUtils'
 import { formataPreco } from '@/utils/currencyUtils'
-import { RouterLink } from 'vue-router';
+import { RouterLink } from 'vue-router'
 
 defineProps({
   item: {
@@ -50,8 +50,8 @@ defineProps({
 .card {
   position: relative;
   display: flex;
-  gap: 16px;
-  padding: 20px 30px;
+  gap: 12px;
+  padding: 15px 20px;
   border-bottom: 1px solid #ddd;
   background-color: #efe4d6;
 }
@@ -62,7 +62,7 @@ defineProps({
   justify-content: center;
   cursor: pointer;
   flex-shrink: 0;
-  margin-top: 5px;
+  margin-top: 3px;
 }
 
 .selecao input {
@@ -70,10 +70,10 @@ defineProps({
 }
 
 .selecao span {
-  width: 22px;
-  height: 22px;
+  width: 18px;
+  height: 18px;
   border: 2px solid #c00b63;
-  border-radius: 5px;
+  border-radius: 4px;
   background-color: transparent;
   display: flex;
   align-items: center;
@@ -88,66 +88,65 @@ defineProps({
 .selecao input:checked + span::after {
   content: '✓';
   color: white;
-  font-size: 16px;
+  font-size: 13px;
   font-weight: bold;
 }
 
 .imagem {
-  width: 150px;
-  height: 150px;
+  width: 95px;
+  height: 95px;
   object-fit: cover;
-  border-radius: 8px;
+  border-radius: 6px;
 }
 .info {
   flex: 1;
-  display: flex;
-  flex-direction: column;
+  min-width: 0;
 }
 
 .topo {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
+  padding-right: 25px;
 }
 
 h2 {
   color: black;
-  font-size: 22px;
-  margin-bottom: 6px;
+  font-size: 18px;
+  margin: 0 0 5px;
 }
 
 .descricao {
   color: #555;
-  font-size: 15px;
-  max-width: 400px;
+  font-size: 13px;
+  line-height: 1.2;
+  margin: 0;
 }
 
 .subtotal {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  justify-content: flex-end;
-  margin-right: 20px;
+  position: absolute;
+  bottom: 15px;
+  right: 20px;
 }
 .preco {
-  margin-top: auto;
-  font-size: 18px;
+  margin: 0;
+  font-size: 15px;
   color: black;
 }
 
 .lixeira {
   position: absolute;
-  top: 15px;
-  right: 20px;
+  top: 12px;
+  right: 15px;
   background: none;
   border: none;
   cursor: pointer;
-  padding: 5px;
+  padding: 3px;
   transition: transform 0.2s ease;
 }
 
 .lixeira img {
-  width: 25px;
+  width: 20px;
 }
 
 .lixeira:hover {
@@ -156,49 +155,34 @@ h2 {
 
 @media (max-width: 768px) {
   .card {
-    gap: 12px;
-    padding: 15px;
+    gap: 10px;
+    padding: 12px 15px;
   }
 
   .imagem {
-    width: 100px;
-    height: 100px;
-  }
-
-  .info {
-    min-width: 0;
-  }
-
-  .topo {
-    padding-right: 25px;
+    width: 75px;
+    height: 75px;
   }
 
   h2 {
-    font-size: 17px;
-    margin-bottom: 5px;
-  }
-
-  .descricao {
-    font-size: 13px;
-    line-height: 1.2;
-    max-width: none;
-  }
-
-  .subtotal {
-    margin-right: 0;
-  }
-
-  .preco {
     font-size: 15px;
   }
 
+  .descricao {
+    font-size: 12px;
+  }
+
+  .preco {
+    font-size: 14px;
+  }
+
   .lixeira {
-    top: 10px;
+    top: 8px;
     right: 10px;
   }
 
   .lixeira img {
-    width: 20px;
+    width: 18px;
   }
 }
 

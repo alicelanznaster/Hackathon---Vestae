@@ -42,13 +42,10 @@ function enviarAvaliacao() {
   const avaliacao = {
     nome: nome.value.trim(),
     comentario: comentario.value.trim(),
-    score: nota.value
+    score: nota.value,
   }
 
-  localStorage.setItem(
-    'vestae-avaliacao',
-    JSON.stringify(avaliacao)
-  )
+  localStorage.setItem('vestae-avaliacao', JSON.stringify(avaliacao))
 
   alert('Obrigada por avaliar o VESTÆ! Sua opinião é muito importante para nós.')
 
@@ -58,19 +55,12 @@ function enviarAvaliacao() {
 
 <template>
   <main class="avaliacao">
-
     <h1>AVALIE O VESTÆ</h1>
 
     <form class="formulario-avaliacao" @submit.prevent="enviarAvaliacao">
-
       <label for="nome">Seu Nome</label>
 
-      <input
-        id="nome"
-        v-model.trim="nome"
-        type="text"
-        placeholder="Informe o seu nome*"
-      >
+      <input id="nome" v-model.trim="nome" type="text" placeholder="Informe o seu nome*" />
 
       <label for="comentario">Comentário</label>
 
@@ -87,20 +77,11 @@ function enviarAvaliacao() {
         <StarRating v-model="nota" />
       </fieldset>
 
-      <div
-        v-if="erro" 
-        class="mensagem-erro"
-      >
+      <div v-if="erro" class="mensagem-erro">
         {{ erro }}
       </div>
 
-      <button
-        class="botao-publicar"
-        type="submit"
-      >
-        PUBLICAR AVALIAÇÃO
-      </button>
-
+      <button class="botao-publicar" type="submit">PUBLICAR AVALIAÇÃO</button>
     </form>
   </main>
 </template>
@@ -113,7 +94,7 @@ function enviarAvaliacao() {
   margin: 0 auto;
   padding: 30px 42px 60px;
   background: #fff8ef;
-  font-family: "Marcellus", serif;
+  font-family: 'Marcellus', serif;
 }
 
 .avaliacao h1 {
@@ -187,7 +168,7 @@ function enviarAvaliacao() {
   color: white;
   border-radius: 14px;
   padding: 12px 28px;
-  font-family: "Marcellus", serif;
+  font-family: 'Marcellus', serif;
   font-size: 18px;
   cursor: pointer;
   transition: 0.2s;

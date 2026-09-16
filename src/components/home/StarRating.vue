@@ -1,13 +1,12 @@
 <script setup>
 const nota = defineModel({
   type: Number,
-  default: 0
+  default: 0,
 })
 </script>
 
 <template>
   <div class="estrelas-input">
-
     <button
       v-for="estrela in 5"
       :key="estrela"
@@ -19,7 +18,6 @@ const nota = defineModel({
     </button>
 
     <span>{{ nota }}/5</span>
-
   </div>
 </template>
 

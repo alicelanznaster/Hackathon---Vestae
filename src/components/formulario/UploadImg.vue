@@ -51,6 +51,7 @@ function selecionarArquivo(evento) {
   </div>
 </template>
 
+
 <style scoped>
 .upload {
  display: flex;

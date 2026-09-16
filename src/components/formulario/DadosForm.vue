@@ -17,6 +17,7 @@ const condicao = ref('')
 const marca = ref('')
 const descricao = ref('')
 const preco = ref('')
+const status = ref('')
 
 const limitarPreco = () => {
   if (preco.value > 1000) preco.value = 1000
@@ -31,6 +32,7 @@ const limparFormulario = () => {
   marca.value = ''
   descricao.value = ''
   preco.value = ''
+  status.value = ''
 }
 
 const enviarFormulario = () => {
@@ -41,7 +43,8 @@ const enviarFormulario = () => {
     condicao: condicao.value,
     marca: marca.value.trim(),
     descricao: descricao.value.trim(),
-    preco: Number(preco.value)
+    preco: Number(preco.value),
+    status: status.value
   })
 }
 
@@ -85,6 +88,11 @@ watch(
             </select>
 
             <input v-model="marca" type="text" placeholder="Marca">
+
+            <select v-model="status" required>
+                <option disabled value="">Status*</option>
+                <option>Disponível</option>
+            </select>
         </div>
     </div>
 

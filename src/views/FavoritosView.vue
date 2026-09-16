@@ -1,3 +1,84 @@
+<script setup>
+import produtos from '@/data/product'
+import ProductCard from '@/components/products/ProductCard.vue'
+import { computed } from 'vue'
+
+const favoritos = computed(() => {
+  return produtos.value.filter((produto) => produto.favorito)
+})
+</script>
+
 <template>
-  <h1>Home</h1>
+  <div class="pagina">
+    <h1>Favoritos</h1>
+
+    <div v-if="favoritos.length > 0" class="lista-produtos">
+      <ProductCard v-for="produto in favoritos" :key="produto.id" :produto="produto" />
+    </div>
+
+    <div v-else class="vazio">
+      <p>Você ainda não favoritou nenhum produto.</p>
+    </div>
+  </div>
 </template>
+
+<style scoped>
+.pagina {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 40px 30px;
+}
+
+h1 {
+  font-family: 'Marcellus', sans-serif;
+  font-size: 3rem;
+  font-weight: 400;
+  color: black;
+  margin-bottom: 40px;
+}
+
+.vazio {
+  color: rgb(56, 56, 56);
+  font-family: 'Google Sans Flex', sans-serif;
+  text-align: center;
+  font-size: 1.3rem;
+}
+
+.lista-produtos {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 30px;
+}
+
+@media (max-width: 1024px) {
+  .pagina {
+    padding: 30px 20px;
+  }
+
+  h1 {
+    font-size: 2.5rem;
+    margin-bottom: 30px;
+  }
+
+  .lista-produtos {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  .pagina {
+    padding: 24px 16px;
+  }
+
+  h1 {
+    font-size: 2rem;
+    margin-bottom: 24px;
+  }
+
+  .lista-produtos {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+}
+</style>

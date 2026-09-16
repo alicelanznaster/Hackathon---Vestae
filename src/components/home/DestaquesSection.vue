@@ -6,12 +6,11 @@ import 'swiper/css/navigation'
 import produtos from '@/data/product'
 import ProductCard from '@/components/products/ProductCard.vue'
 
-const produtosDestaque = produtos.value.filter(produto => produto.destaque)
+const produtosDestaque = produtos.value.filter((produto) => produto.destaque)
 </script>
 
 <template>
   <section class="destaques">
-
     <h2>PEÇAS EM DESTAQUE</h2>
 
     <p class="subtitulo">
@@ -19,34 +18,30 @@ const produtosDestaque = produtos.value.filter(produto => produto.destaque)
     </p>
 
     <Swiper
-  :modules="[Navigation]"
-  :slides-per-view="1"
-  :space-between="15"
-  navigation
-  :loop="produtosDestaque.length > 4"
-  :breakpoints="{
-    768: {
-      slidesPerView: 2,
-      spaceBetween: 20
-    },
-    1024: {
-      slidesPerView: 3,
-      spaceBetween: 20
-    },
-    1200: {
-      slidesPerView: 4,
-      spaceBetween: 20
-    }
-  }"
->
-  <SwiperSlide
-    v-for="produto in produtosDestaque"
-    :key="produto.id"
-  >
-    <ProductCard :produto="produto" />
-  </SwiperSlide>
-</Swiper>
-
+      :modules="[Navigation]"
+      :slides-per-view="1"
+      :space-between="15"
+      navigation
+      :loop="produtosDestaque.length > 4"
+      :breakpoints="{
+        768: {
+          slidesPerView: 2,
+          spaceBetween: 20,
+        },
+        1024: {
+          slidesPerView: 3,
+          spaceBetween: 20,
+        },
+        1200: {
+          slidesPerView: 4,
+          spaceBetween: 20,
+        },
+      }"
+    >
+      <SwiperSlide v-for="produto in produtosDestaque" :key="produto.id">
+        <ProductCard :produto="produto" />
+      </SwiperSlide>
+    </Swiper>
   </section>
 </template>
 
@@ -111,7 +106,6 @@ const produtosDestaque = produtos.value.filter(produto => produto.destaque)
   right: 5px;
 }
 
-
 /* NOTEBOOK */
 @media (max-width: 1199px) {
   .destaques {
@@ -131,7 +125,6 @@ const produtosDestaque = produtos.value.filter(produto => produto.destaque)
     padding: 0 50px;
   }
 }
-
 
 /* TABLET */
 @media (max-width: 1023px) {
@@ -162,7 +155,6 @@ const produtosDestaque = produtos.value.filter(produto => produto.destaque)
     right: 8px;
   }
 }
-
 
 /* CELULAR */
 @media (max-width: 767px) {

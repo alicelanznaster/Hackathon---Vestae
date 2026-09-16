@@ -555,7 +555,7 @@ select {
     margin-bottom: 25px;
   }
 
-  .conteudo-pagamento {
+  .conteudo {
     flex-direction: column;
     gap: 15px;
   }
@@ -564,6 +564,11 @@ select {
   .card-resumo {
     width: 100%;
     padding: 25px 20px;
+  }
+
+  .card-entrega h3,
+  .card-resumo h3 {
+    font-size: 20px;
   }
 
   input,
@@ -584,6 +589,61 @@ select {
 
   .protegida p {
     font-size: 11px;
+  }
+
+  .produto-resumo img {
+    width: 55px;
+    height: 55px;
+  }
+
+  .produto-resumo p {
+    font-size: 13px;
+  }
+
+  .produto-resumo span {
+    font-size: 12px;
+  }
+
+  .valores p {
+    font-size: 13px;
+  }
+
+  .valores .total {
+    font-size: 17px;
+  }
+
+  .aviso-carregando {
+    width: 80%;
+    padding: 25px 20px;
+  }
+}
+
+@media (max-width: 400px) {
+  .topo {
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+
+  .logo {
+    font-size: 22px;
+  }
+
+  h2 {
+    font-size: 21px;
+  }
+
+  .subtitulo {
+    font-size: 14px;
+  }
+
+  .card-entrega,
+  .card-resumo {
+    padding: 20px 15px;
+  }
+
+  .aviso-carregando {
+    width: 85%;
+    padding: 20px 15px;
   }
 }
 </style>

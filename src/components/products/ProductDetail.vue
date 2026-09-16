@@ -286,9 +286,9 @@ const meuProduto = computed(() => {
     font-size: 1.2rem;
 }
 
-@media (max-width: 1024px) and (min-width: 769px){
-    .pagina{
-        padding: 20px 30px 40px 30px;
+@media (max-width: 1024px) and (min-width: 769px) {
+    .pagina {
+        padding: 20px 30px 40px;
         min-height: 85vh;
     }
 
@@ -299,19 +299,18 @@ const meuProduto = computed(() => {
     .detalhe-img {
         width: 340px;
         height: 450px;
-        margin-left: 15px; /* Tira os 100px do desktop */
+        margin-left: 15px;
     }
 
-    .favoritar{
+    .favoritar {
         height: 45px;
         width: 45px;
     }
 
-    .favoritar img{
+    .favoritar img {
         width: 27px;
         height: 27px;
     }
-
 
     .dados h1 {
         font-size: 1.9rem;
@@ -319,7 +318,6 @@ const meuProduto = computed(() => {
 
     .preco {
         font-size: 1.35rem;
-        
     }
 
     .carrinho {
@@ -333,12 +331,23 @@ const meuProduto = computed(() => {
 
 @media (max-width: 768px) {
     .pagina {
-        padding: 15px 20px 40px 20px;
+        padding: 10px 20px 40px;
+        min-height: 100vh;
+    }
+
+    .voltar {
+        padding: 10px;
+        margin-bottom: 15px;
+    }
+
+    .voltar img {
+        width: 20px;
+        height: 20px;
     }
 
     .detalhe {
         flex-direction: column;
-        align-items: flex-start;
+        align-items: center;
         gap: 20px;
         width: 100%;
     }
@@ -348,25 +357,20 @@ const meuProduto = computed(() => {
         max-width: 340px;
         height: auto;
         aspect-ratio: 1 / 1.3;
-        margin-left: 0;
-        margin-right: 0;
+        margin: 0;
         border-radius: 16px;
     }
 
-    .imagem-produto {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-    }
-
-    .favoritar{
-        height: 40px;
+    .favoritar {
+        top: 18px;
+        right: 18px;
         width: 40px;
+        height: 40px;
     }
 
-    .favoritar img{
-        width: 25px;
-        height: 25px;
+    .favoritar img {
+        width: 24px;
+        height: 24px;
     }
 
     .dados {
@@ -377,17 +381,17 @@ const meuProduto = computed(() => {
     .dados h1 {
         font-size: 1.5rem;
         margin-bottom: 5px;
-  }
+    }
 
     .preco {
         font-size: 1.2rem;
-        margin: 5px 0 15px 0;
+        margin: 5px 0 15px;
     }
 
     .carrinho {
         width: 100%;
         padding: 14px;
-        font-size: 1.18rem;
+        font-size: 1.1rem;
         text-align: center;
     }
 
@@ -396,10 +400,15 @@ const meuProduto = computed(() => {
         margin-bottom: 20px;
     }
 
+    .dados h3 {
+        font-size: 1.2rem;
+    }
+
     .descricao {
         font-size: 0.95rem;
         max-width: 100%;
         margin-bottom: 20px;
+        line-height: 1.4;
     }
 
     .informacoes {
@@ -407,8 +416,49 @@ const meuProduto = computed(() => {
     }
 
     .info {
-        font-size: 0.8rem;
+        font-size: 0.75rem;
         padding: 5px 10px;
+    }
+
+    .aviso {
+        width: 80%;
+        max-width: 350px;
+        padding: 25px 20px;
+        font-size: 16px;
+        box-sizing: border-box;
+    }
+}
+
+@media (max-width: 400px) {
+    .pagina {
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+
+    .detalhe-img {
+        max-width: 300px;
+    }
+
+    .dados h1 {
+        font-size: 1.35rem;
+    }
+
+    .carrinho {
+        font-size: 1rem;
+    }
+
+    .descricao {
+        font-size: 0.9rem;
+    }
+
+    .info {
+        font-size: 0.7rem;
+        padding: 5px 8px;
+    }
+
+    .aviso {
+        width: 88%;
+        font-size: 15px;
     }
 }
 </style>

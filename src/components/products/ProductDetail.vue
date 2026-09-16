@@ -17,10 +17,30 @@ const voltarPagina = () => {
   }
 }
 
+// procura primeiro nos produtos fixos e depois nos anunciados pelo usuario
 const produto = computed(() => {
-  return produtos.value.find(
+  const produtoFixo = produtos.value.find(
     p => p.id === Number(route.params.id)
   )
+
+  if (produtoFixo) return produtoFixo
+
+  const anuncios = JSON.parse(
+    localStorage.getItem('vestae-anuncios') || '[]'
+  )
+
+  return anuncios.find(
+    p => p.id === Number(route.params.id)
+  )
+})
+
+// faz o botão de add a sacola aparecer só para produtos que não foram publicados pelo usuário logado
+const usuarioLogado = JSON.parse(
+  localStorage.getItem('usuarioLogado') || 'null'
+)
+
+const meuProduto = computed(() => {
+  return produto.value?.email === usuarioLogado?.email
 })
 </script>
 
@@ -50,8 +70,8 @@ const produto = computed(() => {
                 {{ formataPreco(produto.preco) }}
             </p>
 
-            <button class="carrinho" @click="addCarrinho(produto.id)" >
-                Adicionar à Sacola
+            <button v-if="!meuProduto" class="carrinho" @click="addCarrinho(produto.id)">
+            Adicionar à Sacola
             </button>
 
             <div class="protegido">

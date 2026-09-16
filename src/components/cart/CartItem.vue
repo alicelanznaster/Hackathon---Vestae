@@ -1,18 +1,30 @@
 <script setup>
-import { removerCarrinho } from '@/utils/cartUtils';
-import { formataPreco } from '@/utils/currencyUtils';
+import { removerCarrinho, selecionados, selecionarProduto } from '@/utils/cartUtils'
+import { formataPreco } from '@/utils/currencyUtils'
+import { RouterLink } from 'vue-router';
 
 defineProps({
   item: {
     type: Object,
-    required: true
-  }
+    required: true,
+  },
 })
 </script>
 
 <template>
   <div class="card">
-    <img :src="item.imagem" :alt="item.titulo" class="imagem">
+    <label class="selecao">
+      <input
+        type="checkbox"
+        :checked="selecionados.includes(item.id)"
+        @click="selecionarProduto(item.id)"
+      />
+      <span></span>
+    </label>
+
+    <RouterLink :to="{ name: 'produto', params: { id: item.id } }">
+      <img :src="item.imagem" :alt="item.titulo" class="imagem" />
+    </RouterLink>
 
     <div class="info">
       <div class="topo">
@@ -22,18 +34,16 @@ defineProps({
         </div>
 
         <button class="lixeira" @click="removerCarrinho(item.id)">
-          <img src="/icons/lixeira.svg" alt="Remover">
+          <img src="/icons/lixeira.svg" alt="Remover" />
         </button>
-
       </div>
     </div>
     <div class="subtotal">
-        <p class="preco">
-            {{ formataPreco(item.preco) }}
-        </p>
-      </div>
+      <p class="preco">
+        {{ formataPreco(item.preco) }}
+      </p>
+    </div>
   </div>
-  
 </template>
 
 <style scoped>
@@ -43,7 +53,43 @@ defineProps({
   gap: 16px;
   padding: 20px 30px;
   border-bottom: 1px solid #ddd;
-  background-color: #EFE4D6;
+  background-color: #efe4d6;
+}
+
+.selecao {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  flex-shrink: 0;
+  margin-top: 5px;
+}
+
+.selecao input {
+  display: none;
+}
+
+.selecao span {
+  width: 22px;
+  height: 22px;
+  border: 2px solid #c00b63;
+  border-radius: 5px;
+  background-color: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: 0.2s;
+}
+
+.selecao input:checked + span {
+  background-color: #c00b63;
+}
+
+.selecao input:checked + span::after {
+  content: '✓';
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
 }
 
 .imagem {
@@ -52,7 +98,6 @@ defineProps({
   object-fit: cover;
   border-radius: 8px;
 }
-
 .info {
   flex: 1;
   display: flex;
@@ -77,12 +122,12 @@ h2 {
   max-width: 400px;
 }
 
-.subtotal{
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    justify-content: flex-end;
-    margin-right: 20px;
+.subtotal {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: flex-end;
+  margin-right: 20px;
 }
 .preco {
   margin-top: auto;
@@ -158,7 +203,6 @@ h2 {
 }
 
 @media (max-width: 400px) {
-
   .card {
     gap: 10px;
     padding: 15px;
@@ -178,7 +222,6 @@ h2 {
     font-size: 12px;
   }
 
-  
   .preco {
     font-size: 14px;
   }
@@ -186,6 +229,5 @@ h2 {
   .lixeira img {
     width: 22px;
   }
-
-} 
+}
 </style>

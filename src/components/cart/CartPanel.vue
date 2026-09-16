@@ -1,5 +1,5 @@
 <script setup>
-import { carrinho } from '@/utils/cartUtils'
+import { carrinho } from '@/utils/cartUtils.js';
 import CartItem from './CartItem.vue';
 import CartSummary from './CartSummary.vue';
 

@@ -4,10 +4,9 @@ import { ref } from 'vue'
 const ultimoProdAdd = ref('')
 const mostrarAviso = ref(false)
 const carrinho = ref([])
+const selecionados = ref([])
 
-const carrinhoSalvo = JSON.parse(
-  localStorage.getItem('carrinho') ?? '[]'
-)
+const carrinhoSalvo = JSON.parse(localStorage.getItem('carrinho') ?? '[]')
 
 carrinho.value = carrinhoSalvo
 
@@ -23,10 +22,7 @@ function addCarrinho(idItem) {
       carrinho.value.push(item)
     }
 
-    localStorage.setItem(
-      'carrinho',
-      JSON.stringify(carrinho.value)
-    )
+    localStorage.setItem('carrinho', JSON.stringify(carrinho.value))
 
     mostrarAviso.value = true
 
@@ -37,18 +33,14 @@ function addCarrinho(idItem) {
 }
 
 function removerCarrinho(idItem) {
-  const posicao = carrinho.value.findIndex(item => item.id === idItem)
+  const posicao = carrinho.value.findIndex((item) => item.id === idItem)
 
   if (posicao !== -1) {
     carrinho.value.splice(posicao, 1)
 
-    localStorage.setItem(
-      'carrinho',
-      JSON.stringify(carrinho.value)
-    )
+    localStorage.setItem('carrinho', JSON.stringify(carrinho.value))
   }
 }
-
 
 function totalCarrinho() {
   let total = 0
@@ -62,9 +54,16 @@ function totalCarrinho() {
 
 function limparCarrinho() {
   carrinho.value = []
-  localStorage.setItem( 
-    'carrinho', 
-    JSON.stringify(carrinho.value) 
-  )
+  localStorage.setItem('carrinho', JSON.stringify(carrinho.value))
 }
-export { ultimoProdAdd, mostrarAviso, carrinho, addCarrinho, removerCarrinho, totalCarrinho, limparCarrinho}
+
+function selecionarProduto(idItem) {
+  const posicao = selecionados.value.indexOf(idItem)
+
+  if (posicao === -1) {
+    selecionados.value.push(idItem)
+  } else {
+    selecionados.value.splice(posicao, 1)
+  }
+}
+export { ultimoProdAdd, mostrarAviso, carrinho, addCarrinho, removerCarrinho, totalCarrinho, limparCarrinho, selecionarProduto, selecionados}

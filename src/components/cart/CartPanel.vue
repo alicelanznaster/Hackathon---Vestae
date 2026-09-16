@@ -1,94 +1,117 @@
 <script setup>
-import { carrinho } from '@/utils/cartUtils'
-import CartItem from './CartItem.vue';
-import CartSummary from './CartSummary.vue';
+import { carrinho } from '@/utils/cartUtils.js'
+import CartItem from './CartItem.vue'
+import CartSummary from './CartSummary.vue'
 
+const emit = defineEmits(['fechar'])
+
+function fecharSacola() {
+  emit('fechar')
+}
 </script>
 
 <template>
-  <section class="pagina">
+  <div class="fundo" @click="fecharSacola">
+    <section class="pagina" @click.stop>
+      <div class="topo">
+        <button class="fechar" @click="fecharSacola">
+          <img src="/icons/fechar.svg" alt="botao-fechar" />
+        </button>
 
-    <div class="topo">
-        <a href="/" class="fechar">
-            <img src="/icons/fechar.svg" alt="botao-fechar">
-        </a>
-      
         <h1>Sacola ({{ carrinho.length }})</h1>
-    </div>
+      </div>
 
-    <div v-if="carrinho.length > 0">
+      <div v-if="carrinho.length > 0">
+        <CartItem v-for="item in carrinho" :key="item.id" :item="item" />
 
-      <CartItem
-        v-for="item in carrinho"
-        :key="item.id"
-        :item="item"
-      />
+        <CartSummary />
+      </div>
 
-      <CartSummary />
-
-    </div>
-
-    <div v-else class="vazio">
-      <h2>Sua sacola está vazia.</h2>
-      <p>Adicione uma peça para continuar.</p>
-    </div>
-
-  </section>
+      <div v-else class="vazio">
+        <h2>Sua sacola está vazia.</h2>
+        <p>Adicione uma peça para continuar.</p>
+      </div>
+    </section>
+  </div>
 </template>
 
 <style scoped>
-.pagina{
-    min-height: 80vh;
-    background: #F8EFE3;    
+.fundo {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.2);
+  z-index: 1000;
 }
 
-.topo{
-    display: flex;
-    gap: 15px;
-    border-bottom: 1px solid #ddd;
-    padding: 20px 30px;
+.pagina {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 420px;
+  height: 100%;
+  background: #f8efe3;
+  box-shadow: -5px 0 15px rgba(0, 0, 0, 0.15);
+  overflow-y: auto;
 }
 
-.topo h1{
-    font-size: 2rem;
-    color: #222;
-    padding: 0;
-    margin-left: 5px;
+.topo {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  border-bottom: 1px solid #ddd;
+  padding: 20px 30px;
 }
 
-.topo a img{
-    height: 29px;
-    width: 29px;
-} 
-
-.fechar{
-    display: flex;
-    align-items: center;
+.topo h1 {
+  font-size: 2rem;
+  color: #222;
+  padding: 0;
+  margin: 0 0 0 5px;
 }
 
-.vazio{
-    margin-top: 100px;
-    text-align: center;
+.fechar {
+  display: flex;
+  align-items: center;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
 }
 
-.vazio h2{
-    color: black;
-    margin-bottom: 8px;
+.topo .fechar img {
+  height: 29px;
+  width: 29px;
 }
 
-.vazio p{
-    color:#666;
+.vazio {
+  margin-top: 100px;
+  text-align: center;
 }
 
-@media (max-width: 768px){
-    .topo h1{
-        font-size: 1.6rem;
-    }
-
-    .fechar img{
-        width: 18px;
-        height: 18px;
-    }
+.vazio h2 {
+  color: black;
+  margin-bottom: 8px;
 }
 
+.vazio p {
+  color: #666;
+}
+
+@media (max-width: 768px) {
+  .pagina {
+    width: 90%;
+  }
+
+  .topo h1 {
+    font-size: 1.6rem;
+  }
+
+  .fechar img {
+    width: 18px;
+    height: 18px;
+  }
+}
 </style>

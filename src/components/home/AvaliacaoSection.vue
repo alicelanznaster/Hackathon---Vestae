@@ -266,9 +266,14 @@ function excluirAvaliacao() {
 
 .acoes button {
   border: none;
-  background: none;
   cursor: pointer;
-  text-decoration: underline;
+  text-decoration: none;
+  background-color: #c9005b;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 10px;
+  font-family: "Marcellus", serif;
+  font-size: 15px;
 }
 
 .avaliar-container {

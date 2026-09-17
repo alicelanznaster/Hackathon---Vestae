@@ -1,6 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '@/views/HomeView.vue'
-import CartPanel from '@/components/cart/CartPanel.vue'
 import ProductList from '@/components/products/ProductList.vue'
 import FemininoView from '../views/FemininoView.vue'
 import MasculinoView from '../views/MasculinoView.vue'
@@ -23,11 +22,6 @@ const router = createRouter({
       path: '/',
       name: 'home',
       component: HomeView,
-    },
-    {
-      path: '/sacola',
-      name: 'sacola',
-      component: CartPanel,
     },
     {
       path: '/masculino',

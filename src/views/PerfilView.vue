@@ -32,6 +32,10 @@ function editarNome() {
   editandoNome.value = true
 }
 
+function cancelarEdicaoNome() {
+  editandoNome.value = false
+}
+
 function salvarNome() {
   const nome = novoNome.value.trim()
 
@@ -136,8 +140,7 @@ onMounted(() => {
           <img v-else src="/icons/user-circle.svg" alt="Usuário" class="icone-usuario" />
         </button>
 
-        <input type="file" ref="inputFile" @change="selecionarFoto" accept="image/png, image/jpeg, image/webp"
-          class="input-oculto" />
+        <input type="file" ref="inputFile" @change="selecionarFoto" accept="image/png, image/jpeg, image/webp" class="input-oculto" />
 
         <div class="info">
           <div v-if="!editandoNome" class="nome-perfil">
@@ -148,9 +151,15 @@ onMounted(() => {
           <div v-else class="edicao-nome">
             <input v-model="novoNome" type="text" maxlength="50" @keyup.enter="salvarNome" />
 
-            <button type="button" @click="salvarNome">
-              Salvar
-            </button>
+            <div class="botoes-edicao">
+              <button type="button" @click="salvarNome">
+                Salvar
+              </button>
+
+              <button type="button" class="botao-cancelar" @click="cancelarEdicaoNome">
+                Cancelar
+              </button>
+            </div>
           </div>
 
           <p class="quantidade">
@@ -193,7 +202,12 @@ onMounted(() => {
       <section class="produtos">
         <h2>Meus Produtos</h2>
 
-        <p v-if="produtos.length === 0" class="vazio">Você ainda não anunciou nenhuma peça.</p>
+        <div v-if="produtos.length === 0" class="vazio">
+          <p class="texto-vazio">Você ainda não anunciou nenhuma peça</p>
+          <RouterLink to="/anunciar">
+            <p class="botao-anunciar">Clique aqui para anunciar</p>
+          </RouterLink>
+        </div>
 
         <div v-else class="grid">
           <ProductCard v-for="produto in produtos" :key="produto.id" :produto="produto" :mostrar-favorito="false" />
@@ -286,7 +300,8 @@ onMounted(() => {
 
 .edicao-nome {
   display: flex;
-  align-items: center;
+  flex-direction: column;
+  align-items: flex-start;
   gap: 10px;
   margin-bottom: 7px;
 }
@@ -306,6 +321,11 @@ onMounted(() => {
   border-color: #c40c6c;
 }
 
+.botoes-edicao {
+  display: flex;
+  gap: 10px;
+}
+
 .edicao-nome button {
   padding: 9px 14px;
   border: none;
@@ -315,6 +335,12 @@ onMounted(() => {
   font-family: 'Marcellus', sans-serif;
   font-size: 1.4rem;
   cursor: pointer;
+}
+
+.botao-cancelar {
+  background-color: transparent !important /* important serve para o botão cancelar não ficar com o css do edicao-nome, e sim do botao-cancelar como prioridade*/;
+  color: #c40c6c !important;
+  border: 1px solid #c40c6c !important;
 }
 
 .edicao-nome button:hover {
@@ -416,11 +442,19 @@ onMounted(() => {
 }
 
 .vazio {
-  margin: 0 8px;
-  color: rgb(56, 56, 56);
   font-family: 'Google Sans Flex', sans-serif;
   text-align: center;
+}
+
+.vazio .texto-vazio {
+  color: #555;
+  font-size: 1.4rem;
+}
+
+.vazio .botao-anunciar {
+  color: #c40c6c;
   font-size: 1.25rem;
+  text-decoration: underline;
 }
 
 @media (max-width: 1024px) {
@@ -451,23 +485,20 @@ onMounted(() => {
   .nome {
     font-size: 2.3rem;
   }
-
   .edicao-nome input {
     width: 220px;
     font-size: 1.8rem;
   }
 
-
   .edicao-nome button {
     font-size: 1.4rem;
-
   }
 
   .quantidade {
     font-size: 1.15rem;
   }
 
-  .sair{
+  .sair {
     width: 28px;
     height: 28px;
   }
@@ -485,7 +516,7 @@ onMounted(() => {
   }
 
   .texto {
-    font-size: 1.05rem;
+    font-size: 1.1rem;
   }
 
   .produtos h2 {
@@ -494,6 +525,14 @@ onMounted(() => {
 
   .grid {
     gap: 17px;
+  }
+
+  .vazio .texto-vazio {
+    font-size: 1.1rem;
+  }
+
+  .vazio .botao-anunciar {
+    font-size: 1.1rem;
   }
 }
 
@@ -531,10 +570,8 @@ onMounted(() => {
     font-size: 1.6rem;
   }
 
-
   .edicao-nome button {
     font-size: 1.2rem;
-
   }
 
   .quantidade {
@@ -545,11 +582,10 @@ onMounted(() => {
     margin-top: 5px;
   }
 
-  .sair{
+  .sair {
     width: 28px;
     height: 28px;
   }
-
 
   .divisoria {
     margin-bottom: 42px;
@@ -582,6 +618,14 @@ onMounted(() => {
   .grid {
     grid-template-columns: repeat(2, 1fr);
     gap: 18px;
+  }
+
+  .vazio .texto-vazio {
+    font-size: 1rem;
+  }
+
+  .vazio .botao-anunciar {
+    font-size: 1rem;
   }
 }
 
@@ -625,8 +669,9 @@ onMounted(() => {
 
   .edicao-nome button {
     font-size: 1rem;
-    padding-left: 20px;
-    padding-right: 20px;
+    padding: 5px 10px;
+
+
   }
 
   .quantidade {
@@ -682,3 +727,8 @@ onMounted(() => {
   }
 }
 </style>
+
+
+
+
+

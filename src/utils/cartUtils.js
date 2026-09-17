@@ -6,9 +6,51 @@ const mostrarAviso = ref(false)
 const carrinho = ref([])
 const selecionados = ref([])
 
-const carrinhoSalvo = JSON.parse(localStorage.getItem('carrinho') ?? '[]')
+function pegarUsuario() {
+  return JSON.parse(
+    localStorage.getItem('usuarioLogado') || 'null'
+  )
+}
 
-carrinho.value = carrinhoSalvo
+function carregarCarrinho() {
+  const usuario = pegarUsuario()
+
+  if (usuario) {
+    const carrinhos = JSON.parse(
+      localStorage.getItem('carrinhos') || '{}'
+    )
+
+    carrinho.value = carrinhos[usuario.email] || []
+    return
+  }
+
+  const carrinhoVisitante = JSON.parse(localStorage.getItem('carrinho') || '[]')
+  carrinho.value = carrinhoVisitante
+}
+
+function salvarCarrinho() {
+  const usuario = pegarUsuario()
+
+  if (usuario) {
+    const carrinhos = JSON.parse(
+      localStorage.getItem('carrinhos') || '{}'
+    )
+
+    carrinhos[usuario.email] = carrinho.value
+    localStorage.setItem(
+      'carrinhos',
+      JSON.stringify(carrinhos)
+    )
+    return
+  }
+
+  localStorage.setItem(
+    'carrinho',
+    JSON.stringify(carrinho.value)
+  )
+}
+
+carregarCarrinho()
 
 function addCarrinho(idItem) {
   const item = produtos.value.find((p) => p.id === idItem)
@@ -16,14 +58,15 @@ function addCarrinho(idItem) {
   if (item) {
     ultimoProdAdd.value = item.titulo
 
-    const itemExistente = carrinho.value.find((produto) => produto.id === idItem)
+    const itemExistente = carrinho.value.find(
+      (produto) => produto.id === idItem
+    )
 
     if (!itemExistente) {
       carrinho.value.push(item)
     }
 
-    localStorage.setItem('carrinho', JSON.stringify(carrinho.value))
-
+    salvarCarrinho()
     mostrarAviso.value = true
 
     setTimeout(() => {
@@ -33,12 +76,13 @@ function addCarrinho(idItem) {
 }
 
 function removerCarrinho(idItem) {
-  const posicao = carrinho.value.findIndex((item) => item.id === idItem)
+  const posicao = carrinho.value.findIndex(
+    (item) => item.id === idItem
+  )
 
   if (posicao !== -1) {
     carrinho.value.splice(posicao, 1)
-
-    localStorage.setItem('carrinho', JSON.stringify(carrinho.value))
+    salvarCarrinho()
   }
 }
 
@@ -54,7 +98,8 @@ function totalCarrinho() {
 
 function limparCarrinho() {
   carrinho.value = []
-  localStorage.setItem('carrinho', JSON.stringify(carrinho.value))
+  selecionados.value = []
+  salvarCarrinho()
 }
 
 function selecionarProduto(idItem) {
@@ -66,4 +111,6 @@ function selecionarProduto(idItem) {
     selecionados.value.splice(posicao, 1)
   }
 }
-export { ultimoProdAdd, mostrarAviso, carrinho, addCarrinho, removerCarrinho, totalCarrinho, limparCarrinho, selecionarProduto, selecionados}
+
+export { ultimoProdAdd, mostrarAviso, carrinho, addCarrinho, removerCarrinho, totalCarrinho, limparCarrinho, selecionarProduto, selecionados, carregarCarrinho }
+

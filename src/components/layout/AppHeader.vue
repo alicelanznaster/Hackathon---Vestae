@@ -17,6 +17,18 @@ watch(busca, (valor) => {
 function alternarMenu() {
   menuAberto.value = !menuAberto.value
 }
+
+function abrirPerfil() {
+  const usuarioLogado = JSON.parse(localStorage.getItem('usuarioLogado') || 'null')
+
+  if (!usuarioLogado) {
+    localStorage.setItem('voltarDepoisDoLogin', '/perfil')
+    router.push('/login')
+    return
+  }
+
+  router.push('/perfil')
+}
 </script>
 
 <template>
@@ -29,7 +41,6 @@ function alternarMenu() {
       </p>
     </div>
 
-    <!-- header Principal -->
     <div class="header-main">
       <button class="menu-mobile" type="button" @click="alternarMenu">
         <img src="/icons/menu.png" alt="menu" class="icone-menu" />
@@ -48,9 +59,9 @@ function alternarMenu() {
 
       <nav class="acoes">
         <RouterLink to="/anunciar" class="link-vender">Quero vender</RouterLink>
-        <RouterLink to="/perfil" class="icones">
+        <button class="icones" @click="abrirPerfil">
           <img src="/icons/perfil.svg" alt="Perfil" class="icone-perfil" />
-        </RouterLink>
+        </button>
         <RouterLink to="/favoritos" class="icones">
           <img src="/icons/coracao.svg" alt="Favoritos" class="icone-coracao" />
         </RouterLink>

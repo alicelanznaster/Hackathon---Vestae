@@ -5,6 +5,7 @@ import { formataPreco } from '@/utils/currencyUtils'
 import { RouterLink, useRouter } from 'vue-router'
 
 const router = useRouter()
+const emit = defineEmits(['finalizar'])
 const total = computed(() => {
   let valor = 0
 
@@ -27,7 +28,15 @@ function finalizarCompra() {
     return
   }
 
-  router.push('/pagamento')
+  const usuarioLogado = JSON.parse(localStorage.getItem('usuarioLogado') || 'null')
+  emit('finalizar')
+
+  if (usuarioLogado) {
+    router.push('/pagamento')
+  } else {
+    localStorage.setItem('voltarDepoisDoLogin', '/pagamento')
+    router.push('/login')
+  }
 }
 </script>
 

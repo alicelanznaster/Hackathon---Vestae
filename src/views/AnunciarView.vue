@@ -1,97 +1,107 @@
-  <script setup>
-  import { ref } from 'vue'
-  import UploadImg from '@/components/formulario/UploadImg.vue'
-  import DadosForm from '@/components/formulario/DadosForm.vue'
+<script setup>
+import { ref } from 'vue'
+import { useRouter } from 'vue-router'
+import UploadImg from '@/components/formulario/UploadImg.vue'
+import DadosForm from '@/components/formulario/DadosForm.vue'
 
-  const imagem = ref(null)
-  const publicado = ref(false)
+const router = useRouter()
+const anuncioTemporario = JSON.parse(localStorage.getItem('anuncioTemporario') || 'null')
+const imagem = ref(anuncioTemporario ? { preview: anuncioTemporario.imagem } : null)
+const publicado = ref(false)
+const salvarImagem = (dados) => {
+  imagem.value = dados
+}
 
-  const salvarImagem = (dados) => {
-    imagem.value = dados
+const publicar = (produto) => {
+  publicado.value = false
+
+  if (!imagem.value) {
+    alert('Por favor, selecione uma imagem.')
+    return
   }
 
-  const publicar = (produto) => {
-    publicado.value = false
-
-    if (!imagem.value) {
-      alert('Por favor, selecione uma imagem.')
-      return
-    }
-
-    const usuarioLogado = JSON.parse(
-      localStorage.getItem('usuarioLogado') ?? 'null'
-    )
-
-    const anunciosSalvos = JSON.parse(localStorage.getItem('vestae-anuncios') ?? '[]')
-
-    const novoAnuncio = {
-      id: Date.now(),
+  const usuarioLogado = JSON.parse(localStorage.getItem('usuarioLogado') || 'null')
+  if (!usuarioLogado) {
+    const anuncio = {
       ...produto,
       imagem: imagem.value.preview,
-      email: usuarioLogado.email
     }
 
-    anunciosSalvos.push(novoAnuncio)
-
-    localStorage.setItem('vestae-anuncios', JSON.stringify(anunciosSalvos))
-
-    alert('Anúncio publicado! Agradecemos a preferência!')
-
-    publicado.value = true
-    imagem.value = null
+    localStorage.setItem('anuncioTemporario', JSON.stringify(anuncio))
+    localStorage.setItem('voltarDepoisDoLogin', '/anunciar')
+    router.push('/login')
+    return
   }
-  </script>
 
-  <template>
-    <main class="anunciar">
-      <h2>ANUNCIAR</h2>
+  const anunciosSalvos = JSON.parse(localStorage.getItem('vestae-anuncios') || '[]')
+  const novoAnuncio = {
+    id: Date.now(),
+    ...produto,
+    imagem: imagem.value.preview,
+    email: usuarioLogado.email,
+  }
 
-      <UploadImg @imagemSelecionada="salvarImagem" />
-      <DadosForm :publicado="publicado" @enviar="publicar" />
-    </main>
-  </template>
+  anunciosSalvos.push(novoAnuncio)
+  localStorage.setItem('vestae-anuncios', JSON.stringify(anunciosSalvos))
+  localStorage.removeItem('anuncioTemporario')
 
-  <style scoped>
+  alert('Anúncio publicado! Agradecemos a preferência!')
+
+  publicado.value = true
+  imagem.value = null
+}
+</script>
+
+<template>
+  <main class="anunciar">
+    <h2>ANUNCIAR</h2>
+
+    <UploadImg :imagemInicial="imagem ? imagem.preview : ''" @imagemSelecionada="salvarImagem" />
+    <DadosForm :publicado="publicado" @enviar="publicar" />
+  </main>
+</template>
+
+<style scoped>
+.anunciar {
+  max-width: 1200px;
+  margin: 35px auto;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.anunciar h2 {
+  margin: 0;
+  font-size: 40px;
+  color: #000;
+  font-weight: 400;
+  font-family: 'Marcellus', serif;
+}
+
+/*responsivo*/
+
+@media (max-width: 1024px) {
   .anunciar {
-    max-width: 1200px;
-    margin: 35px auto;
-    display: flex;
-    flex-direction: column;
-    gap: 40px;
+    max-width: 900px;
+    gap: 35px;
+    padding: 0 25px;
   }
 
   .anunciar h2 {
-    margin: 0;
-    font-size: 40px;
-    color: #000;
-    font-weight: 400;
-    font-family: 'Marcellus', serif;
+    font-size: 36px;
+  }
+}
+
+@media (max-width: 768px) {
+  .anunciar {
+    width: 100%;
+    padding: 0 18px;
+    gap: 28px;
+    box-sizing: border-box;
   }
 
-  /*responsivo*/
-
-  @media (max-width: 1024px) {
-    .anunciar {
-      max-width: 900px;
-      gap: 35px;
-      padding: 0 25px;
-    }
-
-    .anunciar h2 {
-      font-size: 36px;
-    }
+  .anunciar h2 {
+    font-size: 30px;
   }
-
-  @media (max-width: 768px) {
-    .anunciar {
-      width: 100%;
-      padding: 0 18px;
-      gap: 28px;
-      box-sizing: border-box;
-    }
-
-    .anunciar h2 {
-      font-size: 30px;
-    }
-  }
-  </style>
+}
+</style>

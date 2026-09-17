@@ -255,6 +255,7 @@ function excluirAvaliacao() {
   justify-content: center;
   font-family: 'Marcellus', serif;
   font-size: 22px;
+  flex-shrink: 0;
 }
 
 .acoes {
@@ -412,7 +413,7 @@ function excluirAvaliacao() {
   }
 
   .mobile-cards .card {
-    max-width: 180px;
+    max-width: 270px;
     padding: 18px;
   }
 

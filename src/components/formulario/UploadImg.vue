@@ -1,7 +1,14 @@
 <script setup>
 import { ref } from 'vue'
 
-const imagem = ref('')
+const props = defineProps({
+  imagemInicial: {
+    type: String,
+    default: ''
+  }
+})
+
+const imagem = ref(props.imagemInicial)
 const nomeImagem = ref('')
 const inputFile = ref(null)
 

@@ -1,13 +1,26 @@
 <script setup>
-import { computed } from 'vue'
+import { computed, ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { produtos } from '@/data/product'
 import { addCarrinho, mostrarAviso } from '@/utils/cartUtils'
 import { formataPreco } from '@/utils/currencyUtils'
 import { favoritarProduto } from '@/utils/favoritesUtils'
+import UploadImg from '../formulario/UploadImg.vue'
 
 const route = useRoute()
 const router = useRouter()
+
+const editando = ref(false)
+
+const tituloEditado = ref('')
+const descricaoEditada = ref('')
+const condicaoEditada = ref('')
+const categoriaEditada = ref('')
+const marcaEditada = ref('')
+const tamanhoEditado = ref('')
+const statusEditado = ref('')
+const precoEditado = ref('')
+const imagemEditada = ref('')
 
 const voltarPagina = () => {
   if (window.history.state && window.history.state.back) {
@@ -19,17 +32,27 @@ const voltarPagina = () => {
 
 // procura primeiro nos produtos fixos e depois nos anunciados pelo usuario
 const produto = computed(() => {
-  const produtoFixo = produtos.value.find((p) => p.id === Number(route.params.id))
+  const produtoFixo = produtos.value.find(
+    (p) => p.id === Number(route.params.id)
+  )
 
-  if (produtoFixo) return produtoFixo
+  if (produtoFixo) {
+    return produtoFixo
+  }
 
-  const anuncios = JSON.parse(localStorage.getItem('vestae-anuncios') || '[]')
+  const anuncios = JSON.parse(
+    localStorage.getItem('vestae-anuncios') || '[]'
+  )
 
-  return anuncios.find((p) => p.id === Number(route.params.id))
+  return anuncios.find(
+    (p) => p.id === Number(route.params.id)
+  )
 })
 
 // faz o botão de add a sacola aparecer só para produtos que não foram publicados pelo usuário logado
-const usuarioLogado = JSON.parse(localStorage.getItem('usuarioLogado') || 'null')
+const usuarioLogado = JSON.parse(
+  localStorage.getItem('usuarioLogado') || 'null'
+)
 
 const meuProduto = computed(() => {
   if (!usuarioLogado || !produto.value) {
@@ -39,76 +62,342 @@ const meuProduto = computed(() => {
   return produto.value.email === usuarioLogado.email
 })
 
+function editarAnuncio() {
+  tituloEditado.value = produto.value.titulo
+  descricaoEditada.value = produto.value.descricao
+  condicaoEditada.value = produto.value.condicao
+  categoriaEditada.value = produto.value.categoria
+  marcaEditada.value = produto.value.marca
+  tamanhoEditado.value = produto.value.tamanho
+  statusEditado.value = produto.value.status
+  precoEditado.value = produto.value.preco
+  imagemEditada.value = produto.value.imagem
+
+  editando.value = true
+}
+
+function salvarAlteracoes() {
+  const anuncios = JSON.parse(
+    localStorage.getItem('vestae-anuncios') || '[]'
+  )
+
+  const anuncio = anuncios.find(
+    (p) => p.id === Number(route.params.id)
+  )
+
+  anuncio.titulo = tituloEditado.value.trim()
+  anuncio.descricao = descricaoEditada.value.trim()
+  anuncio.condicao = condicaoEditada.value
+  anuncio.categoria = categoriaEditada.value
+  anuncio.marca = marcaEditada.value.trim()
+  anuncio.tamanho = tamanhoEditado.value.trim()
+  anuncio.status = statusEditado.value
+  anuncio.preco = Number(precoEditado.value)
+  anuncio.imagem = imagemEditada.value
+
+  localStorage.setItem(
+    'vestae-anuncios',
+    JSON.stringify(anuncios)
+  )
+
+  editando.value = false
+
+  alert('Anúncio atualizado com sucesso!')
+}
+
+function excluirAnuncio() {
+  const confirmar = confirm(
+    'Tem certeza que deseja excluir este anúncio?'
+  )
+
+  if (!confirmar) {
+    return
+  }
+
+  const anuncios = JSON.parse(
+    localStorage.getItem('vestae-anuncios') || '[]'
+  )
+
+  const novosAnuncios = anuncios.filter(
+    (p) => p.id !== Number(route.params.id)
+  )
+
+  localStorage.setItem(
+    'vestae-anuncios',
+    JSON.stringify(novosAnuncios)
+  )
+
+  alert('Anúncio excluído com sucesso!')
+
+  router.push('/produtos')
+}
+
+function alterarImagem(dados) {
+  imagemEditada.value = dados.preview
+}
+
+function limitarPreco() {
+  if (precoEditado.value > 1000) {
+    precoEditado.value = 1000
+  }
+
+  if (precoEditado.value < 0) {
+    precoEditado.value = 0
+  }
+}
 </script>
 
 <template>
-  <div v-if="mostrarAviso" class="aviso">"{{ produto.titulo }}" adicionado(a) à sacola!</div>
+  <div class="pagina">
 
-  <div v-if="produto" class="pagina">
+    <div v-if="mostrarAviso" class="aviso">
+      <p>{{ produto.titulo }} adicionado(a) à sacola!</p>
+    </div>
+
     <button class="voltar" @click="voltarPagina">
-      <img src="/voltar.svg" alt="botão voltar" />
+      <img src="/voltar.svg" alt="Voltar" />
     </button>
 
-    <div class="detalhe">
-      <div class="detalhe-img">
-        <img :src="produto.imagem" :alt="produto.titulo" class="imagem-produto" />
-        <button class="favoritar" @click="favoritarProduto(produto)">
-          <img
-            :src="produto.favorito ? '/icons/coracao-preenchido.svg' : '/icons/coracao.svg'"
-            alt="Favoritar"
+    <div v-if="produto" class="detalhe">
+
+      <!-- EDIÇÃO -->
+      <div v-if="editando" class="dados formulario-edicao">
+
+        <h1>Editar anúncio</h1>
+
+        <UploadImg
+          :imagemInicial="imagemEditada"
+          @imagemSelecionada="alterarImagem"
+        />
+
+        <div class="campo">
+          <label>Descrição</label>
+
+          <textarea
+            v-model="descricaoEditada"
+            placeholder="Descreva seu produto..."
+            required
+          ></textarea>
+        </div>
+
+        <div class="informacoes-edicao">
+
+          <h2>Informações</h2>
+
+          <div class="campos">
+
+            <input
+              v-model="tituloEditado"
+              type="text"
+              placeholder="Título*"
+              required
+            />
+
+            <select
+              v-model="categoriaEditada"
+              required
+            >
+              <option disabled value="">
+                Categoria*
+              </option>
+
+              <option>Masculino</option>
+              <option>Feminino</option>
+              <option>Calçado</option>
+              <option>Acessório</option>
+            </select>
+
+            <input
+              v-model="tamanhoEditado"
+              type="text"
+              placeholder="Tamanho*"
+              required
+            />
+
+            <select
+              v-model="condicaoEditada"
+              required
+            >
+              <option disabled value="">
+                Condição*
+              </option>
+
+              <option>Novo</option>
+              <option>Usado</option>
+            </select>
+
+            <input
+              v-model="marcaEditada"
+              type="text"
+              placeholder="Marca"
+            />
+
+            <select
+              v-model="statusEditado"
+              required
+            >
+              <option disabled value="">
+                Status*
+              </option>
+
+              <option>Disponível</option>
+            </select>
+
+          </div>
+        </div>
+
+        <div class="campo preco-edicao">
+
+          <label>Preço</label>
+
+          <input
+            v-model="precoEditado"
+            type="number"
+            placeholder="Preço*"
+            min="0"
+            max="1000"
+            @input="limitarPreco"
+            required
           />
-        </button>
-      </div>
 
-      <div class="dados">
-        <h1>{{ produto.titulo }}</h1>
-
-        <p class="preco">
-          {{ formataPreco(produto.preco) }}
-        </p>
-
-        <button v-if="!meuProduto" class="carrinho" @click="addCarrinho(produto.id)">
-          Adicionar à Sacola
-        </button>
-
-        <div class="protegido">
-          <img src="/icons/protegida.svg" alt="icon-prot" />
-          <p>Compra protegida pelo Vestæ</p>
         </div>
 
-        <h3>Descrição:</h3>
+        <div class="botoes-edicao">
 
-        <p class="descricao">
-          {{ produto.descricao }}
-        </p>
+          <button @click="salvarAlteracoes">
+            SALVAR ALTERAÇÕES
+          </button>
 
-        <div class="informacoes">
-          <div class="info">
-            <span>{{ produto.tamanho || '-' }}</span>
-          </div>
+          <button @click="editando = false">
+            CANCELAR
+          </button>
 
-          <div class="info">
-            <span>{{ produto.categoria }}</span>
-          </div>
-
-          <div class="info">
-            <span>{{ produto.status }}</span>
-          </div>
-
-          <div class="info">
-            <span>{{ produto.condicao }}</span>
-          </div>
-          <div class="info">
-            <span>{{ produto.marca || '-' }}</span>
-          </div>
         </div>
+
       </div>
+
+      <!-- VISUALIZAÇÃO NORMAL -->
+      <template v-else>
+
+        <div class="detalhe-img">
+
+          <img
+            :src="produto.imagem"
+            :alt="produto.titulo"
+            class="imagem-produto"
+          />
+
+          <button class="!editando" @click="favoritarProduto(produto)">
+            <img src="/icons/coracao.svg" alt="Favoritar" />
+          </button>
+        </div>
+
+        <div class="dados">
+
+          <h1>{{ produto.titulo }}</h1>
+
+          <p class="preco">
+            {{ formataPreco(produto.preco) }}
+          </p>
+
+          <button v-if="!meuProduto" class="carrinho" @click="addCarrinho(produto.id)">
+            ADICIONAR À SACOLA
+          </button>
+
+          <div
+            v-else
+            class="acoes-anuncio"
+          >
+
+            <button
+              class="editar"
+              @click="editarAnuncio"
+            >
+              <img
+                src="/editar.svg"
+                alt="Editar"
+              />
+              EDITAR
+            </button>
+
+            <button
+              class="excluir"
+              @click="excluirAnuncio"
+            >
+              <img
+                src="/icons/lixeira-branca.svg"
+                alt=""
+              />
+              EXCLUIR
+            </button>
+
+          </div>
+
+          <div class="protegido">
+
+            <img
+              src="/icons/protegida.svg"
+              alt="Compra protegida"
+            />
+
+            <span>Compra protegida</span>
+
+          </div>
+
+          <h3>Descrição</h3>
+
+          <p class="descricao">
+            {{ produto.descricao }}
+          </p>
+
+          <div class="informacoes">
+
+            <span class="info">
+              {{ produto.condicao }}
+            </span>
+
+            <span class="info">
+              {{ produto.categoria }}
+            </span>
+
+            <span class="info">
+              {{ produto.marca }}
+            </span>
+
+            <span
+              v-if="produto.tamanho"
+              class="info"
+            >
+              {{ produto.tamanho }}
+            </span>
+
+            <span
+              v-if="produto.status"
+              class="info"
+            >
+              {{ produto.status }}
+            </span>
+
+          </div>
+
+        </div>
+
+      </template>
+
     </div>
+
+    <div
+      v-else
+      class="nao-encontrado"
+    >
+      <p>Produto não encontrado.</p>
+    </div>
+
   </div>
-  <p v-else class="nao-encontrado">Produto não encontrado.</p>
 </template>
 
 <style scoped>
+
 .aviso {
   position: fixed;
   top: 50%;
@@ -230,6 +519,47 @@ const meuProduto = computed(() => {
   background-color: #a00851e0;
 }
 
+.acoes-anuncio {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.acoes-anuncio button {
+  padding: 12px 15px;
+  border: none;
+  border-radius: 10px;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  font-family: 'Marcellus', serif;
+  transition: 0.2s;
+  background-color: #c40c6c;
+}
+
+.acoes-anuncio button:hover {
+  opacity: 0.85;
+}
+
+.editar {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  align-items: center;
+}
+
+.editar img {
+  width: 18px;
+  height: 18px;
+}
+
+.excluir {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+}
+
 .protegido {
   display: flex;
   align-items: center;
@@ -281,7 +611,117 @@ const meuProduto = computed(() => {
   font-size: 1.2rem;
 }
 
+/* FORMULÁRIO DE EDIÇÃO */
+
+.formulario-edicao {
+  gap: 40px;
+  width: 100%;
+  max-width: 900px;
+}
+
+.formulario-edicao h1 {
+  font-size: 40px;
+  font-weight: 400;
+  color: #000;
+  margin: 0 0 10px;
+  font-family: 'Marcellus', serif;
+}
+
+.formulario-edicao label {
+  display: block;
+  margin-bottom: 15px;
+  font-size: 22px;
+  color: #000;
+  font-family: 'Marcellus', serif;
+}
+
+.formulario-edicao textarea {
+  width: 100%;
+  max-width: 700px;
+  height: 140px;
+  padding: 18px;
+  border: none;
+  border-radius: 18px;
+  resize: none;
+  background: white;
+  font-size: 15px;
+  box-sizing: border-box;
+  outline: none;
+}
+
+.informacoes-edicao h2 {
+  margin: 0 0 18px;
+  font-size: 22px;
+  font-weight: 400;
+  color: #000;
+}
+
+.campos {
+  display: grid;
+  grid-template-columns: repeat(3, 260px);
+  gap: 15px;
+  justify-content: start;
+}
+
+.campos input,
+.campos select {
+  width: 100%;
+  padding: 20px;
+  border: none;
+  border-radius: 14px;
+  background: white;
+  font-size: 14px;
+  box-sizing: border-box;
+  outline: none;
+}
+
+.campos select {
+  cursor: pointer;
+  color: #6d6b6c;
+}
+
+.campos select:valid {
+  color: #000000;
+}
+
+.preco-edicao input {
+  width: 220px;
+  padding: 15px;
+  border: none;
+  border-radius: 14px;
+  background: white;
+  font-size: 14px;
+  outline: none;
+  box-sizing: border-box;
+}
+
+.botoes-edicao {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+}
+
+.botoes-edicao button {
+  width: 240px;
+  padding: 18px;
+  border: none;
+  border-radius: 14px;
+  background: #c40c6c;
+  color: white;
+  font-size: 20px;
+  cursor: pointer;
+  transition: 0.2s;
+  font-family: 'Marcellus', serif;
+}
+
+.botoes-edicao button:hover {
+  opacity: 0.9;
+}
+
+/* RESPONSIVO */
+
 @media (max-width: 1024px) and (min-width: 769px) {
+
   .pagina {
     padding: 20px 30px 40px;
     min-height: 85vh;
@@ -322,9 +762,17 @@ const meuProduto = computed(() => {
     font-size: 1.15rem;
     white-space: nowrap;
   }
+
+  .campos {
+    grid-template-columns: repeat(3, 1fr);
+    width: 100%;
+    max-width: 820px;
+  }
+
 }
 
 @media (max-width: 768px) {
+
   .pagina {
     padding: 10px 20px 40px;
     min-height: 100vh;
@@ -383,6 +831,14 @@ const meuProduto = computed(() => {
     margin: 5px 0 15px;
   }
 
+  .acoes-anuncio {
+    width: 100%;
+  }
+
+  .acoes-anuncio button {
+    width: 100%;
+  }
+
   .carrinho {
     width: 100%;
     padding: 14px;
@@ -422,9 +878,61 @@ const meuProduto = computed(() => {
     font-size: 16px;
     box-sizing: border-box;
   }
+
+  /* edição */
+
+  .formulario-edicao {
+    width: 100%;
+    gap: 28px;
+  }
+
+  .formulario-edicao h1 {
+    font-size: 30px;
+  }
+
+  .formulario-edicao label {
+    font-size: 20px;
+  }
+
+  .formulario-edicao textarea {
+    width: 100%;
+    max-width: 100%;
+    height: 130px;
+  }
+
+  .campos {
+    grid-template-columns: 1fr;
+    width: 100%;
+    gap: 14px;
+  }
+
+  .campos input,
+  .campos select {
+    width: 100%;
+    padding: 18px;
+  }
+
+  .preco-edicao input {
+    width: 100%;
+    padding: 18px;
+  }
+
+  .botoes-edicao {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .botoes-edicao button {
+    width: 100%;
+    max-width: none;
+    padding: 18px;
+    font-size: 19px;
+  }
+
 }
 
 @media (max-width: 400px) {
+
   .pagina {
     padding-left: 15px;
     padding-right: 15px;
@@ -455,5 +963,41 @@ const meuProduto = computed(() => {
     width: 88%;
     font-size: 15px;
   }
+
+  .formulario-edicao {
+    gap: 20px;
+  }
+
+  .formulario-edicao h1 {
+    font-size: 26px;
+  }
+
+  .formulario-edicao label {
+    font-size: 18px;
+  }
+
+  .formulario-edicao textarea {
+    height: 120px;
+  }
+
+  .campos {
+    gap: 10px;
+  }
+
+  .campos input,
+  .campos select {
+    padding: 15px;
+  }
+
+  .preco-edicao input {
+    padding: 15px;
+  }
+
+  .botoes-edicao button {
+    padding: 15px;
+    font-size: 17px;
+  }
+
 }
+
 </style>

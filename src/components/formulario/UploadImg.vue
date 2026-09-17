@@ -15,7 +15,7 @@ const inputFile = ref(null)
 const emit = defineEmits(['imagemSelecionada'])
 
 function selecionarArquivo(evento) {
-  const arquivo = evento.target.files?.[0]
+  const arquivo = evento.target.files[0]
 
   if (!arquivo) return
 

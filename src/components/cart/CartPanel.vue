@@ -24,7 +24,7 @@ function fecharSacola() {
       <div v-if="carrinho.length > 0">
         <CartItem v-for="item in carrinho" :key="item.id" :item="item" />
 
-        <CartSummary />
+        <CartSummary @finalizar="fecharSacola" />
       </div>
 
       <div v-else class="vazio">

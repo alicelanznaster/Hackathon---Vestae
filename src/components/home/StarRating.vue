@@ -42,5 +42,6 @@ const nota = defineModel({
 
 .estrelas-input span {
   margin-left: 8px;
+  color: black;
 }
 </style>

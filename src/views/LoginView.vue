@@ -34,7 +34,14 @@ function entrar() {
 
   alert('Login realizado com sucesso!')
 
-  router.push('/')
+  const voltar = localStorage.getItem('voltarDepoisDoLogin')
+
+  if (voltar) {
+    localStorage.removeItem('voltarDepoisDoLogin')
+    router.push(voltar)
+  } else {
+    router.push('/')
+  }
 }
 </script>
 

@@ -32,27 +32,19 @@ const voltarPagina = () => {
 
 // procura primeiro nos produtos fixos e depois nos anunciados pelo usuario
 const produto = computed(() => {
-  const produtoFixo = produtos.value.find(
-    (p) => p.id === Number(route.params.id)
-  )
+  const produtoFixo = produtos.value.find((p) => p.id === Number(route.params.id))
 
   if (produtoFixo) {
     return produtoFixo
   }
 
-  const anuncios = JSON.parse(
-    localStorage.getItem('vestae-anuncios') || '[]'
-  )
+  const anuncios = JSON.parse(localStorage.getItem('vestae-anuncios') || '[]')
 
-  return anuncios.find(
-    (p) => p.id === Number(route.params.id)
-  )
+  return anuncios.find((p) => p.id === Number(route.params.id))
 })
 
 // faz o botão de add a sacola aparecer só para produtos que não foram publicados pelo usuário logado
-const usuarioLogado = JSON.parse(
-  localStorage.getItem('usuarioLogado') || 'null'
-)
+const usuarioLogado = JSON.parse(localStorage.getItem('usuarioLogado') || 'null')
 
 const meuProduto = computed(() => {
   if (!usuarioLogado || !produto.value) {
@@ -77,13 +69,9 @@ function editarAnuncio() {
 }
 
 function salvarAlteracoes() {
-  const anuncios = JSON.parse(
-    localStorage.getItem('vestae-anuncios') || '[]'
-  )
+  const anuncios = JSON.parse(localStorage.getItem('vestae-anuncios') || '[]')
 
-  const anuncio = anuncios.find(
-    (p) => p.id === Number(route.params.id)
-  )
+  const anuncio = anuncios.find((p) => p.id === Number(route.params.id))
 
   anuncio.titulo = tituloEditado.value.trim()
   anuncio.descricao = descricaoEditada.value.trim()
@@ -95,10 +83,7 @@ function salvarAlteracoes() {
   anuncio.preco = Number(precoEditado.value)
   anuncio.imagem = imagemEditada.value
 
-  localStorage.setItem(
-    'vestae-anuncios',
-    JSON.stringify(anuncios)
-  )
+  localStorage.setItem('vestae-anuncios', JSON.stringify(anuncios))
 
   editando.value = false
 
@@ -106,26 +91,17 @@ function salvarAlteracoes() {
 }
 
 function excluirAnuncio() {
-  const confirmar = confirm(
-    'Tem certeza que deseja excluir este anúncio?'
-  )
+  const confirmar = confirm('Tem certeza que deseja excluir este anúncio?')
 
   if (!confirmar) {
     return
   }
 
-  const anuncios = JSON.parse(
-    localStorage.getItem('vestae-anuncios') || '[]'
-  )
+  const anuncios = JSON.parse(localStorage.getItem('vestae-anuncios') || '[]')
 
-  const novosAnuncios = anuncios.filter(
-    (p) => p.id !== Number(route.params.id)
-  )
+  const novosAnuncios = anuncios.filter((p) => p.id !== Number(route.params.id))
 
-  localStorage.setItem(
-    'vestae-anuncios',
-    JSON.stringify(novosAnuncios)
-  )
+  localStorage.setItem('vestae-anuncios', JSON.stringify(novosAnuncios))
 
   alert('Anúncio excluído com sucesso!')
 
@@ -149,7 +125,6 @@ function limitarPreco() {
 
 <template>
   <div class="pagina">
-
     <div v-if="mostrarAviso" class="aviso">
       <p>{{ produto.titulo }} adicionado(a) à sacola!</p>
     </div>
@@ -159,16 +134,11 @@ function limitarPreco() {
     </button>
 
     <div v-if="produto" class="detalhe">
-
       <!-- EDIÇÃO -->
       <div v-if="editando" class="dados formulario-edicao">
-
         <h1>Editar anúncio</h1>
 
-        <UploadImg
-          :imagemInicial="imagemEditada"
-          @imagemSelecionada="alterarImagem"
-        />
+        <UploadImg :imagemInicial="imagemEditada" @imagemSelecionada="alterarImagem" />
 
         <div class="campo">
           <label>Descrição</label>
@@ -181,25 +151,13 @@ function limitarPreco() {
         </div>
 
         <div class="informacoes-edicao">
-
           <h2>Informações</h2>
 
           <div class="campos">
+            <input v-model="tituloEditado" type="text" placeholder="Título*" required />
 
-            <input
-              v-model="tituloEditado"
-              type="text"
-              placeholder="Título*"
-              required
-            />
-
-            <select
-              v-model="categoriaEditada"
-              required
-            >
-              <option disabled value="">
-                Categoria*
-              </option>
+            <select v-model="categoriaEditada" required>
+              <option disabled value="">Categoria*</option>
 
               <option>Masculino</option>
               <option>Feminino</option>
@@ -207,47 +165,26 @@ function limitarPreco() {
               <option>Acessório</option>
             </select>
 
-            <input
-              v-model="tamanhoEditado"
-              type="text"
-              placeholder="Tamanho*"
-              required
-            />
+            <input v-model="tamanhoEditado" type="text" placeholder="Tamanho*" required />
 
-            <select
-              v-model="condicaoEditada"
-              required
-            >
-              <option disabled value="">
-                Condição*
-              </option>
+            <select v-model="condicaoEditada" required>
+              <option disabled value="">Condição*</option>
 
               <option>Novo</option>
               <option>Usado</option>
             </select>
 
-            <input
-              v-model="marcaEditada"
-              type="text"
-              placeholder="Marca"
-            />
+            <input v-model="marcaEditada" type="text" placeholder="Marca" />
 
-            <select
-              v-model="statusEditado"
-              required
-            >
-              <option disabled value="">
-                Status*
-              </option>
+            <select v-model="statusEditado" required>
+              <option disabled value="">Status*</option>
 
               <option>Disponível</option>
             </select>
-
           </div>
         </div>
 
         <div class="campo preco-edicao">
-
           <label>Preço</label>
 
           <input
@@ -259,41 +196,28 @@ function limitarPreco() {
             @input="limitarPreco"
             required
           />
-
         </div>
 
         <div class="botoes-edicao">
+          <button @click="salvarAlteracoes">SALVAR ALTERAÇÕES</button>
 
-          <button @click="salvarAlteracoes">
-            SALVAR ALTERAÇÕES
-          </button>
-
-          <button @click="editando = false">
-            CANCELAR
-          </button>
-
+          <button @click="editando = false">CANCELAR</button>
         </div>
-
       </div>
 
       <!-- VISUALIZAÇÃO NORMAL -->
       <template v-else>
-
         <div class="detalhe-img">
+          <img :src="produto.imagem" :alt="produto.titulo" class="imagem-produto" />
 
-          <img
-            :src="produto.imagem"
-            :alt="produto.titulo"
-            class="imagem-produto"
-          />
+          <button class="favoritar" @click="favoritarProduto(produto)">
+            <img v-if="produto.favorito" src="/icons/coracao-preenchido.svg" alt="Desfavoritar" />
 
-          <button class="!editando" @click="favoritarProduto(produto)">
-            <img src="/icons/coracao.svg" alt="Favoritar" />
+            <img v-else src="/icons/coracao.svg" alt="Favoritar" />
           </button>
         </div>
 
         <div class="dados">
-
           <h1>{{ produto.titulo }}</h1>
 
           <p class="preco">
@@ -304,44 +228,22 @@ function limitarPreco() {
             ADICIONAR À SACOLA
           </button>
 
-          <div
-            v-else
-            class="acoes-anuncio"
-          >
-
-            <button
-              class="editar"
-              @click="editarAnuncio"
-            >
-              <img
-                src="/editar.svg"
-                alt="Editar"
-              />
+          <div v-else class="acoes-anuncio">
+            <button class="editar" @click="editarAnuncio">
+              <img src="/editar.svg" alt="Editar" />
               EDITAR
             </button>
 
-            <button
-              class="excluir"
-              @click="excluirAnuncio"
-            >
-              <img
-                src="/icons/lixeira-branca.svg"
-                alt=""
-              />
+            <button class="excluir" @click="excluirAnuncio">
+              <img src="/icons/lixeira-branca.svg" alt="" />
               EXCLUIR
             </button>
-
           </div>
 
           <div class="protegido">
-
-            <img
-              src="/icons/protegida.svg"
-              alt="Compra protegida"
-            />
+            <img src="/icons/protegida.svg" alt="Compra protegida" />
 
             <span>Compra protegida</span>
-
           </div>
 
           <h3>Descrição</h3>
@@ -351,7 +253,6 @@ function limitarPreco() {
           </p>
 
           <div class="informacoes">
-
             <span class="info">
               {{ produto.condicao }}
             </span>
@@ -364,40 +265,25 @@ function limitarPreco() {
               {{ produto.marca }}
             </span>
 
-            <span
-              v-if="produto.tamanho"
-              class="info"
-            >
+            <span v-if="produto.tamanho" class="info">
               {{ produto.tamanho }}
             </span>
 
-            <span
-              v-if="produto.status"
-              class="info"
-            >
+            <span v-if="produto.status" class="info">
               {{ produto.status }}
             </span>
-
           </div>
-
         </div>
-
       </template>
-
     </div>
 
-    <div
-      v-else
-      class="nao-encontrado"
-    >
+    <div v-else class="nao-encontrado">
       <p>Produto não encontrado.</p>
     </div>
-
   </div>
 </template>
 
 <style scoped>
-
 .aviso {
   position: fixed;
   top: 50%;
@@ -721,7 +607,6 @@ function limitarPreco() {
 /* RESPONSIVO */
 
 @media (max-width: 1024px) and (min-width: 769px) {
-
   .pagina {
     padding: 20px 30px 40px;
     min-height: 85vh;
@@ -768,11 +653,9 @@ function limitarPreco() {
     width: 100%;
     max-width: 820px;
   }
-
 }
 
 @media (max-width: 768px) {
-
   .pagina {
     padding: 10px 20px 40px;
     min-height: 100vh;
@@ -928,11 +811,9 @@ function limitarPreco() {
     padding: 18px;
     font-size: 19px;
   }
-
 }
 
 @media (max-width: 400px) {
-
   .pagina {
     padding-left: 15px;
     padding-right: 15px;
@@ -997,7 +878,5 @@ function limitarPreco() {
     padding: 15px;
     font-size: 17px;
   }
-
 }
-
 </style>

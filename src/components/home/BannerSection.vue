@@ -41,6 +41,14 @@ const modules = [Navigation, Pagination, Autoplay]
         <img src="/banner/banner3.png" alt="Banner 3" />
       </picture>
     </SwiperSlide>
+
+    <SwiperSlide>
+      <picture>
+        <source media="(max-width: 767px)" srcset="/banner/4.png" />
+
+        <img src="/banner/banner4.png" alt="Banner 4" />
+      </picture>
+    </SwiperSlide>
   </Swiper>
 </template>
 

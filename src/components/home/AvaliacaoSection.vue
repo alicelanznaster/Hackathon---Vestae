@@ -1,17 +1,24 @@
 <script setup>
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
-
 import { Swiper, SwiperSlide } from 'swiper/vue'
 import { Navigation, Pagination } from 'swiper/modules'
-
 import 'swiper/css'
 import 'swiper/css/navigation'
 import 'swiper/css/pagination'
 
 const router = useRouter()
+const usuarioLogado = JSON.parse(localStorage.getItem('usuarioLogado') || 'null')
 const avaliacaoSalva = localStorage.getItem('vestae-avaliacao')
-const avaliacaoUsuario = ref(avaliacaoSalva ? JSON.parse(avaliacaoSalva) : null)
+const avaliacaoUsuario = ref(null)
+
+if (usuarioLogado && avaliacaoSalva) {
+  const avaliacao = JSON.parse(avaliacaoSalva)
+
+  if (avaliacao.email === usuarioLogado.email) {
+    avaliacaoUsuario.value = avaliacao
+  }
+}
 
 const avaliacoes = [
   {
@@ -33,6 +40,14 @@ const avaliacoes = [
 ]
 
 function avaliar() {
+  const usuarioLogado = JSON.parse(localStorage.getItem('usuarioLogado') || 'null')
+
+  if (!usuarioLogado) {
+    localStorage.setItem('voltarDepoisDoLogin', '/avaliacao')
+    router.push('/login')
+    return
+  }
+
   router.push('/avaliacao')
 }
 
@@ -43,6 +58,18 @@ function editarAvaliacao() {
 function excluirAvaliacao() {
   localStorage.removeItem('vestae-avaliacao')
   avaliacaoUsuario.value = null
+}
+
+function fotoAvaliacao() {
+  if (!avaliacaoUsuario.value) {
+    return ''
+  }
+
+  if (!avaliacaoUsuario.value.email) {
+    return ''
+  }
+
+  return localStorage.getItem(`vestae-foto-${avaliacaoUsuario.value.email}`)
 }
 </script>
 
@@ -58,7 +85,6 @@ function excluirAvaliacao() {
 
           <div>
             <h3>{{ avaliacao.nome }}</h3>
-
             <p class="estrelas">⭐⭐⭐⭐⭐</p>
           </div>
         </div>
@@ -70,7 +96,8 @@ function excluirAvaliacao() {
 
       <div v-if="avaliacaoUsuario" class="card">
         <div class="perfil">
-          <div class="avatar">
+          <img v-if="fotoAvaliacao()" :src="fotoAvaliacao()" :alt="avaliacaoUsuario.nome" />
+          <div v-else class="avatar">
             {{ avaliacaoUsuario.nome.charAt(0).toUpperCase() }}
           </div>
 
@@ -89,7 +116,6 @@ function excluirAvaliacao() {
 
         <div class="acoes">
           <button @click="editarAvaliacao">Editar</button>
-
           <button @click="excluirAvaliacao">Excluir</button>
         </div>
       </div>
@@ -127,7 +153,8 @@ function excluirAvaliacao() {
       <SwiperSlide v-if="avaliacaoUsuario">
         <div class="card">
           <div class="perfil">
-            <div class="avatar">
+            <img v-if="fotoAvaliacao()" :src="fotoAvaliacao()" :alt="avaliacaoUsuario.nome" />
+            <div v-else class="avatar">
               {{ avaliacaoUsuario.nome.charAt(0).toUpperCase() }}
             </div>
 
@@ -146,7 +173,6 @@ function excluirAvaliacao() {
 
           <div class="acoes">
             <button @click="editarAvaliacao">Editar</button>
-
             <button @click="excluirAvaliacao">Excluir</button>
           </div>
         </div>
@@ -155,7 +181,6 @@ function excluirAvaliacao() {
 
     <div v-if="!avaliacaoUsuario" class="avaliar-container">
       <p>Ainda não avaliou o VESTÆ?</p>
-
       <button @click="avaliar">AVALIE AGORA</button>
     </div>
   </section>
@@ -273,7 +298,7 @@ function excluirAvaliacao() {
   color: white;
   padding: 5px 10px;
   border-radius: 10px;
-  font-family: "Marcellus", serif;
+  font-family: 'Marcellus', serif;
   font-size: 15px;
 }
 

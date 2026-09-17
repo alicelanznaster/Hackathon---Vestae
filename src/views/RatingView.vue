@@ -4,20 +4,32 @@ import { useRouter } from 'vue-router'
 import StarRating from '@/components/home/StarRating.vue'
 
 const router = useRouter()
-
 const nome = ref('')
 const comentario = ref('')
 const nota = ref(0)
 const erro = ref('')
-
 const avaliacaoSalva = localStorage.getItem('vestae-avaliacao')
+const usuarioLogado = JSON.parse(localStorage.getItem('usuarioLogado') || 'null')
+
+if (!usuarioLogado) {
+  router.push('/login')
+}
 
 if (avaliacaoSalva) {
   const avaliacao = JSON.parse(avaliacaoSalva)
-
   nome.value = avaliacao.nome
   comentario.value = avaliacao.comentario
   nota.value = avaliacao.score
+}
+
+const avaliacaoTemporaria = localStorage.getItem('avaliacaoTemporaria')
+
+if (avaliacaoTemporaria) {
+  const avaliacao = JSON.parse(avaliacaoTemporaria)
+  nome.value = avaliacao.nome
+  comentario.value = avaliacao.comentario
+  nota.value = avaliacao.score
+  localStorage.removeItem('avaliacaoTemporaria')
 }
 
 function validar() {
@@ -35,20 +47,32 @@ function validar() {
 }
 
 function enviarAvaliacao() {
+  const usuarioLogado = JSON.parse(localStorage.getItem('usuarioLogado') || 'null')
+
+  if (!usuarioLogado) {
+    const avaliacao = {
+      nome: nome.value,
+      comentario: comentario.value,
+      score: nota.value,
+    }
+
+    localStorage.setItem('avaliacaoTemporaria', JSON.stringify(avaliacao))
+    localStorage.setItem('voltarDepoisDoLogin', '/avaliacao')
+    router.push('/login')
+    return
+  }
+
   if (!validar()) return
-
   erro.value = ''
-
   const avaliacao = {
     nome: nome.value.trim(),
     comentario: comentario.value.trim(),
     score: nota.value,
+    email: usuarioLogado.email,
   }
 
   localStorage.setItem('vestae-avaliacao', JSON.stringify(avaliacao))
-
   alert('Obrigada por avaliar o VESTÆ! Sua opinião é muito importante para nós.')
-
   router.push('/')
 }
 </script>

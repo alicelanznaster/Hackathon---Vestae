@@ -1,10 +1,18 @@
 <script setup>
-import produtos from '@/data/product'
+import { computed } from 'vue'  
 import ProductCard from '@/components/products/ProductCard.vue'
-import { computed } from 'vue'
+import produtos from '@/data/product'
 
+const usuarioLogado = JSON.parse(localStorage.getItem('usuarioLogado') || 'null')
+const favoritosSalvos = JSON.parse(localStorage.getItem('favoritos') || '{}')
 const favoritos = computed(() => {
-  return produtos.value.filter((produto) => produto.favorito)
+  if (!usuarioLogado) {
+    return []
+  }
+
+  const idsFavoritos = favoritosSalvos[usuarioLogado.email] || []
+
+  return produtos.value.filter((produto) => idsFavoritos.includes(produto.id))
 })
 </script>
 

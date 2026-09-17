@@ -1,12 +1,13 @@
+```vue
 <script setup>
 import { ref } from 'vue'
 import { RouterLink, useRouter } from 'vue-router'
+import { carregarFavoritos } from '@/utils/favoritesUtils'
+import { carregarCarrinho } from '@/utils/cartUtils'
 
 let email = ref('')
 let senha = ref('')
-
 let mostrarSenha = ref(false)
-
 const router = useRouter()
 
 function entrar() {
@@ -15,27 +16,39 @@ function entrar() {
     return
   }
 
-  // pega os usuários já cadastrados
   const usuarios = JSON.parse(localStorage.getItem('usuarios') ?? '[]')
-
-  // procura um usuário com o e-mail e a senha
   const usuario = usuarios.find(
     (usuario) => usuario.email === email.value.toLowerCase() && usuario.senha === senha.value,
   )
 
-  // se não encontrou
   if (!usuario) {
     alert('E-mail ou senha incorretos!')
     return
   }
 
-  // salva o usuário que está logado
   localStorage.setItem('usuarioLogado', JSON.stringify(usuario))
+  const produtoParaFavoritar = localStorage.getItem('produtoParaFavoritar')
+
+  if (produtoParaFavoritar) {
+    const id = Number(produtoParaFavoritar)
+    const favoritos = JSON.parse(localStorage.getItem('favoritos') || '{}')
+    if (!favoritos[usuario.email]) {
+      favoritos[usuario.email] = []
+    }
+    if (!favoritos[usuario.email].includes(id)) {
+      favoritos[usuario.email].push(id)
+    }
+
+    localStorage.setItem('favoritos', JSON.stringify(favoritos))
+    localStorage.removeItem('produtoParaFavoritar')
+  }
+
+  carregarFavoritos()
+  carregarCarrinho()
 
   alert('Login realizado com sucesso!')
 
   const voltar = localStorage.getItem('voltarDepoisDoLogin')
-
   if (voltar) {
     localStorage.removeItem('voltarDepoisDoLogin')
     router.push(voltar)
@@ -44,6 +57,7 @@ function entrar() {
   }
 }
 </script>
+```
 
 <template>
   <main class="pagina">

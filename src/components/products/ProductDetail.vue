@@ -64,13 +64,11 @@ function editarAnuncio() {
   statusEditado.value = produto.value.status
   precoEditado.value = produto.value.preco
   imagemEditada.value = produto.value.imagem
-
   editando.value = true
 }
 
 function salvarAlteracoes() {
   const anuncios = JSON.parse(localStorage.getItem('vestae-anuncios') || '[]')
-
   const anuncio = anuncios.find((p) => p.id === Number(route.params.id))
 
   anuncio.titulo = tituloEditado.value.trim()
@@ -84,9 +82,7 @@ function salvarAlteracoes() {
   anuncio.imagem = imagemEditada.value
 
   localStorage.setItem('vestae-anuncios', JSON.stringify(anuncios))
-
   editando.value = false
-
   alert('Anúncio atualizado com sucesso!')
 }
 
@@ -98,14 +94,11 @@ function excluirAnuncio() {
   }
 
   const anuncios = JSON.parse(localStorage.getItem('vestae-anuncios') || '[]')
-
   const novosAnuncios = anuncios.filter((p) => p.id !== Number(route.params.id))
-
   localStorage.setItem('vestae-anuncios', JSON.stringify(novosAnuncios))
 
   alert('Anúncio excluído com sucesso!')
-
-  router.push('/produtos')
+  router.push('/perfil')
 }
 
 function alterarImagem(dados) {

@@ -204,8 +204,8 @@ onMounted(() => {
 
         <div v-if="produtos.length === 0" class="vazio">
           <p class="texto-vazio">Você ainda não anunciou nenhuma peça</p>
-          <RouterLink to="/anunciar">
-            <p class="botao-anunciar">Clique aqui para anunciar</p>
+          <RouterLink to="/anunciar" class="botao-anunciar">
+            Clique aqui para anunciar
           </RouterLink>
         </div>
 
